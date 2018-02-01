@@ -1,7 +1,7 @@
 import os
 import sys
 from pprint import pprint
-from .ethoslist_util import *
+from ethoslist_util import *
 
 
 def global_command(string):
@@ -133,6 +133,31 @@ def respond_str(question, display=None, min_=None, max_=None, spacing=False, con
     return answer
 
 
+def respond_mcq(question, options=None, spacing=False, return_index=False, cancel=False):
+    if options is not None and type(options) is not list:
+        options = [options]
+    max_ = len(options) + 1
+    for index, option in enumerate(options):
+        options[index] = str(index + 1) + ". " + option.title() + "."
+    options.insert(0, question)
+    if cancel:
+        options.append(str(max_) + ". Cancel")
+        max_ += 1
+    options[-1] = (options[-1] + "\n") if not spacing else options[-1]
+    question = "Enter the corresponding number of your selection: "
+    choice = respond_int(question, options, min_=1, max_=max_, spacing=spacing)
+    return (choice - 1) if return_index else choice
+
+
+def respond_any(question=None, display=None, spacing=False):
+    if question is None:
+        question = "Press [ENTER] to continue... "
+    show_display(display, spacing)
+    input_ = input(question)
+    global_command(input_)
+    return input_ if question is not None else None
+
+
 def set_title(type_, title=None):
     """Set's a title for a clip or a project."""
     type_check(type_)
@@ -251,8 +276,7 @@ def display_object(obj_type, id_=-1):
     if confirm:
         data = access_file(obj_type)
         pprint(data[id_])
-        confirm = respond_bool("Are you ready to move on?")
-        return
+        respond_any()
 
 
 def create_new_project():
@@ -262,8 +286,8 @@ def create_new_project():
     new_proj["description"] = set_description(new_proj["type"])
     new_proj["location"] = set_location(new_proj["location"])
     print("New project has been created!")
-    display_object("project")
     save_to_file(new_proj)
+    display_object("project")
 
 
 def create_new_episode():
@@ -316,9 +340,12 @@ def set_start(max_end, end=None):
             start = 0
         start = convert_to_seconds(start)
         if start < 0:
-            start = 0
-        if start > end:
-            start = end - 1
+            print("The start time cannot be set to less than 0.")
+            start = None
+        if start is not None:
+            if start > end:
+                print("The start time cannot be set greater than or equal to the end time ("+str(end)+" seconds).")
+                start = None
     return start
 
 
@@ -331,10 +358,12 @@ def set_end(max_end, start):
             end = max_end
         end = convert_to_seconds(end)
         if end > max_end:
-            end = max_end
-        if end < start:
-            print("The END TIME must be greater than the START TIME("+str(start)+" seconds).")
+            print("The end time cannot exceed the total runtime of the episode ("+str(max_end)+" seconds).")
             end = None
+        if end is not None:
+            if end < start:
+                print("The end time must be greater than the start time ("+str(start)+" seconds).")
+                end = None
     return end
 
 
@@ -382,8 +411,8 @@ def change_episode(clip):
         print("No changes were made. Chosen parent was the same as current parent.")
         return clip
     old_episode = load_obj_by_id(id_, "episode")
-    line1 = "Current parent: " + old_episode["title"]
-    line2 = "New parent: " + new_episode["title"]
+    line1 = "Current parent:  " + old_episode["title"]
+    line2 = "New parent:      " + new_episode["title"]
     display = [line1, line2]
     question = "Are you sure you want to change the parent episode?"
     confirm = respond_bool(question, display)
@@ -403,16 +432,22 @@ def change_project(clip, action=None):
     if action == "break":
         proj_list = clip["associated_projects"]
         if len(proj_list) == 1:
+            print("This is the ONLY project associated with this clip.")
+            print("Deleting it will make this clip obsolete.")
             selected_proj = load_obj_by_id(proj_list[0], "project")
         else:
-            line1 = "Which project would you like to remove this clip from?"
-            display = [line1]
-            for index, proj_id in enumerate(clip["associated_projects"]):
+            question = "Which project would you like to remove this clip from?"
+            options = []
+            for index, proj_id in enumerate(proj_list):
                 proj_obj = load_obj_by_id(proj_id, "project")
-                display.append(str(index + 1) + ". " + proj_obj["title"].title())
-            display.append(str(len(clip["associated_projects"]+1)) + ". Restart")
-            #TODO: Finish this variable length menu display. Good luck to you.
-        """---Do not edit below this line.---"""
+                options.append(proj_obj["title"])
+            cancel_index = len(options)
+            choice = respond_mcq(question, options, return_index=True, cancel=True)
+            if choice == cancel_index:
+                print("No changes were made.")
+                return clip
+            else:
+                selected_proj = load_obj_by_id(proj_list[choice], "project")
         line1 = "Selected Clip: " + clip["title"]
         line2 = "Selected Project: " + selected_proj["title"]
         display = [line1, line2]
@@ -429,7 +464,7 @@ def change_project(clip, action=None):
     else:
         new_project = find_and_return_object("project")
         if new_project["id"] in clip["associated_projects"]:
-            print("No changes were made. Project is already associated with clip.")
+            print("No changes were made. That project is already associated with this clip.")
             return clip
         line1 = "Selected Clip: " + clip["title"]
         line2 = "Selected Project: " + new_project["title"]
@@ -558,28 +593,48 @@ def set_status(status):
             return status
 
 
+def link_to_a_project(a):
+    b = find_and_return_object("project")
+    if a["id"] in b["related_projects"] and b["id"] in a["related_projects"]:
+        print("No changes were made. These projects are already linked.")
+        return a
+    else:
+        line1 = "First Project:   " + a["title"]
+        line2 = "Second Project:  " + b["title"]
+        display = [line1, line2]
+        question = "Are you sure you want to link these projects?"
+        confirm = respond_bool(question, display)
+        if confirm:
+            a, b = link_project_to_project(a, b)
+            print("Both projects were linked successfully!")
+            save_to_file(b)
+            return a
+
+
 def change_attr(attr, type_, action=None):
     type_check(type_)
     key_check(type_, attr)
-    object = find_and_return_object(type_)
+    object_ = find_and_return_object(type_)
     if attr=="title":
-        object[attr] = set_title(object["type"], object[attr])
+        object_[attr] = set_title(object_["type"], object_[attr])
     if attr=="description":
-        object[attr] = set_description(object["type"], object[attr])
+        object_[attr] = set_description(object_["type"], object_[attr])
     if attr=="location":
-        object[attr] = change_location(object[attr])
+        object_[attr] = change_location(object_[attr])
     if attr=="status":
-        object[attr] = set_status(object[attr])
+        object_[attr] = set_status(object_[attr])
     if attr=="start":
-        object[attr] = change_duration(object, start=True)
+        object_[attr] = change_duration(object_, start=True)
     if attr=="end":
-        object[attr] = change_duration(object, end=True)
+        object_[attr] = change_duration(object_, end=True)
     if attr=="from_episode":
-        object = change_episode(object)
+        object_ = change_episode(object_)
     if attr=="associated_projects":
-        object = change_project(object, action=action)
-    save_to_file(object)
-    display_object(type_, object["id"])
+        object_ = change_project(object_, action=action)
+    if attr=="related_projects":
+        object_ = link_to_a_project(object_)
+    save_to_file(object_)
+    display_object(type_, object_["id"])
 
 
 def modify_clip(title):
@@ -618,8 +673,9 @@ def modify_project(title):
     option2 = "change description"
     option3 = "change location"
     option4 = "change status"
-    option5 = "restart"
-    options = [option1, option2, option3, option4, option5]
+    option5 = "link a related project"
+    option6 = "restart"
+    options = [option1, option2, option3, option4, option5, option6]
     choice = make_menu(title, options)
     print("\n" + menu_title(options[choice - 1]))
     if choice == 1:
@@ -631,18 +687,42 @@ def modify_project(title):
     elif choice == 4:
         change_attr("status", "project")
     elif choice == 5:
+        change_attr("related_projects", "project")
+    elif choice == 6:
         global_command("-restart")
     main()
+
+
+def confirm_delete_project():
+    project = find_and_return_object("project")
+    line1 = project["title"]
+    line2 = project["description"]
+    display = [line1, line2]
+    question = "Are you sure you want to DELETE this project?"
+    confirm1 = respond_bool(question, display)
+    if confirm1:
+        pprint(project)
+        display = "You can type \'-exit\' or \'-restart\' to abort."
+        question = "To delete this project, please type the word \'DELETE\' in all caps: "
+        confirm2 = respond_str(question, display, spacing=True)
+        if confirm2 == "DELETE":
+            project["status"] = -2
+            delete_project(project)
+            print("Project was deleted successfully!")
+        else:
+            print("No changes were made.")
+            return
 
 
 def main():
     option1 = "create new project"
     option2 = "modify existing project"
-    option3 = "create new clip"
-    option4 = "modify existing clip"
-    option5 = "get new episode"
-    option6 = "exit"
-    options = [option1, option2, option3, option4, option5, option6]
+    option3 = "delete project"
+    option4 = "create new clip"
+    option5 = "modify existing clip"
+    option6 = "get new episode"
+    option7 = "exit"
+    options = [option1, option2, option3, option4, option5, option6, option7]
     choice = make_menu("main menu", options)
     if choice == 1:
         print("\n" + menu_title(options[choice - 1]))
@@ -651,13 +731,16 @@ def main():
         modify_project(option2)
     elif choice == 3:
         print("\n" + menu_title(options[choice - 1]))
-        create_new_clip()
+        confirm_delete_project()
     elif choice == 4:
-        modify_clip(option4)
+        print("\n" + menu_title(options[choice - 1]))
+        create_new_clip()
     elif choice == 5:
+        modify_clip(option4)
+    elif choice == 6:
         print("\n" + menu_title(options[choice - 1]))
         create_new_episode()
-    elif choice == 6:
+    elif choice == 7:
         global_command("-exit")
     main()
 

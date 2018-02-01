@@ -6,23 +6,6 @@ ETHOSLIST: An Ethoslab Fansite with a twist!
 
 TO DO LIST:
 
-4. Figure out base necessary functioning for Ethoslist utility.
-    - Add new episode. (VIA API) Figured out. Implemented!
-    - Add new project. Figured out. Implemented!
-    - Add new clip. Figured out. Implemented.
-    - Edit/Remove project. Figured out.
-    - Edit/Remove clip.
-        - Add to project.
-        - Remove from project.
-        - Reassign episode.
-    - Error test episodes.json.
-
-GIST of implimentations...
-    1. Add New.
-    2. Change.
-    3. Delete.
-    4. Refine the front end.
-
 
 1. "Add new project" functionality. IMPLEMENTED!
     5. create_new_project function IMPLEMENTED!

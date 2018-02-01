@@ -19,7 +19,10 @@ project_description_max_length = 500
 
 def round_sig(x, sig=4):
     """Round to designated number of significant figures."""
-    return round(x, sig-int(floor(log10(abs(x))))-1)
+    try:
+        return round(x, sig - int(floor(log10(abs(x)))) - 1)
+    except ValueError:
+        return 0.0
 
 
 def get_episode_num(string):
@@ -31,6 +34,7 @@ def get_episode_num(string):
 
 def access_file(obj_type):
     """Return the data from designated JSON file."""
+    type_check(obj_type)
     filename = obj_type + "s.json"
     with open(filename, "r") as j_data:
         d_data = json.load(j_data)
@@ -47,6 +51,7 @@ def update_file(data):
 
 def load_obj_by_id(id_, obj_type):
     """Return an object by it's ID and type."""
+    type_check(obj_type)
     data = access_file(obj_type)
     return data[id_]
 
@@ -333,8 +338,35 @@ def refresh_curation_data(obj):
     return obj["curation"]
 
 
+def error_catch(a, b, action=None):
+    if a["type"] == "clip" and b["type"] == "project":
+        a_list = a["associated_projects"]
+        b_list = b["clip_ids"]
+    if a["type"] == "clip" and b["type"] == "episode":
+        a_list = a["associated_projects"]
+        b_list = b["associated_clips"]
+    if a["type"] == "project" and b["type"] == "project":
+        a_list = a["related_projects"]
+        b_list = b["related_projects"]
+    if action == "break":
+        if (a["id"] not in b_list) and (b["id"] not in a_list):
+            raise Exception("Objects do not have a link to break.")
+    else:
+        if (a["id"] in b_list) and (b["id"] in a_list):
+            raise Exception("Objects are already linked.")
+    if (a["id"] in b_list) and (b["id"] not in a_list):
+        raise Exception(
+            "Faulty link detected: " + a["type"] + "[" + str(a["id"]) + "] is missing a reference to " + b["type"] + "[" + str(
+                b["id"]) + "].")
+    if (a["id"] in b_list) and (b["id"] not in a_list):
+        raise Exception(
+            "Faulty link detected: " + b["type"] + "[" + str(b["id"]) + "] is missing a reference to " + a["type"] + "[" + str(
+                a["id"]) + "].")
+
+
 def link_clip_to_project(clip, proj, action=None):
     """Makes and breaks the link between a project and a clip."""
+    error_catch(clip, proj, action=action)
     if action == "break":
         clip["associated_projects"].remove(proj["id"])
         proj["clip_ids"].remove(clip["id"])
@@ -352,6 +384,7 @@ def link_clip_to_project(clip, proj, action=None):
 
 def link_clip_to_episode(clip, epi, action=None):
     """Makes and breaks the link between an episode and a clip."""
+    error_catch(clip, epi, action=action)
     if action == "break":
         epi["associated_clips"].remove(clip["id"])
         clip["from_episode"]["id"] = None
@@ -369,6 +402,7 @@ def link_clip_to_episode(clip, epi, action=None):
 
 def link_project_to_project(x, y, action=None):
     """Makes and breaks the link between two projects."""
+    error_catch(x, y, action=action)
     if action == "break":
         x["related_projects"].remove(y["id"])
         y["related_projects"].remove(x["id"])
@@ -403,6 +437,35 @@ def key_check(type_, attr):
         raise AttributeError(type_.title() + " does not contain the \'" + attr + "\' attribute.")
     del dict_
 
+
 def type_check(string):
     if string not in list_of_types:
         raise TypeError("Parameter must equal \'clip\', \'project\', or \'episode.\'")
+
+
+def delete_project(project, firm=True):
+    backup_project_data = list(access_file("project"))
+    backup_clip_data = list(access_file("clip"))
+    try:
+        if project["status"] == -2:
+            for id in project["related_projects"]:
+                linked_proj = load_obj_by_id(id, "project")
+                linked_proj, project = link_project_to_project(linked_proj, project, action="break")
+                save_to_file(linked_proj)
+            for id in project["clip_ids"]:
+                linked_clip = load_obj_by_id(id, "clip")
+                if len(linked_clip["associated_projects"]) <= 1:
+                    str_id = "[" + str(linked_clip["id"]) + "]"
+                    print("Clip " + str_id + " is now obsolete...")
+                linked_clip, project = link_clip_to_project(linked_clip, project, action="break")
+                save_to_file(linked_clip)
+            data = access_file("project")
+            del data[project["id"]]
+            update_file(data)
+            force_id_index_alignment()
+        elif firm:
+            raise Exception("Project [index: "+str(project["id"])+"] must be marked for deletion before any action is taken.")
+    except Exception:
+        update_file(backup_project_data)
+        update_file(backup_clip_data)
+        traceback.print_exc()
