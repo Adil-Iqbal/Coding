@@ -1,7 +1,7 @@
 import os
 import sys
-from .ethoslist_util import *
 from pprint import pprint
+from .ethoslist_util import *
 
 
 def global_command(string):
@@ -344,14 +344,14 @@ def set_duration(max_end):
     return start, end
 
 
-def change_duration(object, start=False, end=False):
+def change_duration(object_, start=False, end=False):
     if (start and end) or (not start and not end):
         raise Exception("Improper usage. Params must be used in XOR fashion.")
-    max_end = load_obj_by_id(object["from_episode"]["id"], "episode")
+    max_end = load_obj_by_id(object_["from_episode"]["id"], "episode")
     max_end = max_end["duration"]
     if start:
-        new_start = set_start(max_end, object["end"])
-        line1 = "Current start time: " + str(object["start"])
+        new_start = set_start(max_end, object_["end"])
+        line1 = "Current start time: " + str(object_["start"])
         line2 = "New start time: " + str(new_start)
         display = [line1, line2]
         choice = respond_bool("Are you sure?", display)
@@ -360,19 +360,19 @@ def change_duration(object, start=False, end=False):
             return new_start
         else:
             print("Start time was not changed.")
-            return object["start"]
+            return object_["start"]
     if end:
-        new_end = set_end(max_end, object["start"])
-        line1 = "Current end time: " + str(object["end"])
+        new_end = set_end(max_end, object_["start"])
+        line1 = "Current end time: " + str(object_["end"])
         line2 = "New end time: " + str(new_end)
         display = [line1, line2]
         choice = respond_bool("Are you sure?", display)
         if choice:
-            print("End time has been changed to: " + str(new_start))
+            print("End time has been changed to: " + str(new_end))
             return new_end
         else:
             print("End time was not changed.")
-            return object["start"]
+            return object_["start"]
 
 
 def change_episode(clip):
@@ -401,8 +401,9 @@ def change_episode(clip):
 
 def change_project(clip, action=None):
     if action == "break":
-        if len(clip["associated_projects"]) == 1:
-            selected_proj = load_obj_by_id(clip["associated_projects"][0], "project")
+        proj_list = clip["associated_projects"]
+        if len(proj_list) == 1:
+            selected_proj = load_obj_by_id(proj_list[0], "project")
         else:
             line1 = "Which project would you like to remove this clip from?"
             display = [line1]
