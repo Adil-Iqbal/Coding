@@ -1,0 +1,219 @@
+ETHOSLIST: An Ethoslab Fansite with a twist!
+
+- The episode object is used to help display info/content related to clips.
+- The clip object is used to structure the components of a project.
+- A project object is an ITEM on the "TO DO LIST" style UI.
+
+TO DO LIST:
+
+4. Figure out base necessary functioning for Ethoslist utility.
+    - Add new episode. (VIA API) Figured out. Implemented!
+    - Add new project. Figured out. Implemented!
+    - Add new clip. Figured out. Implemented.
+    - Edit/Remove project. Figured out.
+    - Edit/Remove clip.
+        - Add to project.
+        - Remove from project.
+        - Reassign episode.
+    - Error test episodes.json.
+
+GIST of implimentations...
+    1. Add New.
+    2. Change.
+    3. Delete.
+    4. Refine the front end.
+
+
+1. "Add new project" functionality. IMPLEMENTED!
+    5. create_new_project function IMPLEMENTED!
+    1. set_project_title(proj) function. IMPLEMENTED!
+    2. set_project_description function. IMPLEMENTED!
+    3. set_project_location function. IMPLEMENTED!
+
+2. "Add new clip" functionality! IMPLEMENTED!
+
+2. Recalculate project dates function. IMPLEMENTED!
+3. link(clip, (episode or project)) function. IMPLIMENTED!
+2. Recalculate episode curation data function. IMPLIMENTED!
+
+
+
+/**** EPISODE ****/
+Note: First build using Youtube Data API.
+
+SAMPLE JSON STRUCTURE:
+
+{
+"id" : 0,		// INTEGER, increments from 0.
+"type" : "episode",
+"youtube_id" : "", 	// id
+"title" : "", 		// snippet.title
+"episode" : 102, 	// INTEGER, derive from snippet.title.
+"description" : "", 	// snippet.description
+"published_at" : "", 	// snippet.publishedAt
+"duration" : "", 	// to_seconds(contentDetails.duration)
+"thumbnails" : "", 	// set equal to snippet.thumbnails
+"associated_clips" : [35, 52],
+"curation_data": {
+	"curated_time": 0, // avoid_overlap(this.associated_clips.end - this.associated_clips.start)
+	"curation_percentage": 00.00, // to_4_sig_fig(curated_time / duration) * 100
+	}
+}
+
+Curation_percentage algorithm uses a list of boolean values whose length is equal-
+to the total number of seconds in the video. Each index on the list represents 1 second in the video.
+List values are initially set to False and assigned True when the corresponding second has been used in a clip.
+Once all associated clips are accounted for, the Trues are counted.
+ 
+'''
+from random import randint
+
+L = []
+
+# The length of 11000 represents > 3 hours of footage.
+for x in range(11000):
+  L.append(False)
+
+for i in range(20):
+  s = randint(0, 11000)
+  e = randint(s, 11000)
+  print("Clip:", s, "-", e, "of length", e - s)
+  for j in range(s, e):
+    if L[j] == False:
+        L[j] = True
+
+sum_ = 0
+for val in L:
+  if val == True:
+    sum_ += 1
+
+print(sum_/11000)
+'''
+
+
+/**** CLIP ****/
+:::::ADD NEW CLIP:
+1. Ask for associated project OR BOOT (this_clip.associated_projects.append(INPUT))
+2. Ask for parent episode OR BOOT (this_clip.from_episode.append(INPUT))
+3. Set time defaults in seperate variable.
+	- Start time defaults to 0.
+	- End time defaults to to_seconds(all_episodes[this_clip.from_episode.id].duration)
+4. Ask for Start time & End time in to_seconds("MM:SS")
+5. Ask for title
+6. Ask for description... limit_to_char_max()
+//*** BEGIN PROCESSING
+7. Set "id" to len(all_clips).
+8. Set start time.
+9. Set end time.
+10. Set title
+11. Set description
+12. Add the clip to the list of clips.
+//*** CLIP to EPISODE
+13. Add parent episode to from_episode attribute.
+14. Add clip id to parent episode.
+15. Calc curation data for parent episode.
+//*** CLIP TO PROJECT.
+16. Add clip id to declared project.
+17. Update project begin date if the project has an undeclared begin date or if clip's date is earlier than project's begin date.
+18. Update project's last updated date if the project has an undeclared last updated date or if the clip's date is after the last updated date.
+19. Initialize project status to 0 if needed.
+
+
+EDITABLE ATTR:
+- Title
+- Description
+- Change Episode Assignment Only.
+    - Remove clip id from previous parent ep.
+    - Recalc prev parent ep's curation data.
+    - Reassign from_episode to new parent ep.
+    - Add clip id to new parent ep.
+    - Recalc new parent ep's curation data.
+- Add/Remove Project Assignment.
+    ADD:
+        - Add project.id to clip's associated_projects.
+        - Add clip to project's clip_ids.
+        - Recalculate project dates.
+    REMOVE:
+        - Remove project.id from clip's associated_projects.
+        - Remove clip from project's clip_ids.
+        - Recalculate project dates.
+- Start Time (See step 10, 11)
+    - Change time with respect to end time.
+    - Recalculate project dates.
+    - Recalculate episode curation data.
+- End Time (See step 10, 11)
+    - Change time with respect to start time.
+    - Recalculate project dates.
+    - Recalculate episode curation data.
+
+SAMPLE JSON STRUCTURE:
+
+{
+"id" : 0, 		// INTEGER, increments from 0.
+"type" : "clip",
+"title" : "", 		// Admin generated title.
+"description" : "", 	// Admin generated description. (140 character max)
+"from_episode" : {	// Connection to parent episode.
+	"number": 102,
+	"id": 0
+	} 	
+"start" : 0,		// Start of videos in seconds. (Gen algorithmically).
+"end" : 0,		// End of videos in seconds. (Gen algorithmically).
+"associated_projects" : [0, 2, 16]	// Connection to parent projects.
+}					// Should be added algorithmically.
+
+
+/**** PROJECT ****/
+GENERATE NEW PROJECT::::
+1. Ask for to_json(title).
+2. Check for naming conflict. If so, back to step_1.
+3. Generate path to graphics folder algorithmically. Defaults to NULL for now.
+4. Ask for to_json(description).
+5. Do you know the location? (0 = Not at all. 1 = dimension only. 2. Precise xyz)
+If user_input = "0":
+	1. Set "location.season" to 2.
+	2. Set "location.dimension" to "overworld"
+	3. Set "x", "y", and "z" to undefined.
+
+*. Set "status" to 0.
+*. Set "clip_ids" to [].
+*. Set "begin_date" to undefined.
+*. Set "last_updated" to undefined.
+
+EDITABLE ATTR:
+- Title (Step 1 and 2 above)
+- Description (Step 4 above)
+- Location paramters. (Step 5 above).
+- Status... 0 for incomplete. 1 for complete. 2. for abandoned.
+
+DELETE PROJECT:::
+1. Loop through all clip_ids and remove given_clip.associated_projects == this_project.id
+2. Loop through all associated_projects and remove given_project.associated_projects == this_project.id
+3. Path to media folder and delete all associated media files.
+4. Set project status to -2. (Marked for deletion)
+5. Loop through all subsequent projects and given_project.id -= 1.
+6. Loop through all projects and splice out this_project.status == -2.
+
+SAMPLE JSON STRUCTURE:
+
+{
+"id" : 0, 		// INTEGER, increments from 0.
+"type" : "project",
+"title" : "Wilson", 		// Admin generated title.
+"description" : "A redstone tomogochi pet.", 	// Admin generated description. (140 character max)
+"graphics/media" : "", 	// Path to folder of images.
+"status" : 0, 		// -1 for un-initialized, 0 for ongoing, 1 for complete, 2 for abandoned, etc.
+"clip_ids" : [1, 2, 6, 22, 41],
+"begin_date" : "",	// ALL_EPS[ALL_CLIPS[this_project.clip_ids[0]].from_episode.id].published_at
+"last_updated" : "",	// ALL_EPS[ALL_CLIPS[this_project.clip_ids[-1]].from_episode.id].published_at
+"location":{
+	"season" : 2,
+	"dimension" : "over_world",
+	"x" : 1.234,
+	"y" : 123.232,
+	"z" : -324.33
+	}
+"related_projects":[12,33,25]
+}
+
+
