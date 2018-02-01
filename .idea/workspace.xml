@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91d130fb-faf6-4e4d-8341-60411e64364e" name="Default" comment="Change directory architecture to be more reasonable.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Ethoslab Fansite/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Ethoslab Fansite/clear_all_json_data.py" />
+    <list default="true" id="91d130fb-faf6-4e4d-8341-60411e64364e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ethoslab Fansite/Scripts/plan_details.txt" afterPath="$PROJECT_DIR$/Ethoslab Fansite/Scripts/plan_details.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ethoslab Fansite/clips.json" afterPath="$PROJECT_DIR$/Ethoslab Fansite/clips.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ethoslab Fansite/episodes.json" afterPath="$PROJECT_DIR$/Ethoslab Fansite/episodes.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist_util.py" afterPath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist_util.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ethoslab Fansite/json_editor_app.py" afterPath="$PROJECT_DIR$/Ethoslab Fansite/json_editor_app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ethoslab Fansite/projects.json" afterPath="$PROJECT_DIR$/Ethoslab Fansite/projects.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -481,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517499862209</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Change directory architecture to be more reasonable.">
+      <created>1517520670738</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1517520670738</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
