@@ -1,5 +1,10 @@
 import json
+from random import randint
 
+a = randint(1000, 9999)
+b = randint(1000, 9999)
+
+"""
 ## The follow code was taken from ethoslist.util
 list_of_types = ["clip", "episode", "project"]
 
@@ -40,3 +45,4 @@ if input_=="CLEAR THE WAY":
     print("GOD HAVE MERCY ON YOUR SOUL!")
 else:
     print("Never come back.")
+"""

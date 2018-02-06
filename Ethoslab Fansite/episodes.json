@@ -30,10 +30,12 @@
         "height": 480
       }
     },
-    "associated_clips": [],
+    "associated_clips": [
+      0
+    ],
     "curation": {
-      "curated_time": 0,
-      "percentage": 0.0
+      "curated_time": 1845,
+      "percentage": 100.0
     }
   },
   {
@@ -15797,6 +15799,48 @@
       },
       "maxres": {
         "url": "https://i.ytimg.com/vi/CBeIq96sI3w/maxresdefault.jpg",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "associated_clips": [],
+    "curation": {
+      "curated_time": 0,
+      "percentage": 0.0
+    }
+  },
+  {
+    "id": 394,
+    "type": "episode",
+    "youtube_id": "wyEIcii_9pk",
+    "title": "Etho Plays Minecraft - Episode 499: Clean Up",
+    "episode": 499,
+    "description": "Minecraft survival. Today we head over to the Library to do a bunch of building and then we enter clean up mode to get the world prepped for a world download.\n\nTwitter: http://www.twitter.com/EthoLP\nTwitchTV: http://www.twitch.tv/ethotv/videos\nWorld Download (450): http://www.minecraftworldmap.com/worlds/Gi1tj#/\n\nReminder: People advertising, spamming, or being rude in the channel comments will be blocked.",
+    "published_at": "2018-02-03T21:00:05.000Z",
+    "duration": 1386,
+    "media": {
+      "default": {
+        "url": "https://i.ytimg.com/vi/wyEIcii_9pk/default.jpg",
+        "width": 120,
+        "height": 90
+      },
+      "medium": {
+        "url": "https://i.ytimg.com/vi/wyEIcii_9pk/mqdefault.jpg",
+        "width": 320,
+        "height": 180
+      },
+      "high": {
+        "url": "https://i.ytimg.com/vi/wyEIcii_9pk/hqdefault.jpg",
+        "width": 480,
+        "height": 360
+      },
+      "standard": {
+        "url": "https://i.ytimg.com/vi/wyEIcii_9pk/sddefault.jpg",
+        "width": 640,
+        "height": 480
+      },
+      "maxres": {
+        "url": "https://i.ytimg.com/vi/wyEIcii_9pk/maxresdefault.jpg",
         "width": 1280,
         "height": 720
       }

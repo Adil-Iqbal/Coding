@@ -326,6 +326,7 @@ def find_and_return_object(obj_type):
     else:
         print("There are no saved " + obj_type + "s.")
         print("Please create a new "+ obj_type +" and try again.")
+        respond_any()
         main()
 
 

@@ -1,5 +1,6 @@
 import requests
 import json
+import sys
 import dateutil.parser as to_datetime
 import traceback
 from math import log10, floor
@@ -41,12 +42,37 @@ def access_file(obj_type):
         return d_data
 
 
-def update_file(data):
+def update_file(data, obj_type=None):
     """Store updated data into JSON file."""
-    obj_type = data[0]["type"]
+    try:
+        obj_type = data[0]["type"]
+    except IndexError:
+        if obj_type is None:
+            raise Exception(
+                "Could not identify object type. Data variable is empty and \'obj_type\' param was undeclared.")
     filename = obj_type + "s.json"
     with open(filename, "w") as j_data:
         json.dump(data, j_data)
+
+
+def backup_files(function):
+    def wrapped():
+        backup_project_data = list(access_file("project"))
+        backup_clip_data = list(access_file("clip"))
+        backup_episode_data = list(access_file("episode"))
+        try:
+            function()
+        except:
+            update_file(backup_project_data)
+            update_file(backup_clip_data)
+            update_file(backup_episode_data)
+            print("All files were reverted to a back-up state.")
+            traceback.print_exc()
+            sys.exit()
+        del backup_project_data
+        del backup_episode_data
+        del backup_clip_data
+    return wrapped
 
 
 def load_obj_by_id(id_, obj_type):
@@ -356,11 +382,13 @@ def error_catch(a, b, action=None):
             raise Exception("Objects are already linked.")
     if (a["id"] in b_list) and (b["id"] not in a_list):
         raise Exception(
-            "Faulty link detected: " + a["type"] + "[" + str(a["id"]) + "] is missing a reference to " + b["type"] + "[" + str(
+            "Faulty link detected: " + a["type"] + "[" + str(a["id"]) + "] is missing a reference to " + b[
+                "type"] + "[" + str(
                 b["id"]) + "].")
     if (a["id"] in b_list) and (b["id"] not in a_list):
         raise Exception(
-            "Faulty link detected: " + b["type"] + "[" + str(b["id"]) + "] is missing a reference to " + a["type"] + "[" + str(
+            "Faulty link detected: " + b["type"] + "[" + str(b["id"]) + "] is missing a reference to " + a[
+                "type"] + "[" + str(
                 a["id"]) + "].")
 
 
@@ -443,29 +471,24 @@ def type_check(string):
         raise TypeError("Parameter must equal \'clip\', \'project\', or \'episode.\'")
 
 
+@backup_files
 def delete_project(project, firm=True):
-    backup_project_data = list(access_file("project"))
-    backup_clip_data = list(access_file("clip"))
-    try:
-        if project["status"] == -2:
-            for id in project["related_projects"]:
-                linked_proj = load_obj_by_id(id, "project")
-                linked_proj, project = link_project_to_project(linked_proj, project, action="break")
-                save_to_file(linked_proj)
-            for id in project["clip_ids"]:
-                linked_clip = load_obj_by_id(id, "clip")
-                if len(linked_clip["associated_projects"]) <= 1:
-                    str_id = "[" + str(linked_clip["id"]) + "]"
-                    print("Clip " + str_id + " is now obsolete...")
-                linked_clip, project = link_clip_to_project(linked_clip, project, action="break")
-                save_to_file(linked_clip)
-            data = access_file("project")
-            del data[project["id"]]
-            update_file(data)
-            force_id_index_alignment()
-        elif firm:
-            raise Exception("Project [index: "+str(project["id"])+"] must be marked for deletion before any action is taken.")
-    except Exception:
-        update_file(backup_project_data)
-        update_file(backup_clip_data)
-        traceback.print_exc()
+    if project["status"] == -2:
+        for id in project["related_projects"]:
+            linked_proj = load_obj_by_id(id, "project")
+            linked_proj, project = link_project_to_project(linked_proj, project, action="break")
+            save_to_file(linked_proj)
+        for id in project["clip_ids"]:
+            linked_clip = load_obj_by_id(id, "clip")
+            if len(linked_clip["associated_projects"]) <= 1:
+                str_id = "[" + str(linked_clip["id"]) + "]"
+                print("Clip " + str_id + " is now obsolete...")
+            linked_clip, project = link_clip_to_project(linked_clip, project, action="break")
+            save_to_file(linked_clip)
+        data = access_file("project")
+        del data[project["id"]]
+        update_file(data, "project")
+        force_id_index_alignment()
+    elif firm:
+        raise Exception(
+            "Project [index: " + str(project["id"]) + "] must be marked for deletion before any action is taken.")
