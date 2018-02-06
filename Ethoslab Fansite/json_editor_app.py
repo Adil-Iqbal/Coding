@@ -3,21 +3,26 @@ import sys
 from pprint import pprint
 from ethoslist_util import *
 
+""" Primary JSON Editor Application """
 
 def global_command(string):
+    """Process and execute command which can be given at any time."""
     if string == "-exit":
         os.system('cls' if os.name == 'nt' else 'clear')
         print("Thank you for using the Etho\'s List JSON Editor.")
         sys.exit()
-    if string == "-restart":
+    elif string == "-restart":
         scan_files_for_alignment()
         os.system('cls' if os.name == 'nt' else 'clear')
         main()
-    if string == "-clear":
+    elif string == "-clear":
         os.system('cls' if os.name == 'nt' else 'clear')
+    else:
+        return
 
 
 def show_display(display=None, spacing=False):
+    """Print all lines in the display list."""
     if display is not None and type(display) is not list:
         display = [display]
     if display is not None:
@@ -87,6 +92,7 @@ def respond_int(question, display=None, min_=None, max_=None, spacing=False):
 
 
 def respond_str(question, display=None, min_=None, max_=None, spacing=False, confirm=False):
+    """Return string response."""
     question = (str(question) + " ") if question[-1] is not " " else str(question)
     limit = None
     if type(min_) is not None:
@@ -133,12 +139,14 @@ def respond_str(question, display=None, min_=None, max_=None, spacing=False, con
     return answer
 
 
-def respond_mcq(question, options=None, spacing=False, return_index=False, cancel=False):
+def respond_mcq(question, options=None, spacing=False, return_index=False, as_sentence=False, cancel=False):
+    """Return response to a multiple choice question."""
     if options is not None and type(options) is not list:
         options = [options]
     max_ = len(options) + 1
     for index, option in enumerate(options):
-        options[index] = str(index + 1) + ". " + option.title() + "."
+        option = (option.capitalize() + ".") if as_sentence else option.title()
+        options[index] = str(index + 1) + ". " + option
     options.insert(0, question)
     if cancel:
         options.append(str(max_) + ". Cancel")
@@ -150,12 +158,50 @@ def respond_mcq(question, options=None, spacing=False, return_index=False, cance
 
 
 def respond_any(question=None, display=None, spacing=False):
+    """Return trivial response."""
     if question is None:
         question = "Press [ENTER] to continue... "
     show_display(display, spacing)
     input_ = input(question)
     global_command(input_)
     return input_ if question is not None else None
+
+
+def menu_title(title=None, len_=40, min_len=40):
+    """Construct a menu title line from input provided."""
+    if len_ < min_len:
+        len_ = min_len
+    if title == None:
+        return "-" * len_
+    if len(title) > (len_ - 2):
+        raise ValueError("Length of \'title\' param must be no more than " + str(len_ - 2) + " characters.")
+    title = str(title).upper()
+    title = (" " + title) if not title.startswith(" ") else title
+    title = (title + " ") if not title.endswith(" ") else title
+    from math import floor
+    dash_len = floor((len_ - len(title)) / 2)
+    title = (dash_len * "-") + title
+    while len(title) < len_:
+        title += "-"
+    return title
+
+
+def make_menu(title, options, min_len=40):
+    """Construct and print a menu from the input provided."""
+    options_ = list(options)
+    for index, string in enumerate(options_):
+        string = str(index + 1) + ". " + str(string).title()
+        options_[index] = string
+    max_ = len(max(options_))
+    title_line = menu_title(str(title), max_, min_len)
+    closing = menu_title(len_=max_, min_len=min_len)
+    display = [title_line] + options_ + [closing]
+    question = "Enter a number corresponding to the options above: "
+    global_command("-clear")
+    return respond_int(question, display, min_=1, max_=(len(options_)+1), spacing=True)
+
+
+### ------------------------------ BEGIN APPLICATION ---------------------------- ###
 
 
 def set_title(type_, title=None):
@@ -212,13 +258,12 @@ def set_description(type_, description=None):
 
 def set_dimension():
     """Set the dimension for a location object."""
-    line1 = "In which dimension was this project built?"
-    line2 = "1. The Overworld."
-    line3 = "2. The Nether."
-    line4 = "3. The End."
-    display = [line1, line2, line3, line4]
-    question = "Enter the corresponding number of your answer: "
-    dim = respond_int(question, display, min_=1, max_=4)
+    question = "In which dimension was this project built?"
+    option1 = "the overworld"
+    option2 = "the nether"
+    option3 = "the end"
+    options = [option1, option2, option3]
+    dim = respond_mcq(question, options)
     if dim == 1:
         return "overworld", "the Overworld."
     elif dim == 2:
@@ -240,13 +285,12 @@ def set_coord(msg):
 
 def set_location(loc):
     """Set the location of a project object."""
-    line1 = "Do you know the location of this project?"
-    line2 = "1. Not at all."
-    line3 = "2. The dimension only."
-    line4 = "3. The dimension and the coordinates."
-    display = [line1, line2, line3, line4]
-    question = "Enter the corresponding number of your answer: "
-    gran = respond_int(question, display, min_=1, max_=4)
+    question = "Do you know the location of this project?"
+    option1 = "not at all"
+    option2 = "the dimension only"
+    option3 = "the dimension and the coordinates"
+    options = [option1, option2, option3]
+    gran = respond_mcq(question, options, as_sentence=True)
     loc["season"] = 2
     if gran == 1:
         loc["dimension"] = "overworld"
@@ -265,22 +309,26 @@ def set_location(loc):
         coords = str(loc["x"]) + ", " + str(loc["y"]) + ", " + str(loc["z"])
         print("The project's coordinates have been set to: " + coords)
         return loc
-    else:
-        print("Please enter the number of the corresponding option below...")
 
 
 def display_object(obj_type, id_=-1):
+    """Print saved object to command line. Offer to see video if object is clip."""
     type_check(obj_type)
-    question = "Would you like to see the " + obj_type + "?"
+    question = "Would you like to see the " + obj_type + " object?"
     confirm = respond_bool(question)
     if confirm:
         data = access_file(obj_type)
-        pprint(data[id_])
-        respond_any()
+        pprint("\n" + data[id_] + "\n")
+        if obj_type == "clip":
+            confirm = respond_bool("Would you like to see the video?")
+            if confirm:
+                view_clip(data[id_])
+        else:
+            respond_any()
 
 
 def create_new_project():
-    """Builds a stores a new project object."""
+    """Builds and stores a new project object."""
     new_proj = blank("project")
     new_proj["title"] = set_title(new_proj["type"])
     new_proj["description"] = set_description(new_proj["type"])
@@ -500,38 +548,6 @@ def create_new_clip():
     display_object("clip")
 
 
-def menu_title(title=None, len_=40, min_len=40):
-    if len_ < min_len:
-        len_ = min_len
-    if title == None:
-        return "-" * len_
-    title = str(title).upper()
-    if len(title) > (len_ - 2):
-        raise ValueError("Length of \'title\' parameter must no more than 38 characters.")
-    title = (" " + title) if not title.startswith(" ") else title
-    title = (title + " ") if not title.endswith(" ") else title
-    from math import floor
-    dash_len = floor((len_ - len(title)) / 2)
-    title = (dash_len * "-") + title
-    while len(title) < len_:
-        title += "-"
-    return title
-
-
-def make_menu(title, options, min_len=40):
-    options_ = list(options)
-    for index, string in enumerate(options_):
-        string = str(index + 1) + ". " + str(string).title()
-        options_[index] = string
-    max_ = len(max(options_))
-    title_line = menu_title(str(title), max_, min_len)
-    closing = menu_title(len_=max_, min_len=min_len)
-    display = [title_line] + options_ + [closing]
-    question = "Enter a number corresponding to the options above: "
-    os.system('cls' if os.name == 'nt' else 'clear')
-    return respond_int(question, display, min_=1, max_=(len(options_)+1), spacing=True)
-
-
 def change_location(loc):
     previous_loc = dict(loc)
     line1 = "Season: " + str(previous_loc["season"])
@@ -721,9 +737,10 @@ def main():
     option3 = "delete project"
     option4 = "create new clip"
     option5 = "modify existing clip"
-    option6 = "get new episode"
-    option7 = "exit"
-    options = [option1, option2, option3, option4, option5, option6, option7]
+    option6 = "view clip"
+    option7 = "get new episode"
+    option8 = "exit"
+    options = [option1, option2, option3, option4, option5, option6, option7, option8]
     choice = make_menu("main menu", options)
     if choice == 1:
         print("\n" + menu_title(options[choice - 1]))
@@ -739,14 +756,15 @@ def main():
     elif choice == 5:
         modify_clip(option4)
     elif choice == 6:
+        clip = find_and_return_object("clip")
+        view_clip(clip)
+    elif choice == 7:
         print("\n" + menu_title(options[choice - 1]))
         create_new_episode()
-    elif choice == 7:
+    elif choice == 8:
         global_command("-exit")
     main()
 
 
 if __name__ == '__main__':
-    scan_files_for_alignment()
-    os.system('cls' if os.name == 'nt' else 'clear')
-    main()
+    global_command("-restart")

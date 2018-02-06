@@ -1,0 +1,32 @@
+$darkest: #0a1612;
+$dark: #1a2930;
+$medium: #29414c;
+$light: #f7ce3e;
+$lightest: #c5c1c0;
+
+.name {
+	font-family: Raleway, serif;
+	font-size: 35px;
+	color: $light;
+	text-align: center;
+	line-height: 37px;
+}
+
+.title {
+	font-family: Raleway, serif;
+	font-size: 30px;
+	color: $light;
+	text-align: center;
+	line-height: 32px;
+}
+
+img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.intro {
+	background: $dark;
+}

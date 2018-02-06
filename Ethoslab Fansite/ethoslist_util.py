@@ -1,9 +1,12 @@
-import requests
-import json
+import os
 import sys
-import dateutil.parser as to_datetime
+import json
+import requests
 import traceback
+import webbrowser
+from time import sleep
 from math import log10, floor
+import dateutil.parser as to_datetime
 
 """Utility functions for primary JSON Editor application."""
 
@@ -33,6 +36,12 @@ def get_episode_num(string):
             return int(string[i - 3:i])
 
 
+def type_check(string):
+    """Check to see if param is a valid object type."""
+    if string not in list_of_types:
+        raise TypeError("Parameter must equal \'clip\', \'project\', or \'episode.\'")
+
+
 def access_file(obj_type):
     """Return the data from designated JSON file."""
     type_check(obj_type)
@@ -56,6 +65,7 @@ def update_file(data, obj_type=None):
 
 
 def backup_files(function):
+    """Back up all JSON files before executing function."""
     def wrapped():
         backup_project_data = list(access_file("project"))
         backup_clip_data = list(access_file("clip"))
@@ -143,7 +153,7 @@ def scan_files_for_alignment():
         for index, entry in enumerate(data):
             if not (entry["id"] == index):
                 raise IndexError("Indexes in the JSON file do not align. Please fix!")
-    print("Done!")
+    print("All id's align with their indexes.")
 
 
 def convert_to_seconds(string):
@@ -184,7 +194,7 @@ def convert_to_seconds(string):
         try:
             seconds = int(string)
         except ValueError:
-            return None
+            return None # Allow while loop to handle input.
     return seconds
 
 
@@ -246,8 +256,17 @@ def blank(obj_type):
         raise TypeError("Argument must equal 'clip' or 'project' or 'episode'.")
 
 
+def key_check(type_, attr):
+    """Check to see if an attribute belongs to the object type."""
+    type_check(type_)
+    dict_ = blank(type_)
+    if attr not in dict_.keys():
+        raise AttributeError(type_.title() + " does not contain the \'" + attr + "\' attribute.")
+    del dict_
+
+
 def is_unique(title, type_):
-    """Checks if a selected title is unique."""
+    """Check if a selected title is unique."""
     data = access_file(type_)
     if len(data) == 0:
         return True
@@ -257,19 +276,8 @@ def is_unique(title, type_):
     return True
 
 
-def is_short(description, type_):
-    """DEPRECATED: Checks if a selected string meets the length requirement."""
-    if type_ == "clip":
-        if len(description) > clip_description_max_length:
-            return False
-    if type_ == "project":
-        if len(description) > project_description_max_length:
-            return False
-    return True
-
-
 def request_episode(youtube_id):
-    """Retrieves episode and converts into episode object for saving."""
+    """Retrieve episode and convert into episode object for saving."""
     parameters = {
         "part": "snippet,contentDetails",
         "id": youtube_id,
@@ -289,7 +297,7 @@ def request_episode(youtube_id):
 
 
 def is_valid_youtube_id(potential_id):
-    """Checks if param can be used as a YouTube ID."""
+    """Check if param can be used as a YouTube ID."""
     if type(potential_id) is not str:
         return False
     if len(potential_id) is not 11:
@@ -301,7 +309,7 @@ def is_valid_youtube_id(potential_id):
 
 
 def sort_clip_ids(clip_ids):
-    """Sorts a list of clip ID's chronologically."""
+    """Sort a list of clip ID's chronologically."""
     if len(clip_ids) <= 1:
         return clip_ids
     # Pair clip ids to their episode's publish dates.
@@ -365,6 +373,7 @@ def refresh_curation_data(obj):
 
 
 def error_catch(a, b, action=None):
+    """Detect a faulty link."""
     if a["type"] == "clip" and b["type"] == "project":
         a_list = a["associated_projects"]
         b_list = b["clip_ids"]
@@ -393,7 +402,7 @@ def error_catch(a, b, action=None):
 
 
 def link_clip_to_project(clip, proj, action=None):
-    """Makes and breaks the link between a project and a clip."""
+    """Make or break the link between a project and a clip."""
     error_catch(clip, proj, action=action)
     if action == "break":
         clip["associated_projects"].remove(proj["id"])
@@ -411,7 +420,7 @@ def link_clip_to_project(clip, proj, action=None):
 
 
 def link_clip_to_episode(clip, epi, action=None):
-    """Makes and breaks the link between an episode and a clip."""
+    """Make or break the link between an episode and a clip."""
     error_catch(clip, epi, action=action)
     if action == "break":
         epi["associated_clips"].remove(clip["id"])
@@ -429,7 +438,7 @@ def link_clip_to_episode(clip, epi, action=None):
 
 
 def link_project_to_project(x, y, action=None):
-    """Makes and breaks the link between two projects."""
+    """Make or break the link between two projects."""
     error_catch(x, y, action=action)
     if action == "break":
         x["related_projects"].remove(y["id"])
@@ -441,7 +450,7 @@ def link_project_to_project(x, y, action=None):
 
 
 def link(a, b, action=None):
-    """Makes and breaks any link."""
+    """Make or break any link."""
     if (a["type"] == "clip") and (b["type"] == "project"):
         a, b = link_clip_to_project(a, b, action=action)
     elif (a["type"] == "project") and (b["type"] == "clip"):
@@ -458,21 +467,9 @@ def link(a, b, action=None):
     save_to_file(b)
 
 
-def key_check(type_, attr):
-    type_check(type_)
-    dict_ = blank(type_)
-    if attr not in dict_.keys():
-        raise AttributeError(type_.title() + " does not contain the \'" + attr + "\' attribute.")
-    del dict_
-
-
-def type_check(string):
-    if string not in list_of_types:
-        raise TypeError("Parameter must equal \'clip\', \'project\', or \'episode.\'")
-
-
 @backup_files
 def delete_project(project, firm=True):
+    """Delete a project object."""
     if project["status"] == -2:
         for id in project["related_projects"]:
             linked_proj = load_obj_by_id(id, "project")
@@ -492,3 +489,36 @@ def delete_project(project, firm=True):
     elif firm:
         raise Exception(
             "Project [index: " + str(project["id"]) + "] must be marked for deletion before any action is taken.")
+    
+
+def build_url(clip_object, autoplay=False):
+    """Build and return URL based on clip object."""
+    if clip_object["type"] != "clip":
+        raise Exception("Wrong object type. This function only accepts clip objects.")
+    id_ = clip_object["from_episode"]["youtube_id"]
+    start = "&start=" + str(clip_object["start"])
+    end = "&end=" + str(clip_object["end"])
+    other_params = "&fs=1&iv_load_policy=3&showinfo=1&rel=0&cc_load_policy=0"
+    autoplay = "?autoplay=1" if autoplay else "?autoplay=0"
+    return "https://www.youtube.com/embed/" + id_ + autoplay + other_params + start +  end
+
+
+def build_embed(clip_object, autoplay=False):
+    """Build and return the iframe that will hold clips."""
+    url = build_url(clip_object, autoplay=autoplay)
+    return "<iframe frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"width=\"788.54\" height=\"443\" type=\"text/html\" src=" + url + "></iframe>"
+
+
+def view_clip(clip_object):
+    """Build and open an html file with clip embedded."""
+    title = "<head><title>" + clip_object["title"] + "</title></head>"
+    h1 = "<h1>" + clip_object["title"] + "</h1>"
+    h2 = "<h2>" + clip_object["description"] + "</h2>"
+    embed = build_embed(clip_object, autoplay=True)
+    html = "<html>" + title + "<body style=\"font-family: verdana\">" + embed + h1 + h2 + "</body></html>"
+    with open("render_clip.html", "w+") as page:
+        page.write(html)
+    webbrowser.open('file://' + os.path.realpath("render_clip.html"))
+    sleep(5)
+    os.remove("render_clip.html")
+    

@@ -1,0 +1,24 @@
+.name {
+  font-family: Raleway, serif;
+  font-size: 35px;
+  color: #f7ce3e;
+  text-align: center;
+  line-height: 37px; }
+
+.title {
+  font-family: Raleway, serif;
+  font-size: 30px;
+  color: #f7ce3e;
+  text-align: center;
+  line-height: 32px; }
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%; }
+
+.intro {
+  background: #1a2930; }
+
+/*# sourceMappingURL=style.css.map */
