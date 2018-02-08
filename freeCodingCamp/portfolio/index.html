@@ -1,27 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Adil Iqbal</title>
+    <title>Adil Iqbal - Portfolio</title>
+    <meta name="description" content="The portfolio website for Mr. Adil Iqbal.">
+    <meta name="author" content="Adil Iqbal">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
     <link rel="stylesheet" href="style.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="jquery.localscroll.js" type="text/javascript"></script>
+    <script src="jquery.scrollTo.js" type="text/javascript"></script>
+    <script>
+    $(document).ready(function() {
+
+    	// Download the resume.
+        $(".resume").click(function() {
+            alert("Resume download goes here!")
+        });
+
+        // Smooth scrolling.
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+
+            var target = this.hash;
+            var $target = $(target);
+
+            $('html, body').stop().animate({
+                'scrollTop': $target.offset().top
+            }, 900, 'swing', function() {
+                window.location.hash = target;
+            });
+        });
+    });
+    </script>
 </head>
+
 <body>
-    <div class="intro">
-        <!-- Name, title, download-resume button. -->
-        <img src="signature.png" alt="Signature" class="signature center">
+    <!-- Introduction -->
+    <div id="intro"></div>
+    <section class="intro">
+        <img src="signature.png" alt="Signature" class="signature">
         <div class="name">ADIL IQBAL</div>
-        <div class="title">Front End Developer</div>
-    </div>
-    <div class="about_me">
-        <!-- A little about myself. -->
-    </div>
-    <div class="skills">
-        <!-- Discuss skills that you have. Use the bars graphic! -->
-    </div>
-    <div class="front_end">
-        <!-- Front end portfolio -->
-    </div>
+        <div class="title">Full Stack Developer</div>
+        <div class="resume">
+            <span class="resume__mask"></span>
+            <span class="resume__text">download resume</span>
+            <span class="resume__text resume__text--bis">download resume</span>
+        </div>
+        <a href="#about_me"><i class="fas fa-chevron-down arrow__down"></i></a>
+    </section>
+
+    <!-- About Me. -->
+    <div id="about_me"></div>
+    <section class="about_me">
+        <a href="#intro"><i class="fas fa-chevron-up arrow__up"></i></a>
+        <a href="#"><i class="fas fa-chevron-down arrow__down"></i></a>
+    </section>
+
+    
 </body>
 
 </html>

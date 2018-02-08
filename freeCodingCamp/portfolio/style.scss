@@ -1,32 +1,213 @@
+// Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700,900');
+
+// Color palette
 $darkest: #0a1612;
 $dark: #1a2930;
 $medium: #29414c;
 $light: #f7ce3e;
 $lightest: #c5c1c0;
 
-.name {
-	font-family: Raleway, serif;
-	font-size: 35px;
-	color: $light;
-	text-align: center;
-	line-height: 37px;
+// Utility functions
+@function with_pad($n) {
+    @return $n * 1.05;
 }
 
-.title {
-	font-family: Raleway, serif;
-	font-size: 30px;
-	color: $light;
-	text-align: center;
-	line-height: 32px;
+// --- STYLE --- //
+body {
+    background: $medium;
+    font-family: Raleway, serif;
 }
 
-img {
-	display: block;
+section {
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+$text_color: $light;
+.intro {
+    background: $dark;
+    color: $text_color;
+    a {
+        color: $text_color;
+        &:visited {
+            color: darken(desaturate($text_color, 5%), 5%);
+        }
+        &:hover {
+            color: lighten(saturate($text_color, 15%), 10%);
+        }
+        &:active {
+            color: lighten(saturate($text_color, 15%), 10%);
+        }
+    }
+}
+
+.signature {
+    display: block;
     margin-left: auto;
     margin-right: auto;
     width: 40%;
 }
 
-.intro {
-	background: $dark;
+.name {
+    font-size: 2.25em;
 }
+
+$font-size: 1.87;
+.title {
+    font-size: $font-size+em;
+    line-height: with_pad($font-size)+em;
+}
+
+// Fancy "Download Resume" Button
+$anim-text-offset: 1em;
+
+.resume {
+    touch-callout: none;
+    user-select: none;
+    display: inline-block;
+    border: .2em solid;
+    margin-top: 1em;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 0.6;
+    color: $light;
+    &__text {
+        display: block;
+        padding: 1em 2em;
+        text-transform: uppercase;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: bold;
+        &:before {
+            content: attr(title);
+        }
+        &--bis {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform: translateX(-1 * $anim-text-offset);
+            opacity: 0;
+        }
+    }
+    &__mask {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $light;
+        transform: translateX(-100%) rotate(45deg);
+        transition: all 0.3s;
+    }
+}
+
+.resume:hover {
+    opacity: 1;
+    .resume__text {
+        animation: fx-text .3s ease-out;
+        &--bis {
+            animation: fx-text-bis .3s ease-out;
+        }
+    }
+    .resume__mask {
+        animation: fx-mask .3s ease-out;
+    }
+}
+
+.resume:active {
+    opacity: 1;
+    background: $light;
+    color: darken($dark, 10%);
+}
+
+@keyframes fx-mask {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+@keyframes fx-text {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX($anim-text-offset);
+        opacity: 0;
+    }
+}
+
+@keyframes fx-text-bis {
+    0% {
+        transform: translateX(-1 * $anim-text-offset);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+// Arrow positioning
+$vertical_arrow_spacing: 10vh;
+$horizontal_arrow_spacing: 10vw;
+
+%arrow {
+    position: absolute;
+    font-size: 2em;
+}
+
+.arrow {
+    &__up {
+        @extend %arrow;
+        top: $vertical_arrow_spacing;
+    }
+    &__down {
+        @extend %arrow;
+        bottom: $vertical_arrow_spacing;
+    }
+    &__left {
+        @extend %arrow;
+        left: $horizontal_arrow_spacing;
+    }
+    &__right {
+        @extend %arrow;
+        right: $horizontal_arrow_spacing;
+    }
+}
+
+$text_color: $dark;
+.about_me {
+    background: $lightest;
+    color: $text_color;
+    a {
+        color: $text_color;
+        &:visited {
+            color: darken(desaturate($text_color, 5%), 5%);
+        }
+        &:hover {
+            color: lighten(saturate($text_color, 15%), 10%);
+        }
+        &:active {
+            color: lighten(saturate($text_color, 15%), 10%);
+        }
+    }
+}
+
+
+
