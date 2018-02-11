@@ -1,3 +1,8 @@
+// ----
+// Sass (v3.4.21)
+// Compass (v1.0.3)
+// ----
+
 // Google Fonts
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700,900');
@@ -16,8 +21,22 @@ $lightest: #c5c1c0;
 
 // --- STYLE --- //
 body {
-    background: $medium;
     font-family: Raleway, serif;
+    background: linear-gradient(-45deg, $medium, darken($dark, 15%));
+    background-size: 300% 300%;
+    animation: bg-fx 120s ease infinite;
+}
+
+@keyframes bg-fx {
+	0% {
+		background-position: 100% 50%;
+	}
+	50% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 100% 50%;
+	}
 }
 
 section {
@@ -33,7 +52,6 @@ section {
 
 $text_color: $light;
 .intro {
-    background: $dark;
     color: $text_color;
     a {
         color: $text_color;
@@ -191,9 +209,9 @@ $horizontal_arrow_spacing: 10vw;
     }
 }
 
-$text_color: $dark;
+$text_color: $light;
 .about_me {
-    background: $lightest;
+    // background: linear-gradient(lighten($dark, 20%), darken($medium, 20%));//$medium;
     color: $text_color;
     a {
         color: $text_color;
@@ -208,6 +226,25 @@ $text_color: $dark;
         }
     }
 }
+
+.text_box {
+  background: linear-gradient($lightest, darken($lightest, 20%));
+  color: $dark;
+  height: auto;
+  width: 50%;
+  vertical-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 1em;
+  padding: 0.5em;
+}
+
+
+.box_titles {
+  font-size: 2em;
+  line-height: with_pad(2)+em;
+}
+
 
 
 
