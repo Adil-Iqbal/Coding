@@ -6,39 +6,16 @@
     <title>Adil Iqbal - Portfolio</title>
     <meta name="description" content="The portfolio website for Mr. Adil Iqbal.">
     <meta name="author" content="Adil Iqbal">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
     <link rel="stylesheet" href="style.css" />
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="jquery.localscroll.js" type="text/javascript"></script>
-    <script src="jquery.scrollTo.js" type="text/javascript"></script>
-    <script>
-    $(document).ready(function() {
-
-    	// Download the resume.
-        $(".resume").click(function() {
-            alert("Resume download goes here!")
-        });
-
-        // Smooth scrolling.
-        $('a[href^="#"]').on('click', function(e) {
-            e.preventDefault();
-
-            var target = this.hash;
-            var $target = $(target);
-
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top
-            }, 900, 'swing', function() {
-                window.location.hash = target;
-            });
-        });
-    });
-    </script>
+    <script type="text/javascript" src="jquery.visible.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
+
 <body>
     <!-- Introduction -->
-    <section id="intro" class="intro">
+    <section id="intro">
         <img src="signature.png" alt="Signature" class="signature">
         <div class="name">ADIL IQBAL</div>
         <div class="title">Full Stack Developer</div>
@@ -49,18 +26,48 @@
         </div>
         <a href="#about_me"><i class="fas fa-chevron-down arrow__down"></i></a>
     </section>
-
     <!-- About Me. -->
-    <section  id="about_me" class="about_me">
+    <section id="about_me">
         <a href="#intro"><i class="fas fa-chevron-up arrow__up"></i></a>
         <div class="box_titles">About Me</div>
         <div class="text_box">
+            <img class="headshot" src="adil_headshot.jpg" alt="Adil Iqbal! Full Stack Developer.">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, quo, quibusdam! Maiores incidunt corrupti sapiente voluptatibus itaque aspernatur dolor sit amet consectetur, dolores. Animi magnam provident facilis distinctio saepe est?</p>
+        </div>
+        <a href="#technical_skills"><i class="fas fa-chevron-down arrow__down"></i></a>
+    </section>
+    <section id="technical_skills">
+        <a href="#about_me"><i class="fas fa-chevron-up arrow__up"></i></a>
+        <div class="box_titles">Technical Skills</div>
+        <div id="skill_bars">
+            <div class="progressbar">
+                <div class="bar" id="python">python</div>
+            </div>
+            <div class="progressbar">
+                <div class="bar" id="javascript">javascript</div>
+            </div>
+            <div class="progressbar">
+                <div class="bar" id="jquery">jquery</div>
+            </div>
+            <div class="progressbar">
+                <div class="bar" id="sass">sass</div>
+            </div>
+            <div class="progressbar">
+                <div class="bar" id="css">css</div>
+            </div>
+            <div class="progressbar">
+                <div class="bar" id="html">html</div>
+            </div>
+        </div>
+        <a href="#soft_skills"><i class="fas fa-chevron-down arrow__down"></i></a>
+    </section>
+    <section id="soft_skills">
+        <a href="#technical_skills"><i class="fas fa-chevron-up arrow__up"></i></a>
+        <div class="box_titles">Soft Skills</div>
+        <div class="text_box">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa aliquam, nihil eum nemo reprehenderit repellat nam quis dolore voluptatem enim accusantium molestiae sit pariatur tenetur! Ullam eum magnam dolorem.</p>
         </div>
         <a href="#"><i class="fas fa-chevron-down arrow__down"></i></a>
     </section>
-
-    
 </body>
-
 </html>

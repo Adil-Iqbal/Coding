@@ -14,29 +14,78 @@ $medium: #29414c;
 $light: #f7ce3e;
 $lightest: #c5c1c0;
 
-// Utility functions
+// Utility functions & mixins
 @function with_pad($n) {
     @return $n * 1.05;
 }
 
-// --- STYLE --- //
-body {
-    font-family: Raleway, serif;
-    background: linear-gradient(-45deg, $medium, darken($dark, 15%));
-    background-size: 300% 300%;
-    animation: bg-fx 120s ease infinite;
+@mixin scrimGradient($startColor: 'black', $stopColor: 'white', $direction: 'to bottom') {
+  $scrimCoordinates: (
+    0: 1,
+    19: 0.738,
+    34: 0.541,
+    47: 0.382,
+    56.5: 0.278,
+    65: 0.194,
+    73: 0.126,
+    80.2: 0.075,
+    86.1: 0.042,
+    91: 0.021,
+    95.2: 0.008,
+    98.2: 0.002,
+    100: 0
+  );
+  $hue: hue($startColor);
+  $saturation: saturation($startColor);
+  $lightness: lightness($startColor);
+  $stops: ();
+  @each $colorStop, $alphaValue in $scrimCoordinates {
+    // $stop: mix($startColor, $stopColor, ($weight * 100));
+    $stop: hsla($hue, $saturation, $lightness, $alphaValue) percentage($colorStop/100);
+    $stops: append($stops, $stop, comma);
+  }
+
+  background: $stopColor linear-gradient(unquote($direction), $stops);
 }
 
+// --- STYLE --- //
+$text_color: $light;
+body {
+    @include scrimGradient(lighten($medium, 20%), darken($dark, 20%), -45deg);
+    // background: linear-gradient(-45deg, lighten($medium, 10%), darken($dark, 15%));
+    // background: #092756;
+    // background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top, rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+    // background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+    // background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+    // background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+    // background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg, #670d10 0%,#092756 100%);
+    background-size: 200% 200%;
+    animation: bg-fx 90s ease infinite;
+    font-family: Raleway, serif;
+    color: $text_color;
+    a {
+        color: $text_color;
+        &:visited {
+            color: darken(desaturate($text_color, 5%), 5%);
+        }
+        &:hover {
+            color: lighten(saturate($text_color, 15%), 10%);
+        }
+        &:active {
+            color: lighten(saturate($text_color, 15%), 10%);
+        }
+}}
+
 @keyframes bg-fx {
-	0% {
-		background-position: 100% 50%;
-	}
-	50% {
-		background-position: 0% 50%;
-	}
-	100% {
-		background-position: 100% 50%;
-	}
+    0% {
+        background-position: 100% 50%;
+    }
+    50% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 section {
@@ -50,22 +99,22 @@ section {
     position: relative;
 }
 
-$text_color: $light;
-.intro {
-    color: $text_color;
-    a {
-        color: $text_color;
-        &:visited {
-            color: darken(desaturate($text_color, 5%), 5%);
-        }
-        &:hover {
-            color: lighten(saturate($text_color, 15%), 10%);
-        }
-        &:active {
-            color: lighten(saturate($text_color, 15%), 10%);
-        }
-    }
-}
+// $text_color: $light;
+// #intro {
+//     color: $text_color;
+//     a {
+//         color: $text_color;
+//         &:visited {
+//             color: darken(desaturate($text_color, 5%), 5%);
+//         }
+//         &:hover {
+//             color: lighten(saturate($text_color, 15%), 10%);
+//         }
+//         &:active {
+//             color: lighten(saturate($text_color, 15%), 10%);
+//         }
+//     }
+// }
 
 .signature {
     display: block;
@@ -209,22 +258,9 @@ $horizontal_arrow_spacing: 10vw;
     }
 }
 
-$text_color: $light;
-.about_me {
-    // background: linear-gradient(lighten($dark, 20%), darken($medium, 20%));//$medium;
-    color: $text_color;
-    a {
-        color: $text_color;
-        &:visited {
-            color: darken(desaturate($text_color, 5%), 5%);
-        }
-        &:hover {
-            color: lighten(saturate($text_color, 15%), 10%);
-        }
-        &:active {
-            color: lighten(saturate($text_color, 15%), 10%);
-        }
-    }
+.box_titles {
+  font-size: 2em;
+  line-height: with_pad(2)+em;
 }
 
 .text_box {
@@ -239,12 +275,37 @@ $text_color: $light;
   padding: 0.5em;
 }
 
-
-.box_titles {
-  font-size: 2em;
-  line-height: with_pad(2)+em;
+#technical_skills {
+  align-items: center;
 }
 
+.headshot {
+  max-width: 10em;
+  border-radius: 100%;
+}
 
+#skill_bars {
+  width: 30%;
+}
 
+.progressbar {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    overflow: auto;
+    background: linear-gradient($lightest, darken($lightest, 25%));
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0.2em;
+}
+
+.bar {
+    width: 1%;
+    height: 1.2em;
+    background: linear-gradient(darken($light, 20%), lighten($light, 10%));
+    display: block;
+    color: $dark;
+    text-transform: uppercase;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: bold;
+    border-radius: 0.2em;
 
