@@ -1,4 +1,5 @@
 // javascript
+
 function move(bar_id, skill) {
     let elem = document.getElementById(bar_id);
     let width = 1;
@@ -15,15 +16,13 @@ function move(bar_id, skill) {
 }
 
 function updateBars() {
-    let wait = 1000;
     move("python", 95);
-    setTimeout(move("javascript", 84), wait);
-    setTimeout(move("javascript", 84), wait);
-    setTimeout(move("jquery", 64), wait);
-    setTimeout(move("sass", 76), wait);
-    setTimeout(move("css", 70), wait);
-    setTimeout(move("html", 66), wait);
-    // setTimeout(, wait);
+    move("javascript", 84);
+    move("javascript", 84);
+    move("jquery", 64);
+    move("sass", 76);
+    move("css", 70);
+    move("html", 66);
 }
 
 // jQuery
@@ -34,27 +33,16 @@ $(document).ready(function() {
         alert("Resume download goes here!")
     });
 
-    // Smooth scrolling.
-    $('a[href^="#"]').on('click', function(e) {
-        e.preventDefault();
-
-        var target = this.hash;
-        var $target = $(target);
-
-        $('html, body').stop().animate({
-            'scrollTop': $target.offset().top
-        }, 900, 'swing', function() {
-            window.location.hash = target;
-        });
-    });
-
-    // Trigger skill bar animation.
-
     let load_bars = true;
-    $(window).on('resize scroll', function() {
-        if ($('#skill_bars').visible() && load_bars) {
-            updateBars();
-            load_bars = false;
-        }
+    $('#fullpage').fullpage({
+        // Fill skill bars.
+        afterLoad: function(index) {
+            if ((index == 'technical_skills') && load_bars) {
+                updateBars();
+                load_bars = false;
+            }
+        },
+        verticalCentered: true,
+        controlArrows: false
     });
 });

@@ -23,7 +23,7 @@ start = time.time()
 max_length = 0
 best_starting_num = None
 
-# # Brute Force Solution with Array
+# Brute Force Solution with Array
 # for num in range(1, 1000001):
 # 	collatz_sequence = []
 # 	while num > 1:

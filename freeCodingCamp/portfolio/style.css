@@ -303,3 +303,48 @@ section {
   font-weight: bold;
   border-radius: 0.2em;
 }
+
+#contact_icons {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#contact_icons a {
+  text-decoration: none !important;
+}
+
+.contact {
+  border-radius: 0.4em;
+  width: 6em;
+  padding: 0.3em 0.4em 0.4em 0.3em;
+  text-align: center;
+}
+.contact * {
+  text-align: center;
+  text-decoration: none;
+}
+.contact:hover {
+  background: #f7ce3e -webkit-linear-gradient(30deg, #dfb009 0%, rgba(223, 176, 9, 0.738) 19%, rgba(223, 176, 9, 0.541) 34%, rgba(223, 176, 9, 0.382) 47%, rgba(223, 176, 9, 0.278) 56.5%, rgba(223, 176, 9, 0.194) 65%, rgba(223, 176, 9, 0.126) 73%, rgba(223, 176, 9, 0.075) 80.2%, rgba(223, 176, 9, 0.042) 86.1%, rgba(223, 176, 9, 0.021) 91%, rgba(223, 176, 9, 0.008) 95.2%, rgba(223, 176, 9, 0.002) 98.2%, rgba(223, 176, 9, 0) 100%);
+  background: #f7ce3e linear-gradient(60deg, #dfb009 0%, rgba(223, 176, 9, 0.738) 19%, rgba(223, 176, 9, 0.541) 34%, rgba(223, 176, 9, 0.382) 47%, rgba(223, 176, 9, 0.278) 56.5%, rgba(223, 176, 9, 0.194) 65%, rgba(223, 176, 9, 0.126) 73%, rgba(223, 176, 9, 0.075) 80.2%, rgba(223, 176, 9, 0.042) 86.1%, rgba(223, 176, 9, 0.021) 91%, rgba(223, 176, 9, 0.008) 95.2%, rgba(223, 176, 9, 0.002) 98.2%, rgba(223, 176, 9, 0) 100%);
+  color: #1a2930;
+  text-decoration: none;
+}
+
+  
