@@ -1,63 +1,13 @@
-body {
-    background-color: black;
-    font-family: arial;
-    color: white;
-}
+        .blue {
+            background: blue;
+            height: 100vh;
+            width: 100vw;
+            text-align: center;
+            font
+        }
 
-a {
-    color: silver;
-}
-
-h1 {
-    padding: 0;
-    margin-top: 0px;
-    font-size: 6em;
-    font-family: arial;
-
-
-    .title_div a.last {
-        margin-right: 0;
-    }
-
-    .clear {
-        clear: both;
-    }
-
-    .btn-default {
-        background-color: black;
-        border-color: black;
-    }
-}
-
-.nav-pills {
-    font-size: 1.7em;
-    background-color: black;
-    opacity: .5%;
-}
-
-.pageOne {
-    background: url("http://vbs4u.com/wp-content/uploads/2016/10/portfolio-background.jpg");
-    background-size: cover;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.title_block {
-    position: absolute;
-    width: 50%;
-}
-
-.title {
-    background-color: purple;
-    opacity: .8;
-    border-radius: 10px;
-}
-
-.pagetwo {
-    background: url()
-}
+        .white {
+            background: white;
+            height: 100vh;
+            width: 100vw;
+        }

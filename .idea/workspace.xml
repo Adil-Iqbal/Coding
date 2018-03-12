@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91d130fb-faf6-4e4d-8341-60411e64364e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ethoslab Fansite/clear_all_json_data.py" afterPath="$PROJECT_DIR$/Ethoslab Fansite/clear_all_json_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/index.html" afterPath="$PROJECT_DIR$/freeCodingCamp/portfolio/index.html" />
+      <change beforePath="$PROJECT_DIR$/.idea/Coding.iml" afterPath="$PROJECT_DIR$/.idea/Coding.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Ethoslab Fansite/Scripts/episode_ids_list.txt" afterPath="$PROJECT_DIR$/Ethoslab Fansite/Scripts/episode_ids_list.txt" />
+      <change beforePath="$PROJECT_DIR$/Ethoslab Fansite/episodes.json" afterPath="$PROJECT_DIR$/Ethoslab Fansite/episodes.json" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/.gitignore" afterPath="$PROJECT_DIR$/freeCodingCamp/portfolio/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/gus/index.html" afterPath="$PROJECT_DIR$/freeCodingCamp/portfolio/gus/index.html" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/gus/style.css" afterPath="$PROJECT_DIR$/freeCodingCamp/portfolio/gus/style.css" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/index.html" afterPath="$PROJECT_DIR$/freeCodingCamp/portfolio/index.html" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/index2.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/style.css" afterPath="$PROJECT_DIR$/freeCodingCamp/portfolio/style.css" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/style.css.map" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/style.scss" afterPath="$PROJECT_DIR$/freeCodingCamp/portfolio/style.scss" />
+      <change beforePath="$PROJECT_DIR$/freeCodingCamp/portfolio/style2.css" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,110 +27,23 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plan_details.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/Scripts/plan_details.txt">
+      <file leaf-file-name="create_json.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/freeCodingCamp/quotes/create_json.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="352">
+              <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="json_editor_app.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/json_editor_app.py">
+      <file leaf-file-name="populate_episode_json_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/Scripts/populate_episode_json_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1540">
-              <caret line="328" column="8" lean-forward="false" selection-start-line="328" selection-start-column="8" selection-end-line="328" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#110#494#0" expanded="false" />
-                <element signature="e#548#944#0" expanded="false" />
-                <element signature="e#1008#1361#0" expanded="false" />
-                <element signature="e#1446#2844#0" expanded="false" />
-                <element signature="e#2944#4626#0" expanded="false" />
-                <element signature="e#4723#5330#0" expanded="false" />
-                <element signature="e#5398#5612#0" expanded="false" />
-                <element signature="e#5653#6929#0" expanded="false" />
-                <element signature="e#6982#7889#0" expanded="false" />
-                <element signature="e#7917#8448#0" expanded="false" />
-                <element signature="e#8475#8762#0" expanded="false" />
-                <element signature="e#8792#10025#0" expanded="false" />
-                <element signature="e#10070#10289#0" expanded="false" />
-                <element signature="e#10322#10675#0" expanded="false" />
-                <element signature="e#10708#11293#0" expanded="false" />
-                <element signature="e#12186#12784#0" expanded="false" />
-                <element signature="e#12820#13389#0" expanded="false" />
-                <element signature="e#13423#13505#0" expanded="false" />
-                <element signature="e#13566#14758#0" expanded="false" />
-                <element signature="e#14791#15690#0" expanded="false" />
-                <element signature="e#15736#18049#0" expanded="false" />
-                <element signature="e#18755#19305#0" expanded="false" />
-                <element signature="e#19355#19917#0" expanded="false" />
-                <element signature="e#19950#20492#0" expanded="false" />
-                <element signature="e#20523#22335#0" expanded="false" />
-                <element signature="e#22368#23011#0" expanded="false" />
-                <element signature="e#23061#23961#0" expanded="false" />
-                <element signature="e#23992#24960#0" expanded="false" />
-                <element signature="e#24994#25733#0" expanded="false" />
-                <element signature="e#25770#26516#0" expanded="false" />
-                <element signature="e#26535#27470#0" expanded="false" />
-                <element signature="e#27504#27594#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clear_all_json_data.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/clear_all_json_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ethoslist_util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist_util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="278" column="38" lean-forward="false" selection-start-line="278" selection-start-column="38" selection-end-line="278" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="projects.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/projects.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1298">
-              <caret line="59" column="4" lean-forward="false" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="episodes.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/episodes.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clips.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/clips.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+            <state relative-caret-position="244">
+              <caret line="82" column="48" lean-forward="false" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -195,14 +120,14 @@
         <option value="$PROJECT_DIR$/Ethoslab Fansite/clips.json" />
         <option value="$PROJECT_DIR$/Ethoslab Fansite/projects.json" />
         <option value="$PROJECT_DIR$/Ethoslab Fansite/clear_all_json_data.py" />
+        <option value="$PROJECT_DIR$/freeCodingCamp/quotes/create_json.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="y" value="25" />
+    <option name="width" value="683" />
+    <option name="height" value="743" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -220,72 +145,13 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project_euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ethoslab Fansite" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Coding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ethoslab Fansite" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JSON" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -296,7 +162,55 @@
       <recent name="C:\Users\Asim\Desktop\Coding\Ethoslab Fansite" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ethoslist_util">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.create_json">
+    <configuration name="create_json" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/freeCodingCamp/quotes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Coding" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/freeCodingCamp/quotes/create_json.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="ethoslist_util" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Coding" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/&quot;Ethoslab Fansite&quot;ethoslist_util.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -431,29 +345,21 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="ethoslist_util" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Coding" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/&quot;Ethoslab Fansite&quot;ethoslist_util.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.ethoslist_util" />
+      <item index="1" class="java.lang.String" itemvalue="Python.create_json" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.create_json" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -504,27 +410,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="0" y="25" width="683" height="743" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18986385" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39817628" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4833887" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36212623" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36070853" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="JSON Viewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="JSON Viewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -562,61 +468,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/Scripts/plan_details.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1606">
-          <caret line="73" column="19" lean-forward="false" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/json_editor_app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#110#494#0" expanded="false" />
-            <element signature="e#548#944#0" expanded="false" />
-            <element signature="e#1008#1361#0" expanded="false" />
-            <element signature="e#1446#2844#0" expanded="false" />
-            <element signature="e#2944#4626#0" expanded="false" />
-            <element signature="e#4723#5330#0" expanded="false" />
-            <element signature="e#5398#5612#0" expanded="false" />
-            <element signature="e#5653#6929#0" expanded="false" />
-            <element signature="e#6982#7889#0" expanded="false" />
-            <element signature="e#7917#8448#0" expanded="false" />
-            <element signature="e#8475#8762#0" expanded="false" />
-            <element signature="e#8792#10025#0" expanded="false" />
-            <element signature="e#10070#10289#0" expanded="false" />
-            <element signature="e#10322#10675#0" expanded="false" />
-            <element signature="e#10708#11293#0" expanded="false" />
-            <element signature="e#12186#12784#0" expanded="false" />
-            <element signature="e#12820#13389#0" expanded="false" />
-            <element signature="e#13423#13505#0" expanded="false" />
-            <element signature="e#13566#14758#0" expanded="false" />
-            <element signature="e#14791#15690#0" expanded="false" />
-            <element signature="e#15736#18049#0" expanded="false" />
-            <element signature="e#18755#19305#0" expanded="false" />
-            <element signature="e#19355#19917#0" expanded="false" />
-            <element signature="e#19950#20492#0" expanded="false" />
-            <element signature="e#20523#22335#0" expanded="false" />
-            <element signature="e#22368#23011#0" expanded="false" />
-            <element signature="e#23061#23961#0" expanded="false" />
-            <element signature="e#23992#24960#0" expanded="false" />
-            <element signature="e#24994#25733#0" expanded="false" />
-            <element signature="e#25770#26516#0" expanded="false" />
-            <element signature="e#26535#27470#0" expanded="false" />
-            <element signature="e#27504#27594#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/projects.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -624,7 +479,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347028">
           <caret line="15774" column="21" lean-forward="false" selection-start-line="15774" selection-start-column="21" selection-end-line="15774" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -632,7 +486,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -647,7 +500,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1606">
           <caret line="73" column="19" lean-forward="true" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -655,41 +507,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#110#494#0" expanded="false" />
-            <element signature="e#548#944#0" expanded="false" />
-            <element signature="e#1008#1361#0" expanded="false" />
-            <element signature="e#1446#2844#0" expanded="false" />
-            <element signature="e#2944#4626#0" expanded="false" />
-            <element signature="e#4723#5330#0" expanded="false" />
-            <element signature="e#5398#5612#0" expanded="false" />
-            <element signature="e#5653#6929#0" expanded="false" />
-            <element signature="e#6982#7889#0" expanded="false" />
-            <element signature="e#7917#8448#0" expanded="false" />
-            <element signature="e#8475#8762#0" expanded="false" />
-            <element signature="e#8792#10025#0" expanded="false" />
-            <element signature="e#10070#10289#0" expanded="false" />
-            <element signature="e#10322#10675#0" expanded="false" />
-            <element signature="e#10708#11293#0" expanded="false" />
-            <element signature="e#12186#12784#0" expanded="false" />
-            <element signature="e#12820#13389#0" expanded="false" />
-            <element signature="e#13423#13505#0" expanded="false" />
-            <element signature="e#13566#14758#0" expanded="false" />
-            <element signature="e#14791#15690#0" expanded="false" />
-            <element signature="e#15736#18049#0" expanded="false" />
-            <element signature="e#18755#19305#0" expanded="false" />
-            <element signature="e#19355#19917#0" expanded="false" />
-            <element signature="e#19950#20492#0" expanded="false" />
-            <element signature="e#20523#22335#0" expanded="false" />
-            <element signature="e#22368#23011#0" expanded="false" />
-            <element signature="e#23061#23961#0" expanded="false" />
-            <element signature="e#23992#24960#0" expanded="false" />
-            <element signature="e#24994#25733#0" expanded="false" />
-            <element signature="e#25770#26516#0" expanded="false" />
-            <element signature="e#26535#27470#0" expanded="false" />
-            <element signature="e#27504#27594#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -697,7 +514,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -705,7 +521,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347028">
           <caret line="15774" column="21" lean-forward="false" selection-start-line="15774" selection-start-column="21" selection-end-line="15774" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -713,7 +528,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -728,7 +542,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2640">
           <caret line="120" column="0" lean-forward="true" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -736,41 +549,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#110#494#0" expanded="false" />
-            <element signature="e#548#944#0" expanded="false" />
-            <element signature="e#1008#1361#0" expanded="false" />
-            <element signature="e#1446#2844#0" expanded="false" />
-            <element signature="e#2944#4626#0" expanded="false" />
-            <element signature="e#4723#5330#0" expanded="false" />
-            <element signature="e#5398#5612#0" expanded="false" />
-            <element signature="e#5653#6929#0" expanded="false" />
-            <element signature="e#6982#7889#0" expanded="false" />
-            <element signature="e#7917#8448#0" expanded="false" />
-            <element signature="e#8475#8762#0" expanded="false" />
-            <element signature="e#8792#10025#0" expanded="false" />
-            <element signature="e#10070#10289#0" expanded="false" />
-            <element signature="e#10322#10675#0" expanded="false" />
-            <element signature="e#10708#11293#0" expanded="false" />
-            <element signature="e#12186#12784#0" expanded="false" />
-            <element signature="e#12820#13389#0" expanded="false" />
-            <element signature="e#13423#13505#0" expanded="false" />
-            <element signature="e#13566#14758#0" expanded="false" />
-            <element signature="e#14791#15690#0" expanded="false" />
-            <element signature="e#15736#18049#0" expanded="false" />
-            <element signature="e#18755#19305#0" expanded="false" />
-            <element signature="e#19355#19917#0" expanded="false" />
-            <element signature="e#19950#20492#0" expanded="false" />
-            <element signature="e#20523#22335#0" expanded="false" />
-            <element signature="e#22368#23011#0" expanded="false" />
-            <element signature="e#23061#23961#0" expanded="false" />
-            <element signature="e#23992#24960#0" expanded="false" />
-            <element signature="e#24994#25733#0" expanded="false" />
-            <element signature="e#25770#26516#0" expanded="false" />
-            <element signature="e#26535#27470#0" expanded="false" />
-            <element signature="e#27504#27594#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -778,7 +556,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -786,7 +563,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347028">
           <caret line="15774" column="21" lean-forward="false" selection-start-line="15774" selection-start-column="21" selection-end-line="15774" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -794,7 +570,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -809,7 +584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3476">
           <caret line="158" column="0" lean-forward="true" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -817,41 +591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#110#494#0" expanded="false" />
-            <element signature="e#548#944#0" expanded="false" />
-            <element signature="e#1008#1361#0" expanded="false" />
-            <element signature="e#1446#2844#0" expanded="false" />
-            <element signature="e#2944#4626#0" expanded="false" />
-            <element signature="e#4723#5330#0" expanded="false" />
-            <element signature="e#5398#5612#0" expanded="false" />
-            <element signature="e#5653#6929#0" expanded="false" />
-            <element signature="e#6982#7889#0" expanded="false" />
-            <element signature="e#7917#8448#0" expanded="false" />
-            <element signature="e#8475#8762#0" expanded="false" />
-            <element signature="e#8792#10025#0" expanded="false" />
-            <element signature="e#10070#10289#0" expanded="false" />
-            <element signature="e#10322#10675#0" expanded="false" />
-            <element signature="e#10708#11293#0" expanded="false" />
-            <element signature="e#12186#12784#0" expanded="false" />
-            <element signature="e#12820#13389#0" expanded="false" />
-            <element signature="e#13423#13505#0" expanded="false" />
-            <element signature="e#13566#14758#0" expanded="false" />
-            <element signature="e#14791#15690#0" expanded="false" />
-            <element signature="e#15736#18049#0" expanded="false" />
-            <element signature="e#18755#19305#0" expanded="false" />
-            <element signature="e#19355#19917#0" expanded="false" />
-            <element signature="e#19950#20492#0" expanded="false" />
-            <element signature="e#20523#22335#0" expanded="false" />
-            <element signature="e#22368#23011#0" expanded="false" />
-            <element signature="e#23061#23961#0" expanded="false" />
-            <element signature="e#23992#24960#0" expanded="false" />
-            <element signature="e#24994#25733#0" expanded="false" />
-            <element signature="e#25770#26516#0" expanded="false" />
-            <element signature="e#26535#27470#0" expanded="false" />
-            <element signature="e#27504#27594#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -859,7 +598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322146">
           <caret line="14643" column="3" lean-forward="false" selection-start-line="14643" selection-start-column="3" selection-end-line="14643" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -867,7 +605,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -882,7 +619,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
           <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -890,41 +626,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#110#494#0" expanded="false" />
-            <element signature="e#548#944#0" expanded="false" />
-            <element signature="e#1008#1361#0" expanded="false" />
-            <element signature="e#1446#2844#0" expanded="false" />
-            <element signature="e#2944#4626#0" expanded="false" />
-            <element signature="e#4723#5330#0" expanded="false" />
-            <element signature="e#5398#5612#0" expanded="false" />
-            <element signature="e#5653#6929#0" expanded="false" />
-            <element signature="e#6982#7889#0" expanded="false" />
-            <element signature="e#7917#8448#0" expanded="false" />
-            <element signature="e#8475#8762#0" expanded="false" />
-            <element signature="e#8792#10025#0" expanded="false" />
-            <element signature="e#10070#10289#0" expanded="false" />
-            <element signature="e#10322#10675#0" expanded="false" />
-            <element signature="e#10708#11293#0" expanded="false" />
-            <element signature="e#12186#12784#0" expanded="false" />
-            <element signature="e#12820#13389#0" expanded="false" />
-            <element signature="e#13423#13505#0" expanded="false" />
-            <element signature="e#13566#14758#0" expanded="false" />
-            <element signature="e#14791#15690#0" expanded="false" />
-            <element signature="e#15736#18049#0" expanded="false" />
-            <element signature="e#18755#19305#0" expanded="false" />
-            <element signature="e#19355#19917#0" expanded="false" />
-            <element signature="e#19950#20492#0" expanded="false" />
-            <element signature="e#20523#22335#0" expanded="false" />
-            <element signature="e#22368#23011#0" expanded="false" />
-            <element signature="e#23061#23961#0" expanded="false" />
-            <element signature="e#23992#24960#0" expanded="false" />
-            <element signature="e#24994#25733#0" expanded="false" />
-            <element signature="e#25770#26516#0" expanded="false" />
-            <element signature="e#26535#27470#0" expanded="false" />
-            <element signature="e#27504#27594#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -932,7 +633,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322146">
           <caret line="14643" column="3" lean-forward="true" selection-start-line="14643" selection-start-column="3" selection-end-line="14643" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -940,7 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -962,7 +661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -970,41 +668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#110#494#0" expanded="false" />
-            <element signature="e#548#944#0" expanded="false" />
-            <element signature="e#1008#1361#0" expanded="false" />
-            <element signature="e#1446#2844#0" expanded="false" />
-            <element signature="e#2944#4626#0" expanded="false" />
-            <element signature="e#4723#5330#0" expanded="false" />
-            <element signature="e#5398#5612#0" expanded="false" />
-            <element signature="e#5653#6929#0" expanded="false" />
-            <element signature="e#6982#7889#0" expanded="false" />
-            <element signature="e#7917#8448#0" expanded="false" />
-            <element signature="e#8475#8762#0" expanded="false" />
-            <element signature="e#8792#10025#0" expanded="false" />
-            <element signature="e#10070#10289#0" expanded="false" />
-            <element signature="e#10322#10675#0" expanded="false" />
-            <element signature="e#10708#11293#0" expanded="false" />
-            <element signature="e#12186#12784#0" expanded="false" />
-            <element signature="e#12820#13389#0" expanded="false" />
-            <element signature="e#13423#13505#0" expanded="false" />
-            <element signature="e#13566#14758#0" expanded="false" />
-            <element signature="e#14791#15690#0" expanded="false" />
-            <element signature="e#15736#18049#0" expanded="false" />
-            <element signature="e#18755#19305#0" expanded="false" />
-            <element signature="e#19355#19917#0" expanded="false" />
-            <element signature="e#19950#20492#0" expanded="false" />
-            <element signature="e#20523#22335#0" expanded="false" />
-            <element signature="e#22368#23011#0" expanded="false" />
-            <element signature="e#23061#23961#0" expanded="false" />
-            <element signature="e#23992#24960#0" expanded="false" />
-            <element signature="e#24994#25733#0" expanded="false" />
-            <element signature="e#25770#26516#0" expanded="false" />
-            <element signature="e#26535#27470#0" expanded="false" />
-            <element signature="e#27504#27594#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1026,41 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="50" lean-forward="false" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#110#494#0" expanded="false" />
-            <element signature="e#548#944#0" expanded="false" />
-            <element signature="e#1008#1361#0" expanded="false" />
-            <element signature="e#1446#2844#0" expanded="false" />
-            <element signature="e#2944#4626#0" expanded="false" />
-            <element signature="e#4723#5330#0" expanded="false" />
-            <element signature="e#5398#5612#0" expanded="false" />
-            <element signature="e#5653#6929#0" expanded="false" />
-            <element signature="e#6982#7889#0" expanded="false" />
-            <element signature="e#7917#8448#0" expanded="false" />
-            <element signature="e#8475#8762#0" expanded="false" />
-            <element signature="e#8792#10025#0" expanded="false" />
-            <element signature="e#10070#10289#0" expanded="false" />
-            <element signature="e#10322#10675#0" expanded="false" />
-            <element signature="e#10708#11293#0" expanded="false" />
-            <element signature="e#12186#12784#0" expanded="false" />
-            <element signature="e#12820#13389#0" expanded="false" />
-            <element signature="e#13423#13505#0" expanded="false" />
-            <element signature="e#13566#14758#0" expanded="false" />
-            <element signature="e#14791#15690#0" expanded="false" />
-            <element signature="e#15736#18049#0" expanded="false" />
-            <element signature="e#18755#19305#0" expanded="false" />
-            <element signature="e#19355#19917#0" expanded="false" />
-            <element signature="e#19950#20492#0" expanded="false" />
-            <element signature="e#20523#22335#0" expanded="false" />
-            <element signature="e#22368#23011#0" expanded="false" />
-            <element signature="e#23061#23961#0" expanded="false" />
-            <element signature="e#23992#24960#0" expanded="false" />
-            <element signature="e#24994#25733#0" expanded="false" />
-            <element signature="e#25770#26516#0" expanded="false" />
-            <element signature="e#26535#27470#0" expanded="false" />
-            <element signature="e#27504#27594#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1107,13 +735,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ethoslist_util.py" />
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/Scripts/populate_episode_json_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1804">
-          <caret line="82" column="48" lean-forward="false" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/Scripts/episode_ids_list.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -1132,49 +753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/json_editor_app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1540">
-          <caret line="328" column="8" lean-forward="false" selection-start-line="328" selection-start-column="8" selection-end-line="328" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#110#494#0" expanded="false" />
-            <element signature="e#548#944#0" expanded="false" />
-            <element signature="e#1008#1361#0" expanded="false" />
-            <element signature="e#1446#2844#0" expanded="false" />
-            <element signature="e#2944#4626#0" expanded="false" />
-            <element signature="e#4723#5330#0" expanded="false" />
-            <element signature="e#5398#5612#0" expanded="false" />
-            <element signature="e#5653#6929#0" expanded="false" />
-            <element signature="e#6982#7889#0" expanded="false" />
-            <element signature="e#7917#8448#0" expanded="false" />
-            <element signature="e#8475#8762#0" expanded="false" />
-            <element signature="e#8792#10025#0" expanded="false" />
-            <element signature="e#10070#10289#0" expanded="false" />
-            <element signature="e#10322#10675#0" expanded="false" />
-            <element signature="e#10708#11293#0" expanded="false" />
-            <element signature="e#12186#12784#0" expanded="false" />
-            <element signature="e#12820#13389#0" expanded="false" />
-            <element signature="e#13423#13505#0" expanded="false" />
-            <element signature="e#13566#14758#0" expanded="false" />
-            <element signature="e#14791#15690#0" expanded="false" />
-            <element signature="e#15736#18049#0" expanded="false" />
-            <element signature="e#18755#19305#0" expanded="false" />
-            <element signature="e#19355#19917#0" expanded="false" />
-            <element signature="e#19950#20492#0" expanded="false" />
-            <element signature="e#20523#22335#0" expanded="false" />
-            <element signature="e#22368#23011#0" expanded="false" />
-            <element signature="e#23061#23961#0" expanded="false" />
-            <element signature="e#23992#24960#0" expanded="false" />
-            <element signature="e#24994#25733#0" expanded="false" />
-            <element signature="e#25770#26516#0" expanded="false" />
-            <element signature="e#26535#27470#0" expanded="false" />
-            <element signature="e#27504#27594#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1182,33 +760,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/clips.json">
+    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/json_editor_app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/projects.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1298">
-          <caret line="59" column="4" lean-forward="false" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="278" column="38" lean-forward="false" selection-start-line="278" selection-start-column="38" selection-end-line="278" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="328" column="0" lean-forward="false" selection-start-line="328" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1216,6 +774,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/projects.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="59" column="4" lean-forward="false" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/clips.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3690">
+          <caret line="278" column="32" lean-forward="false" selection-start-line="278" selection-start-column="32" selection-end-line="278" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/Scripts/populate_episode_json_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="82" column="48" lean-forward="false" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/freeCodingCamp/quotes/authors.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="31" lean-forward="false" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/freeCodingCamp/quotes/create_json.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding />
         </state>
       </provider>

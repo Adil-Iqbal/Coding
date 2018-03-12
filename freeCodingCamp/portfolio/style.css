@@ -3,9 +3,6 @@
 body {
   background: black -webkit-linear-gradient(135deg, #4d7a8e 0%, rgba(77, 122, 142, 0.738) 19%, rgba(77, 122, 142, 0.541) 34%, rgba(77, 122, 142, 0.382) 47%, rgba(77, 122, 142, 0.278) 56.5%, rgba(77, 122, 142, 0.194) 65%, rgba(77, 122, 142, 0.126) 73%, rgba(77, 122, 142, 0.075) 80.2%, rgba(77, 122, 142, 0.042) 86.1%, rgba(77, 122, 142, 0.021) 91%, rgba(77, 122, 142, 0.008) 95.2%, rgba(77, 122, 142, 0.002) 98.2%, rgba(77, 122, 142, 0) 100%);
   background: black linear-gradient(-45deg, #4d7a8e 0%, rgba(77, 122, 142, 0.738) 19%, rgba(77, 122, 142, 0.541) 34%, rgba(77, 122, 142, 0.382) 47%, rgba(77, 122, 142, 0.278) 56.5%, rgba(77, 122, 142, 0.194) 65%, rgba(77, 122, 142, 0.126) 73%, rgba(77, 122, 142, 0.075) 80.2%, rgba(77, 122, 142, 0.042) 86.1%, rgba(77, 122, 142, 0.021) 91%, rgba(77, 122, 142, 0.008) 95.2%, rgba(77, 122, 142, 0.002) 98.2%, rgba(77, 122, 142, 0) 100%);
-  background-size: 200% 200%;
-  -webkit-animation: bg-fx 90s ease infinite;
-          animation: bg-fx 90s ease infinite;
   font-family: Raleway, serif;
   color: #f7ce3e;
 }
@@ -45,7 +42,7 @@ body a:active {
     background-position: 100% 50%;
   }
 }
-section {
+.section {
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -69,15 +66,33 @@ section {
   position: relative;
 }
 
+.section,
+.slide {
+  background-size: cover;
+}
+
 .signature {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 40%;
+  max-width: 100%;
 }
 
 .name {
   font-size: 2.25em;
+}
+
+.fa,
+.fas,
+.fab,
+.name,
+.title,
+.box_titles,
+.arrow__up,
+.arrow__down,
+.arrow__left,
+.arrow__right {
+  text-shadow: 5px 5px 10px black;
 }
 
 .title {
@@ -234,21 +249,78 @@ section {
 }
 
 .arrow__up {
-  top: 10vh;
+  top: 2vh;
 }
 .arrow__down {
-  bottom: 10vh;
+  bottom: 2vh;
 }
 .arrow__left {
-  left: 10vw;
+  left: 2vw;
 }
 .arrow__right {
-  right: 10vw;
+  right: 2vw;
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.col-md-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .box_titles {
   font-size: 2em;
   line-height: 2.1em;
+  text-align: center;
+}
+
+.arrow__up,
+.arrow__down,
+.name,
+.title,
+.box_titles {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
 }
 
 .text_box {
@@ -256,12 +328,16 @@ section {
   background: linear-gradient(#c5c1c0, #948d8b);
   color: #1a2930;
   height: auto;
-  width: 50%;
+  width: 90%;
   vertical-align: center;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 0.8em;
   border-radius: 1em;
   padding: 0.5em;
+  box-shadow: 3px 3px 8px 1px #001721;
+  -webkit-box-shadow: 3px 3px 8px 1px #001721;
+  -moz-box-shadow: 3px 3px 8px 1px #001721;
 }
 
 #technical_skills {
@@ -276,8 +352,8 @@ section {
   border-radius: 100%;
 }
 
-#skill_bars {
-  width: 30%;
+.col-md-6 #skill_bars {
+  width: 80%;
 }
 
 .progressbar {
@@ -289,6 +365,7 @@ section {
   text-align: center;
   vertical-align: middle;
   border-radius: 0.2em;
+  box-shadow: 1px 1px 2px 0px #001721;
 }
 
 .bar {
@@ -302,6 +379,58 @@ section {
   font-family: 'Work Sans', sans-serif;
   font-weight: bold;
   border-radius: 0.2em;
+  box-shadow: 1px 0px 3px 1px rgba(0, 23, 33, 0.56);
+}
+
+.middle_row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.middle_col {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.arrow__right,
+.arrow__left {
+  position: relative;
 }
 
 #contact_icons {
@@ -332,13 +461,15 @@ section {
 
 .contact {
   border-radius: 0.4em;
-  width: 6em;
-  padding: 0.3em 0.4em 0.4em 0.3em;
+  width: 7em;
+  padding: 0.3em 0.6em 0.6em 0.3em;
+  margin: 0.5em;
   text-align: center;
 }
 .contact * {
   text-align: center;
   text-decoration: none;
+  padding: 0em, 0.1em, 0.1em, 0em;
 }
 .contact:hover {
   background: #f7ce3e -webkit-linear-gradient(30deg, #dfb009 0%, rgba(223, 176, 9, 0.738) 19%, rgba(223, 176, 9, 0.541) 34%, rgba(223, 176, 9, 0.382) 47%, rgba(223, 176, 9, 0.278) 56.5%, rgba(223, 176, 9, 0.194) 65%, rgba(223, 176, 9, 0.126) 73%, rgba(223, 176, 9, 0.075) 80.2%, rgba(223, 176, 9, 0.042) 86.1%, rgba(223, 176, 9, 0.021) 91%, rgba(223, 176, 9, 0.008) 95.2%, rgba(223, 176, 9, 0.002) 98.2%, rgba(223, 176, 9, 0) 100%);
@@ -347,4 +478,6 @@ section {
   text-decoration: none;
 }
 
-  
+.work_ethic {
+  background-image: url("media/book_and_glasses.jpeg");
+}
