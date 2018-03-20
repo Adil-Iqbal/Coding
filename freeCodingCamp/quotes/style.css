@@ -75,20 +75,25 @@ h3 {
     align-items: center;
 }
 
+.ui {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .button {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0.15em;
-    margin-top: 0.2em;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    padding-right: 0.6em;
-    padding-left: 0.6em;
-    font-size: 1.5em;
-    -webkit-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 0.12em;
+    margin: 0.2em;
+    height: 1.6em;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    font-size: 1.2em;
+    -webkit-box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.75);
 }
 
 .active {
@@ -107,6 +112,18 @@ h3 {
 .waiting {
     background-color: #bc5e5e;
     color: #ede1d0;
+}
+
+.tweet {
+    background: #cc0000;
+    background: -moz-linear-gradient(top, #cc0000 0%, #820a00 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cc0000), color-stop(100%, #820a00));
+    background: -webkit-linear-gradient(top, #cc0000 0%, #820a00 100%);
+    background: -o-linear-gradient(top, #cc0000 0%, #820a00 100%);
+    background: -ms-linear-gradient(top, #cc0000 0%, #820a00 100%);
+    background: linear-gradient(to bottom, #cc0000 0%, #820a00 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0000', endColorstr='#820a00', GradientType=0);
+    color: #ebd5b3;
 }
 
 @media only screen and (max-width: 480px) {

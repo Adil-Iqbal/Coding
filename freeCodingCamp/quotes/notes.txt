@@ -1,11 +1,6 @@
-Authors
-https://theysaidso.com/quotes/author/
-
-Fonts
-Pinyon Script
-Parisienne
-Alex Brush
-Tangerine
-Italianno
-Arizonia
-Meddon ***
+1. Minify search keys. DONE!
+2. Set global search keys. DONE!
+3. Update global search keys dynamically. DONE!
+4. Generate quote-specific URL. DONE!
+5. Generate tweet content. DONE!
+6. Activate tweet button.
