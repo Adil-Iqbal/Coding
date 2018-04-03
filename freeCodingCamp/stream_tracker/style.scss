@@ -1,34 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
-$darkest:rgb(0,
-0,
-0);
-$dark:rgb(75,
-75,
-75);
-$medium:rgb(150,
-150,
-150);
-$light:rgb(200,
-200,
-200);
-$lightest:rgb(255,
-255,
-255);
-$online:rgb(0,
-255,
-0);
-$neon_blue:rgb(76,
-247,
-219);
-
-$blizzard_blue: rgb(0,
-38,
-80);
-
+$neon_blue: rgb(76,247,219);
+$blizzard_blue: rgb(0,38,80);
+$medium: rgb(150,150,150);
 
 body {
-    color: $lightest;
+    color: white;
+    font-family: Raleway;
     display: flex;
     justify-content: center;
     background: url('background.jpg') no-repeat center center fixed;
@@ -48,8 +26,7 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    background-color: rgba($medium, 0.4);
+    align-items: center; 
     width: 375px;
     border-radius: 0.5em;
 }
@@ -59,6 +36,30 @@ img {
     flex-direction: column;
     align-items: center;
     font-family: Raleway;
+    text-weight: bold;
+    font-size: 2em;
+    width: 100%;
+    background: rgba(48, 90, 138, 1);
+    background: -moz-linear-gradient(top, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(48, 90, 138, 1)), color-stop(60%, rgba(0, 38, 80, 1)), color-stop(100%, rgba(0, 38, 80, 1)));
+    background: -webkit-linear-gradient(top, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    background: -o-linear-gradient(top, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    background: linear-gradient(to bottom, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+}
+
+.limit {
+    align-self: flex-start;
+    background-color: $blizzard_blue;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    &:hover {
+        color: $neon_blue;
+        background-color: lighten($blizzard_blue, 5%);
+    }
 }
 
 #container {
@@ -78,25 +79,22 @@ img {
 }
 
 a {
-    border-style: solid;
-    border-width: 1px;
-    border-color: $neon_blue;
     color: white;
     &:link {
-        color: white; // background-color:;
+        color: white;
         text-decoration: None;
     }
     &:visited {
         color: white;
-        text-decoration: None; // background-color:;
+        text-decoration: None;
     }
     &:hover {
         color: white;
-        text-decoration: None; // background-color:;
+        text-decoration: None;
     }
     &:active {
         color: white;
-        text-decoration: None; // background-color:;
+        text-decoration: None;
     }
 }
 
@@ -106,30 +104,31 @@ a {
     justify-content: space-between;
     width: 100%;
     height: 75px;
-    border-style: solid;
-    border-width: 1px;
-}
-
-.limit {
-    border-style: solid;
-    background-color: black;
-    border-radius: 0.2em;
+    background-color: rgba($medium, 0.4);
     &:hover {
-        color: yellow;
+        border-style: solid;
+        border-width: 1px;
     }
 }
 
 .online #name {
+    background: rgba(48, 90, 138, 1);
+    background: -moz-linear-gradient(top, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(48, 90, 138, 1)), color-stop(60%, rgba(0, 38, 80, 1)), color-stop(100%, rgba(0, 38, 80, 1)));
+    background: -webkit-linear-gradient(top, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    background: -o-linear-gradient(top, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    background: linear-gradient(to bottom, rgba(48, 90, 138, 1) 0%, rgba(0, 38, 80, 1) 60%, rgba(0, 38, 80, 1) 100%);
+    color: white;
+}
 
-background: rgba(48,90,138,1);
-background: -moz-linear-gradient(top, rgba(48,90,138,1) 0%, rgba(0,38,80,1) 60%, rgba(0,38,80,1) 100%);
-background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(48,90,138,1)), color-stop(60%, rgba(0,38,80,1)), color-stop(100%, rgba(0,38,80,1)));
-background: -webkit-linear-gradient(top, rgba(48,90,138,1) 0%, rgba(0,38,80,1) 60%, rgba(0,38,80,1) 100%);
-background: -o-linear-gradient(top, rgba(48,90,138,1) 0%, rgba(0,38,80,1) 60%, rgba(0,38,80,1) 100%);
-background: -ms-linear-gradient(top, rgba(48,90,138,1) 0%, rgba(0,38,80,1) 60%, rgba(0,38,80,1) 100%);
-background: linear-gradient(to bottom, rgba(48,90,138,1) 0%, rgba(0,38,80,1) 60%, rgba(0,38,80,1) 100%);
-// filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#305a8a', endColorstr='#002650', GradientType=0 );
-
-
+.offline #name {
+    background: rgba(100, 100, 100, 0.4);
+    background: -moz-linear-gradient(top, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(100, 100, 100, 0.4)), color-stop(100%, rgba(200, 200, 200, 0.4)));
+    background: -webkit-linear-gradient(top, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
+    background: -o-linear-gradient(top, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
+    background: -ms-linear-gradient(top, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
+    background: linear-gradient(to bottom, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
     color: white;
 }

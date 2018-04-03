@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway");
 body {
   color: white;
+  font-family: Raleway;
   display: flex;
   justify-content: center;
   background: url("background.jpg") no-repeat center center fixed;
@@ -19,7 +20,6 @@ img {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: rgba(150, 150, 150, 0.4);
   width: 375px;
   border-radius: 0.5em; }
 
@@ -27,7 +27,29 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Raleway; }
+  font-family: Raleway;
+  text-weight: bold;
+  font-size: 2em;
+  width: 100%;
+  background: #305a8a;
+  background: -moz-linear-gradient(top, #305a8a 0%, #002650 60%, #002650 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #305a8a), color-stop(60%, #002650), color-stop(100%, #002650));
+  background: -webkit-linear-gradient(top, #305a8a 0%, #002650 60%, #002650 100%);
+  background: -o-linear-gradient(top, #305a8a 0%, #002650 60%, #002650 100%);
+  background: -ms-linear-gradient(top, #305a8a 0%, #002650 60%, #002650 100%);
+  background: linear-gradient(to bottom, #305a8a 0%, #002650 60%, #002650 100%); }
+
+.limit {
+  align-self: flex-start;
+  background-color: #002650;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white; }
+  .limit:hover {
+    color: #4cf7db;
+    background-color: #00326a; }
 
 #container {
   display: flex;
@@ -44,9 +66,6 @@ img {
   font-family: Raleway; }
 
 a {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #4cf7db;
   color: white; }
   a:link {
     color: white;
@@ -66,15 +85,10 @@ a {
   justify-content: space-between;
   width: 100%;
   height: 75px;
-  border-style: solid;
-  border-width: 1px; }
-
-.limit {
-  border-style: solid;
-  background-color: black;
-  border-radius: 0.2em; }
-  .limit:hover {
-    color: yellow; }
+  background-color: rgba(150, 150, 150, 0.4); }
+  .caster:hover {
+    border-style: solid;
+    border-width: 1px; }
 
 .online #name {
   background: #305a8a;
@@ -84,6 +98,16 @@ a {
   background: -o-linear-gradient(top, #305a8a 0%, #002650 60%, #002650 100%);
   background: -ms-linear-gradient(top, #305a8a 0%, #002650 60%, #002650 100%);
   background: linear-gradient(to bottom, #305a8a 0%, #002650 60%, #002650 100%);
+  color: white; }
+
+.offline #name {
+  background: rgba(100, 100, 100, 0.4);
+  background: -moz-linear-gradient(top, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(100, 100, 100, 0.4)), color-stop(100%, rgba(200, 200, 200, 0.4)));
+  background: -webkit-linear-gradient(top, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
+  background: -o-linear-gradient(top, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
+  background: -ms-linear-gradient(top, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
+  background: linear-gradient(to bottom, rgba(100, 100, 100, 0.4) 0%, rgba(200, 200, 200, 0.4) 100%);
   color: white; }
 
 /*# sourceMappingURL=style.css.map */

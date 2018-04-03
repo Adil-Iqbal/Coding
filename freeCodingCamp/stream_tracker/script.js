@@ -1,81 +1,101 @@
-/*
-FreeCodeCamp Criteria: https://www.freecodecamp.org/challenges/use-the-twitchtv-json-api
-Working with the Twitch API: https://daveconway.net/blog/entry/67/making-requests-from-javascript-to-the-new-twitch-helix-api
-Twitch API documentation: https://dev.twitch.tv/docs/api/reference/
-Starcraft I, game_id=11989
-Starcraft II, game_id=490422
-*/
-
-const OFFLINE = 0;
-const ONLINE = 1;
-
 let trackedCasters = ["StarCraft", "OgamingSC2", "GSL", "ESL_SC2", "BaseTradeTV", "Wardiii",
     "RoXKISPomi", "Crank", "StarLadder_SC2_RU", "TaKeTV", "wesg_sc2", "ESL", "BlizzardZHTW"
 ];
 
-let casterObjects = [];
+let objArray = [];
 
-$(document).ready(function() {
-    // Construct caster objects.
-    $.ajax({
-        type: "GET",
-        url: "https://api.twitch.tv/helix/users",
-        dataType: "json",
-        headers: { "Client-ID": "gnb2ffv3rmyk6km2stfqgpf68mribo" }, stream is online . same with offline streamer.
-        data: $.param({ login: trackedCasters }, true),
-        success: (response) => {
-            trackedCasters = [];
-            for (let i = 0; i < response['data'].length; i++) {
-                // Create caster object.
-                let caster = {}
-                caster.id = response['data'][i].id;
-                caster.img = response['data'][i].profile_image_url;
-                caster.name = response['data'][i].display_name;
-                caster.info = response['data'][i].description;
-                casterObjects.push(caster);
+function makeURL(type, name) {
+    return 'https://wind-bow.gomix.me/twitch-api/' + type + '/' + name + '?callback=?';
+};
 
-                trackedCasters.push(caster.id);
+function sortByStatus(caster1, caster2) {
+    if (caster1.status === 'online' && caster2.status === 'offline') {
+        return -1;
+    } else if (caster1.status === 'offline' && caster2.status === 'online') {
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
-                // Add caster to index.html.
-                let html_ = `<div id="${caster.id}" class="caster"><div><img class="img-fluid" src="${caster.img}" alt="${caster.info}" /></div><div id="name">${caster.name}</div></div>`;
-                $('#container').append(html_);
+function populateContainer(limited) {
+    let showArray;
+    if (limited) {
+        showArray = objArray.filter(caster => caster.status === 'online');
+    } else {
+        showArray = objArray.sort(sortByStatus);
+    }
+    $('#container').empty();
+    for (let caster of showArray) {
+        let html = `<a href="${caster.url}" target="_blank">
+        <div class="caster ${caster.status}">
+                		<div>
+                			<img class="img-fluid" src="${caster.logo}" alt="${caster.name}" />
+                		</div>
+                		<div id="name">
+                			${caster.name}
+            			</div>
+            		</div>
+            		</a>`;
+        $('#container').append(html);
+    }
+}
+
+function swapButton(limited) {
+    if (limited) {
+        $('.limit').removeClass('showAll');
+        $('.limit').addClass('liveNow');
+        $('.limit').html('Live Now!');
+
+    } else {
+        $('.limit').removeClass('liveNow');
+        $('.limit').addClass('showAll');
+        $('.limit').html('Showing All');
+    }
+}
+
+function buttonClicked(limit) {
+    swapButton(limited = limit);
+    populateContainer(limited = limit);
+}
+
+
+function getChannelInfo() {
+    for (let login of trackedCasters) {
+        $.getJSON(makeURL("streams", login), (data) => {
+            let status = "online";
+            if (data.stream === null || data.stream === undefined) {
+                status = "offline";
             }
-            console.log(trackedCasters);
-        },
-        error: (response) => { console.log("Error", response); }
+            $.getJSON(makeURL("channels", login), (data) => {
+                let logo = data.logo != null ? data.logo : "https://dummyimage.com/75x75/ecf0e7/5c5457.jpg&text=%20N/A%20";
+                let name = data.display_name != null ? data.display_name : login;
+                objArray.push({
+                    name: data.display_name != null ? data.display_name : login,
+                    logo: data.logo != null ? data.logo : "https://dummyimage.com/75x75/ecf0e7/5c5457.jpg&text=%20N/A%20",
+                    status: status,
+                    url: "https://www.twitch.tv/" + login
+                })
+            })
+        });
+    }
+}
+
+
+$(document).ready(() => {
+    getChannelInfo();
+    let limit = false;
+    $('.limit').click(() => {
+        buttonClicked(limit);
+        limit = !limit;
     });
-
-
-
-    // Get stream data.
-    $.ajax({
-        type: "GET",
-        url: "https://api.twitch.tv/helix/streams",
-        dataType: "json",
-        headers: { "Client-ID": "gnb2ffv3rmyk6km2stfqgpf68mribo" },
-        data: $.param({ login: trackedCasters[0] }, true),
-        success: (response) => {
-            console.log("Success", response)
-            // for (let i = 0; i < response['data'].length; i++) {
-            //     // Create caster object.
-            //     let caster = {}
-            //     caster.id = response['data'][i].id;
-            //     caster.img = response['data'][i].profile_image_url;
-            //     caster.name = response['data'][i].display_name;
-            //     caster.info = response['data'][i].description;
-            //     casterObjects.push(caster);
-
-            //     // Add caster to index.html.
-            //     let html_ = `<div id="${caster.id}" class="caster"><div><img class="img-fluid" src="${caster.img}" alt="${caster.info}" /></div><div id="name">${caster.name}</div></div>`;
-            //     $('#container').append(html_);
-            // }
-        },
-        error: (response) => { console.log("Error", response); }
-    });
-});
-
-
-// for (let caster of casterObjects) {
-//     let html_ = `<div id="${caster.id}" class="caster"><div><img class="img-fluid" src="${caster.img}" alt="${caster.info}" /></div><div id="name">${caster.name}</div></div>`;
-//     $('#container').append(html_);
-// }
+    let timer = setInterval(function() {
+        if ($('#container').contents().length !== trackedCasters.length) {
+            buttonClicked(false);
+            // console.log("Hey!");
+            if ($('#container').contents().length === trackedCasters.length) {
+                clearTimeout(timer);
+            }
+        }
+    }, 1000);
+})
