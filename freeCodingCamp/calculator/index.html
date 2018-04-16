@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Calculator</title>
+    <!--     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+    body {
+        font-family: 'Roboto mono', monospace;
+        font-size: 50px;
+    }
+
+    .calculator,
+    .display,
+    .button {
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .calculator {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        width: 375px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 355px;
+    }
+
+    .display {
+        dipslay: flex;
+        align-items: center;
+        background-color: white;
+        text-align: right;
+        width: 100%;
+        height: 80px;
+        padding-right: 5px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        width: 80px;
+        height: 80px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .lastRow {
+        margin-bottom: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <div class="row">
+            <div class="display">0</div>
+        </div>
+        <div class="row">
+            <div class="button">CE</div>
+            <div class="button">AC</div>
+            <div class="button">%</div>
+            <div class="button">&times;</div>
+        </div>
+        <div class="row">
+            <div class="button">7</div>
+            <div class="button">8</div>
+            <div class="button">9</div>
+            <div class="button">&divide;</div>
+        </div>
+        <div class="row">
+            <div class="button">4</div>
+            <div class="button">5</div>
+            <div class="button">6</div>
+            <div class="button">+</div>
+        </div>
+        <div class="row">
+            <div class="button">1</div>
+            <div class="button">2</div>
+            <div class="button">3</div>
+            <div class="button">-</div>
+        </div>
+        <div class="row lastRow">
+            <div class="button">&plusmn;</div>
+            <div class="button">0</div>
+            <div class="button">.</div>
+            <div class="button">=</div>
+        </div>
+    </div>
+
+    <!--     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="script.js"></script> -->
+    <script>
+    let memory = 0;
+    let display = "0";
+    </script>
+</body>
+
+</html>
