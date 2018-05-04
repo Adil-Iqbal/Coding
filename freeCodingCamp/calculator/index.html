@@ -12,6 +12,9 @@
     body {
         font-family: 'Roboto mono', monospace;
         font-size: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .calculator,
@@ -27,7 +30,8 @@
         justify-content: center;
         align-items: center;
         background-color: black;
-        width: 375px;
+        width: 365px;
+        border-radius: 10px;
     }
 
     .row {
@@ -35,7 +39,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        width: 355px;
+        width: 345px;
     }
 
     .display {
@@ -48,6 +52,7 @@
         padding-right: 5px;
         margin-top: 10px;
         margin-bottom: 5px;
+        border-radius: 10px;
     }
 
     .button {
@@ -56,10 +61,12 @@
         justify-content: center;
         align-items: center;
         background-color: white;
+        font-size: 40px;
         width: 80px;
         height: 80px;
         margin-top: 5px;
         margin-bottom: 5px;
+        border-radius: 10px;
     }
 
     .lastRow {
@@ -71,7 +78,7 @@
 <body>
     <div class="calculator">
         <div class="row">
-            <div class="display">0</div>
+            <div class="display"></div>
         </div>
         <div class="row">
             <div class="button">CE</div>
@@ -105,12 +112,150 @@
         </div>
     </div>
 
-    <!--     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="script.js"></script> -->
+    <!-- <script src="script.js"></script> -->
     <script>
-    let memory = 0;
-    let display = "0";
+    let showDebug = true;
+    $(document).ready(() => {
+        // Calculator's Memory.
+        let memory = 0;
+        let display = "0";
+        let operation = null;
+        let nextNum = false;
+
+        let possibleOperations = "+-×÷";
+        // Utility Functions.
+
+        function debug(event = "Result of previous event.") {
+            if (showDebug) {
+                console.log(
+                    `-----
+Memory Variable: ${memory}
+Display Variable: ${display}
+Display Length: ${display.length}
+Operation Variable: ${operation}
+NextNum Variable: ${nextNum}
+Event: ${event}`
+                );
+            }
+        }
+
+        function show() {
+            $(".display").text(display);
+        }
+
+        function updateDisplay(text) {
+            if ((display === "0" && text !== ".") || (operation !== null && nextNum === true)) {
+            	// Replace Display.
+            	if (text === ".") {
+            		text = "0.";
+            	}
+                display = text;
+                nextNum = false;
+            } else {
+            	// Append Display.
+                display += text;
+            }
+            show();
+        }
+
+        function isDisplayable(text) {
+            return !isNaN(parseInt(text)) || (text === "." && !display.includes("."));
+        }
+
+        function checkForError() {
+            display = display.length < 12 ? display : "ERROR";
+            if (display === "ERROR") {
+                memory = 0;
+            }
+            if (display.toString() === "NaN") {
+            	display = "ERROR";
+            }
+            memory = isNaN(memory) ? 0 : memory;
+        }
+
+        function clearDisplay(allClear = false) {
+            if (allClear) {
+                memory = 0;
+                operation = null;
+                if (showDebug) {
+                	console.clear();
+                }
+            }
+            display = "0";
+            show();
+        }
+
+        function equals() {
+            let number = parseFloat(display);
+            switch (operation) {
+                case '×':
+                    memory *= number;
+                    break;
+                case '÷':
+                    memory /= number;
+                    break;
+                case '+':
+                    memory += number;
+                    break;
+                case '-':
+                    memory -= number;
+                    break;
+                default:
+                    return;
+            }
+            memory = parseFloat(memory.toPrecision(9));
+            display = memory.toString();
+            checkForError();
+            nextNum = !nextNum;
+            show();
+        }
+
+        // BEGIN CALCULATOR!!!
+        show();
+        $('.button').click((value) => {
+            let entry = value.currentTarget.innerText;
+            debug(`The user entered "${entry}".`);
+            if (entry === "CE") {
+                clearDisplay();
+                debug();
+                return;
+            }
+            if (entry === "AC") {
+                clearDisplay(allClear = true);
+                debug("Calculator has been reset.");
+                return;
+            }
+            if (isDisplayable(entry)) {
+                if (display.length < 11) {
+                    updateDisplay(entry, nextNum);
+                }
+                debug();
+                return;
+            }
+            if (entry === "±") {
+                display = parseFloat(display).toPrecision(10) * -1;
+                display = display.toString();
+                checkForError();
+                show();
+                debug();
+            }
+            if (entry === "=") {
+                equals();
+                debug();
+                return;
+            }
+            if (possibleOperations.includes(entry)) {
+                // if (operation === null) {}
+                equals();
+                memory = parseFloat(display);
+                operation = entry;
+                nextNum = true;
+                debug();
+            }
+        });
+    });
     </script>
 </body>
 
