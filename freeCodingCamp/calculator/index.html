@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Javascript Calculator</title>
-    <!--     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
@@ -34,6 +32,14 @@
         border-radius: 10px;
     }
 
+    .col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 345px;
+    }
+
     .row {
         display: flex;
         flex-direction: row;
@@ -42,17 +48,28 @@
         width: 345px;
     }
 
+    .expression {
+        vertical-align: center;
+        background-color: white;
+        text-align: right;
+        width: 100%;
+        height: 30px;
+        padding-right: 5px;
+        margin-bottom: 5px;
+        border-radius: 0px 0px 10px 10px;
+        font-size: 22px;
+        color: grey;
+    }
+
     .display {
-        dipslay: flex;
-        align-items: center;
+        vertical-align: center;
         background-color: white;
         text-align: right;
         width: 100%;
         height: 80px;
         padding-right: 5px;
         margin-top: 10px;
-        margin-bottom: 5px;
-        border-radius: 10px;
+        border-radius: 10px 10px 0px 0px;
     }
 
     .button {
@@ -77,8 +94,9 @@
 
 <body>
     <div class="calculator">
-        <div class="row">
-            <div class="display"></div>
+        <div class="col">
+            <div class="display">0</div>
+            <div class="expression"></div>
         </div>
         <div class="row">
             <div class="button">CE</div>
@@ -112,148 +130,196 @@
         </div>
     </div>
 
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <!-- <script src="script.js"></script> -->
     <script>
-    let showDebug = true;
     $(document).ready(() => {
-        // Calculator's Memory.
-        let memory = 0;
-        let display = "0";
-        let operation = null;
-        let nextNum = false;
 
-        let possibleOperations = "+-×÷";
-        // Utility Functions.
+        const DISPLAY_LENGTH_LIMIT = 11;
+        const EXPRESSION_LENGTH_LIMIT = 26;
 
-        function debug(event = "Result of previous event.") {
-            if (showDebug) {
-                console.log(
-                    `-----
-Memory Variable: ${memory}
-Display Variable: ${display}
-Display Length: ${display.length}
-Operation Variable: ${operation}
-NextNum Variable: ${nextNum}
-Event: ${event}`
-                );
+        let display = "0";		// Primary (black) display variable.
+        let expression = "";	// Secondary (grey) display variable.
+        let memory = 0;			// Holds value of previous number entered. (Used for percentage calculation).
+        let nextNum = true;		// Switches between replacing and appending to display variable.
+        let keylog = [];		// Logs the sequence of button presses for debugging purposes.
+
+        // Utility function for debugging.
+        function err(errorMessage) {
+
+        	// Log the error message if there is one.
+        	console.log('');
+            if (errorMessage) {
+                console.log(`Error Message: ${errorMessage}`);
             }
-        }
 
-        function show() {
-            $(".display").text(display);
-        }
+  			// Log debug information.
+            console.log(`Display type: ${typeof display}`);
+            console.log(`expression type: ${typeof expression}`);
+            console.log(`memory type: ${typeof memory}`);
+            console.log(`nextNum type: ${typeof nextNum}`);
+            console.log(`Display length: ${display.length}`);
+            console.log(`Expression length: ${expression.length}`);
+            console.log(`Display content: ${display}`);
+            console.log(`Expression content: ${expression}`);
+            console.log(`Memory content: ${memory}`)
+            console.log(`nextNum content: ${nextNum}`);
+            console.log(`Keylog...`);
+            console.log(keylog);
+            console.log('');
 
-        function updateDisplay(text) {
-            if ((display === "0" && text !== ".") || (operation !== null && nextNum === true)) {
-            	// Replace Display.
-            	if (text === ".") {
-            		text = "0.";
-            	}
-                display = text;
-                nextNum = false;
-            } else {
-            	// Append Display.
-                display += text;
-            }
-            show();
-        }
+            // Show error message.
+            $(".display").text('ERROR');
+            $(".expression").text('See console log.');
 
-        function isDisplayable(text) {
-            return !isNaN(parseInt(text)) || (text === "." && !display.includes("."));
-        }
-
-        function checkForError() {
-            display = display.length < 12 ? display : "ERROR";
-            if (display === "ERROR") {
-                memory = 0;
-            }
-            if (display.toString() === "NaN") {
-            	display = "ERROR";
-            }
-            memory = isNaN(memory) ? 0 : memory;
-        }
-
-        function clearDisplay(allClear = false) {
-            if (allClear) {
-                memory = 0;
-                operation = null;
-                if (showDebug) {
-                	console.clear();
-                }
-            }
+            // Re-prime calculator for use despite error.
             display = "0";
-            show();
+            expression = "";
+            memory = 0;
+            nextNum = true;
+            keylog = [];
         }
 
-        function equals() {
-            let number = parseFloat(display);
-            switch (operation) {
+        // Calculator functionality begins here...
+        $('.button').click((entry) => {
+
+            // Retrieve button text and log entry.
+            entry = entry.currentTarget.innerText;
+            keylog.push(entry);
+
+            // Perform action based on button text.
+            switch (entry) {
+                case 'CE':
+                    display = "0";
+                    break;
+                case 'AC':
+                    display = "0";
+                    expression = "";
+                    memory = 0;
+                    nextNum = true;
+                    keylog = [];
+                    console.clear();
+                    break;
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    if (nextNum || display === '0') {
+                        if (display === '0' && entry === '0') {
+                        	break;
+                        }
+                        nextNum = false;
+                        display = entry;
+                        break;
+                    }
+                    if (display.length < DISPLAY_LENGTH_LIMIT) {
+                        display += entry;
+                    }
+                    break;
+                case '.':
+                    if (nextNum) {
+                        display = '0.';
+                        nextNum = false;
+                        break;
+                    }
+                    if (!display.includes('.') && display.length < DISPLAY_LENGTH_LIMIT - 1) {
+                        display += entry;
+                    }
+                    break;
+                case '±':
+					display = parseFloat(display) * -1;
+					display = display.toString();
+                    break;
+                case '%':
+                    display = memory * (parseFloat(display) / 100);
+                    display = display.toString();
+                    break;
                 case '×':
-                    memory *= number;
-                    break;
                 case '÷':
-                    memory /= number;
-                    break;
                 case '+':
-                    memory += number;
-                    break;
                 case '-':
-                    memory -= number;
+                    expression += display;
+                    expression += ' ' + entry + ' ';
+                    memory = parseFloat(display);
+                    nextNum = true;
+                    display = '0';
+                    break;
+                case '=':
+                    expression += display;
+                    memory = parseFloat(display);
+                    nextNum = true;
+                    expression = expression.replace(/×/gi, "*");
+                    expression = expression.replace(/÷/gi, "/");
+                    try {
+                        display = eval(expression).toString();
+                        if (display.length > DISPLAY_LENGTH_LIMIT) {
+                        	display = parseFloat(display).toPrecision(DISPLAY_LENGTH_LIMIT - 2);
+                        }
+                        expression = '';
+                    } catch (error) {
+                        if (error instanceof SyntaxError) {
+                            err('Expression is malformed.');
+                        }
+                    }
                     break;
                 default:
                     return;
             }
-            memory = parseFloat(memory.toPrecision(9));
-            display = memory.toString();
-            checkForError();
-            nextNum = !nextNum;
-            show();
-        }
 
-        // BEGIN CALCULATOR!!!
-        show();
-        $('.button').click((value) => {
-            let entry = value.currentTarget.innerText;
-            debug(`The user entered "${entry}".`);
-            if (entry === "CE") {
-                clearDisplay();
-                debug();
+            // Check for datatype errors.
+            if (typeof display !== 'string') {
+                err('Display variable is not a string.');
                 return;
             }
-            if (entry === "AC") {
-                clearDisplay(allClear = true);
-                debug("Calculator has been reset.");
+            if (typeof expression !== 'string') {
+                err('Expression variable is not a string.');
                 return;
             }
-            if (isDisplayable(entry)) {
-                if (display.length < 11) {
-                    updateDisplay(entry, nextNum);
+            if (typeof memory !== 'number' || memory === NaN) {
+                err('Memory variable is not a number.');
+                return;
+            }
+            if (typeof nextNum !== 'boolean') {
+                err('The nextNum variable is not a boolean.');
+                return;
+            }
+            if (!keylog instanceof Array) {
+                err('Keylog variable is not an array.');
+                return;
+            }
+
+            // Check for length errors.
+            if (display.length > DISPLAY_LENGTH_LIMIT) {
+                err('Display variable is too long.');
+                return;
+            }
+            if (expression.length > EXPRESSION_LENGTH_LIMIT) {
+                err('Expression variable is too long.');
+                return;
+            }
+
+            // Check for content errors.
+            for (char of display.split("")) {
+                if (!"1234567890.-".includes(char)) {
+                    err(`Display variable contains invalid character: ${char}`);
+                    return;
                 }
-                debug();
-                return;
             }
-            if (entry === "±") {
-                display = parseFloat(display).toPrecision(10) * -1;
-                display = display.toString();
-                checkForError();
-                show();
-                debug();
+            for (char of expression.split("")) {
+                if (!"1234567890.-+×÷*/ ".includes(char)) {
+                    err(`Expression variable contains invalid character: ${char}`);
+                    return;
+                }
             }
-            if (entry === "=") {
-                equals();
-                debug();
-                return;
-            }
-            if (possibleOperations.includes(entry)) {
-                // if (operation === null) {}
-                equals();
-                memory = parseFloat(display);
-                operation = entry;
-                nextNum = true;
-                debug();
-            }
+
+            // Show the updates.
+            $(".display").text(display);
+            $(".expression").text(expression);
         });
     });
     </script>
