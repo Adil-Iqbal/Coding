@@ -137,22 +137,22 @@
         const DISPLAY_LENGTH_LIMIT = 11;
         const EXPRESSION_LENGTH_LIMIT = 26;
 
-        let display = "0";		// Primary (black) display variable.
-        let expression = "";	// Secondary (grey) display variable.
-        let memory = 0;			// Holds value of previous number entered. (Used for percentage calculation).
-        let nextNum = true;		// Switches between replacing and appending to display variable.
-        let keylog = [];		// Logs the sequence of button presses for debugging purposes.
+        let display = "0"; // Primary (black) display variable.
+        let expression = ""; // Secondary (grey) display variable.
+        let memory = 0; // Holds value of previous number entered. (Used for percentage calculation).
+        let nextNum = true; // Switches between replacing and appending to display variable.
+        let keylog = []; // Logs the sequence of button presses for debugging purposes.
 
         // Utility function for debugging.
         function err(errorMessage) {
 
-        	// Log the error message if there is one.
-        	console.log('');
+            // Log the error message if there is one.
+            console.log('');
             if (errorMessage) {
                 console.log(`Error Message: ${errorMessage}`);
             }
 
-  			// Log debug information.
+            // Log debug information.
             console.log(`Display type: ${typeof display}`);
             console.log(`expression type: ${typeof expression}`);
             console.log(`memory type: ${typeof memory}`);
@@ -188,9 +188,11 @@
 
             // Perform action based on button text.
             switch (entry) {
+
                 case 'CE':
                     display = "0";
                     break;
+
                 case 'AC':
                     display = "0";
                     expression = "";
@@ -199,6 +201,7 @@
                     keylog = [];
                     console.clear();
                     break;
+
                 case '0':
                 case '1':
                 case '2':
@@ -211,7 +214,7 @@
                 case '9':
                     if (nextNum || display === '0') {
                         if (display === '0' && entry === '0') {
-                        	break;
+                            break;
                         }
                         nextNum = false;
                         display = entry;
@@ -221,6 +224,7 @@
                         display += entry;
                     }
                     break;
+
                 case '.':
                     if (nextNum) {
                         display = '0.';
@@ -231,14 +235,17 @@
                         display += entry;
                     }
                     break;
+
                 case '±':
-					display = parseFloat(display) * -1;
-					display = display.toString();
+                    display = parseFloat(display) * -1;
+                    display = display.toString();
                     break;
+
                 case '%':
                     display = memory * (parseFloat(display) / 100);
                     display = display.toString();
                     break;
+
                 case '×':
                 case '÷':
                 case '+':
@@ -249,6 +256,7 @@
                     nextNum = true;
                     display = '0';
                     break;
+
                 case '=':
                     expression += display;
                     memory = parseFloat(display);
@@ -258,7 +266,7 @@
                     try {
                         display = eval(expression).toString();
                         if (display.length > DISPLAY_LENGTH_LIMIT) {
-                        	display = parseFloat(display).toPrecision(DISPLAY_LENGTH_LIMIT - 2);
+                            display = parseFloat(display).toPrecision(DISPLAY_LENGTH_LIMIT - 2);
                         }
                         expression = '';
                     } catch (error) {
@@ -267,6 +275,7 @@
                         }
                     }
                     break;
+
                 default:
                     return;
             }
