@@ -54,9 +54,7 @@ function setTargetTime(h, m, s) {
         minutes: m,
         seconds: s,
         text: `${textify(h)}:${textify(m)}:${textify(s)}`,
-        now: now,
         difference: diff,
-        target: now + diff
     }
 }
 
@@ -66,10 +64,11 @@ const BREAK_TIME = setTargetTime(H2, M2, S2);
 
 // Used to create deep copy of data.
 function deepCopy(data) {
-	return JSON.parse(JSON.stringify(data));
+    return JSON.parse(JSON.stringify(data));
 }
 
 // Begin graphic rendering using P5.js
+
 function setup() {
     createCanvas(400, 400);
     angleMode(DEGREES)
@@ -77,31 +76,27 @@ function setup() {
 
 
 function draw() {
-	let elapsed = millis();
+	// Constrain elapsed time to the duration of a single lap of the Pomodoro clock.
+	let elapsed = millis() % (ACTIVITY_TIME.difference + BREAK_TIME.difference);
 
     background(0);
     translate(width / 2, height / 2);
-
     rotate(270);
-    strokeWeight(10);
     noFill();
 
-    // Acivity Time Ring.
-    stroke(255, 0, 0);
-    let activityTimeLeft = ACTIVITY_TIME.difference - elapsed;
-    let a = map(activityTimeLeft, 0, ACTIVITY_TIME.difference, 0, 360);
-    arc(0, 0, 300, 300, 0, a);
+    let activityTimeLeft, breakTimeLeft;
+    if (elapsed < ACTIVITY_TIME.difference) {
+    	activityTimeLeft = ACTIVITY_TIME.difference - elapsed;
+    	breakTimeLeft = BREAK_TIME.difference;
+    } else {
+    	activityTimeLeft = 0;
+    	breakTimeLeft = BREAK_TIME.difference - (elapsed - ACTIVITY_TIME.difference);
+    }
 
-    // Break Time Ring.
-    // strokeWeight(10);
-    // noFill();
-    stroke(0, 255, 0);
-    let breakTimeLeft = BREAK_TIME.difference - elapsed;
-    let b = map(breakTimeLeft, 0, BREAK_TIME.difference, 0, 360);
-    arc(0, 0, 280, 280, 0, b);
+    showArc('Activity', activityTimeLeft);
+    showArc('Break', breakTimeLeft);
 
     // Time Text Display
-
     rotate(-270);
     strokeWeight(0);
     stroke(255);
@@ -113,5 +108,30 @@ function draw() {
     text(ACTIVITY_TIME.text, 0, -10);
     textSize(20);
     text(BREAK_TIME.text, 0, 30);
+
 }
 
+function showArc(ringType, timeLeft) {
+	let totalTime, weight, diameter, color;
+	if (ringType === 'Activity') {
+		totalTime = ACTIVITY_TIME.difference;
+		weight = 10;
+		diameter = 300;
+		color = [255, 0, 0];
+	} else if (ringType === 'Break') {
+		totalTime = BREAK_TIME.difference;
+		weight = 10;
+		diameter = 280;
+		col = [0, 255, 0];
+	} else {
+		throw new Error ('ringType parameter required.')
+	}
+	if (timeLeft === 0) {
+		color = [0, 0, 0];
+	}
+
+	let angle = map(timeLeft, 0, totalTime, 0, 360);
+	strokeWeight(weight);
+    stroke(color[0], color[1], color[2]);
+    arc(0, 0, diameter, diameter, 0, angle);
+}
