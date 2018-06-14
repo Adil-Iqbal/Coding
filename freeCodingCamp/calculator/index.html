@@ -179,6 +179,17 @@
             keylog = [];
         }
 
+        function stripZeros(string) {
+        	string = string.split('');
+        	while(string[0] === '0') {
+        		string.shift();
+        	}
+        	while(string[string.length - 1] === '0') {
+        		string.pop();
+        	}
+        	return string.join('');
+        }
+
         // Calculator functionality begins here...
         $('.button').click((entry) => {
 
@@ -267,6 +278,7 @@
                         display = eval(expression).toString();
                         if (display.length > DISPLAY_LENGTH_LIMIT) {
                             display = parseFloat(display).toPrecision(DISPLAY_LENGTH_LIMIT - 2);
+                            display = stripZeros(display);
                         }
                         expression = '';
                     } catch (error) {
