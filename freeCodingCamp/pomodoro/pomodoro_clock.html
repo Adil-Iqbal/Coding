@@ -16,29 +16,19 @@
         <div class="col-md-3"></div>
         <div class="col-md-6 container">
             <p>Pomodoro Clock</p>
-            <form action="/pomodoro/pomodoro_clock.html">
-                <div class="activityTime">
-                    <input type="text" name="h1" class="activityInput" size="2" maxlength="2" placeholder="hh"> :
-                    <input type="text" name="m1" class="activityInput" size="2" maxlength="2" placeholder="mm" value="25"> :
-                    <input type="text" name="s1" class="activityInput" size="2" maxlength="2" placeholder="ss">
-                </div>
-                <div class="breakTime">
-                    <input type="text" name="h2" class="breakInput" size="2" maxlength="2" placeholder="hh"> :
-                    <input type="text" name="m2" class="breakInput" size="2" maxlength="2" placeholder="mm" value="05"> :
-                    <input type="text" name="s2" class="breakInput" size="2" maxlength="2" placeholder="ss">
-                </div>
-                <div class='submitButton'>
-                    <button type="submit">
-                        <i class="fa fa-play-circle"></i>
-                    </button>
-                </div>
-            </form>
+            <div id="canvasContainer"></div>
+            <div class="buttonContainer"></a>
+                <div class="button home"><a href="index.html"><i class="fas fa-home"></i></a></div>
+                <div class="button togglePlayPause"><i class="fas fa-pause"></i></div>
+                <div class="button refresh"><i class="fas fa-redo-alt"></i></div>
+            </div>
         </div>
         <div class="col-md-3"></div>
     </div>
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
-    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.13/howler.min.js"></script>
     <script defer type="text/javascript" src="sketch.js"></script>
 </body>
 

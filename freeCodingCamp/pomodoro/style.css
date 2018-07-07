@@ -1,0 +1,111 @@
+    body {
+        height: 100%;
+        background-color: black;
+        color: white;
+        font-size: 25px;
+        font-weight: bold;
+        font-family: 'Arvo';
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a:link,
+    a:hover,
+    a:visited,
+    a:active {
+        color: white;
+        text-decoration: none;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        min-height: 100%;
+    }
+
+    button {
+        background-color: black;
+        color: white;
+        border-style: none;
+        font-size: 30px;
+        margin: 10px;
+    }
+
+    .row {
+        width: 360px;
+        /* Center row vertically. */
+        position: absolute;
+        transform: translateY(-50%);
+        top: 50%;
+
+        /* Center content horizontally. */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 350px;
+        height: 100%;
+    }
+
+    .buttonContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+    }
+
+    .activityTime {
+        color: red;
+        margin: 10px;
+    }
+
+    .breakTime {
+        color: green;
+        margin: 10px;
+    }
+
+    .activityInput {
+        text-align: center;
+        padding: 0px;
+        font-size: 20px;
+        font-family: 'Arvo';
+        border-width: 2px;
+        border-color: #c10505;
+        background-color: #e88181;
+        color: #c10505;
+        border-style: solid;
+        border-radius: 5px;
+    }
+
+    .breakInput {
+        text-align: center;
+        padding: 0px;
+        font-size: 20px;
+        font-family: 'Arvo';
+        border-width: 2px;
+        border-color: #007F00;
+        background-color: #7fbf7f;
+        color: #007F00;
+        border-style: solid;
+        border-radius: 5px;
+    }
+
+    .activityInput:focus {
+        background-color: #f0acac;
+    }
+
+    .breakInput:focus {
+        background-color: #B2D8B2;
+    }
