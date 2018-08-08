@@ -2,7 +2,6 @@
 // Sass (v3.4.21)
 // Compass (v1.0.3)
 // ----
-
 // Google Fonts
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700,900');
@@ -19,9 +18,10 @@ $lightest: #c5c1c0;
     @return $n * 1.05;
 }
 
-@mixin scrimGradient($startColor: 'black', $stopColor: 'white', $direction: 'to bottom') {
-  $scrimCoordinates: (
-    0: 1,
+@mixin scrimGradient($startColor: 'black',
+$stopColor: 'white',
+$direction: 'to bottom') {
+    $scrimCoordinates: ( 0: 1,
     19: 0.738,
     34: 0.541,
     47: 0.382,
@@ -33,25 +33,30 @@ $lightest: #c5c1c0;
     91: 0.021,
     95.2: 0.008,
     98.2: 0.002,
-    100: 0
-  );
-  $hue: hue($startColor);
-  $saturation: saturation($startColor);
-  $lightness: lightness($startColor);
-  $stops: ();
-  @each $colorStop, $alphaValue in $scrimCoordinates {
-    // $stop: mix($startColor, $stopColor, ($weight * 100));
-    $stop: hsla($hue, $saturation, $lightness, $alphaValue) percentage($colorStop/100);
-    $stops: append($stops, $stop, comma);
-  }
+    100: 0);
+    $hue: hue($startColor);
+    $saturation: saturation($startColor);
+    $lightness: lightness($startColor);
+    $stops: ();
+    @each $colorStop,
+    $alphaValue in $scrimCoordinates {
+        // $stop: mix($startColor, $stopColor, ($weight * 100));
+        $stop: hsla($hue, $saturation, $lightness, $alphaValue) percentage($colorStop/100);
+        $stops: append($stops, $stop, comma);
+    }
 
-  background: $stopColor linear-gradient(unquote($direction), $stops);
+    background: $stopColor linear-gradient(unquote($direction),
+    $stops);
 }
 
 // --- STYLE --- //
 $text_color: $light;
 body {
-    @include scrimGradient(lighten($medium, 20%), darken($dark, 20%), -45deg);
+    @include scrimGradient(lighten($medium,
+    20%),
+    darken($dark,
+    20%),
+    -45deg);
     font-family: Raleway, serif;
     color: $text_color;
     a {
@@ -65,7 +70,20 @@ body {
         &:active {
             color: lighten(saturate($text_color, 15%), 10%);
         }
-}}
+    }
+}
+
+body::after {
+  content: "";
+  background: url("media/gplay-texture.png");
+  opacity: 0.15;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
 
 @keyframes bg-fx {
     0% {
@@ -92,18 +110,25 @@ body {
 
 .section,
 .slide {
-  background-size: cover;
+    background-size: cover;
 }
 
 .signature {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+    width: 100%;
 }
 
 .name {
     font-size: 2.25em;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-contents: space-around;
+    align-items: space-around;
 }
 
 .fa,
@@ -133,7 +158,8 @@ $anim-text-offset: 1em;
     user-select: none;
     display: inline-block;
     border: .2em solid;
-    margin-top: 1em;
+    border-radius: 500px;
+    margin-top: 3em;
     position: relative;
     cursor: pointer;
     overflow: hidden;
@@ -251,9 +277,9 @@ $horizontal_arrow_spacing: 10vw;
 }
 
 .box_titles {
-  font-size: 2em;
-  line-height: with_pad(2)+em;
-  text-align: center;
+    font-size: 2em;
+    line-height: with_pad(2)+em;
+    text-align: center;
 }
 
 .arrow__up,
@@ -261,34 +287,34 @@ $horizontal_arrow_spacing: 10vw;
 .name,
 .title,
 .box_titles {
-	margin-right: auto;
-	margin-left: auto;
-	text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
 }
 
 .text_box {
-  background: linear-gradient($lightest, darken($lightest, 20%));
-  color: $dark;
-  height: auto;
-  width: 50%;
-  vertical-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0.8em;
-  border-radius: 1em;
-  padding: 0.5em;
-  box-shadow: 3px 3px 8px 1px rgba(0, 23, 33, 1);
-  -webkit-box-shadow: 3px 3px 8px 1px rgba(0, 23, 33, 1);
+    background: linear-gradient($lightest, darken($lightest, 20%));
+    color: $dark;
+    height: auto;
+    width: 50%;
+    vertical-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.8em;
+    border-radius: 1em;
+    padding: 0.5em;
+    box-shadow: 3px 3px 8px 1px rgba(0, 23, 33, 1);
+    -webkit-box-shadow: 3px 3px 8px 1px rgba(0, 23, 33, 1);
     -moz-box-shadow: 3px 3px 8px 1px rgba(0, 23, 33, 1);
 }
 
 #technical_skills {
-  align-items: center;
+    align-items: center;
 }
 
 .headshot {
-  max-width: 10em;
-  border-radius: 100%;
+    max-width: 10em;
+    border-radius: 100%;
 }
 
 .section #skill_bars {
@@ -353,25 +379,30 @@ $horizontal_arrow_spacing: 10vw;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    & a {text-decoration: none !important;}
+    & a {
+        text-decoration: none !important;
+    }
 }
 
 .contact {
-  border-radius: 0.4em;
+    border-radius: 0.4em;
     width: 7em;
     padding: 0.3em 0.6em 0.6em 0.3em;
     margin: 0.5em;
     text-align: center;
-  & * {
-    text-align: center;
-    text-decoration: none;
-    padding: 0em, 0.1em, 0.1em, 0em;
-  }
-  &:hover {
-    @include scrimGradient(darken($light, 15%), $light, 60deg);
-    color: $dark;
-    text-decoration: none;
-  }
+    & * {
+        text-align: center;
+        text-decoration: none;
+        padding: 0em, 0.1em, 0.1em, 0em;
+    }
+    &:hover {
+        @include scrimGradient(darken($light,
+        15%),
+        $light,
+        60deg);
+        color: $dark;
+        text-decoration: none;
+    }
 }
 
 .work_ethic {

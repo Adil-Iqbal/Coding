@@ -64,14 +64,14 @@ def update_file(data, obj_type=None):
         json.dump(data, j_data)
 
 
-def backup_files(function):
+def backup_files(callback):
     """Back up all JSON files before executing function."""
     def wrapped():
         backup_project_data = list(access_file("project"))
         backup_clip_data = list(access_file("clip"))
         backup_episode_data = list(access_file("episode"))
         try:
-            function()
+            callback()
         except:
             update_file(backup_project_data)
             update_file(backup_clip_data)

@@ -1,18 +1,65 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Polynomial Regression</title>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/0.12.2/tf.min.js"></script>
-	<script type="text/javascript" src="script.js"></script>
-	<style type="text/css">
-		body {
-			text-align: center;
-		}
-	</style>
+    <title>Polynomial Regression</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <style type="text/css">
+    body {
+        text-align: center;
+        font-family: 'Arvo';
+    }
+
+    h1 {
+        margin: 20px;
+    }
+
+
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: 20px;
+    }
+    </style>
 </head>
+
 <body>
-<h1>Polynomial Regression</h1>
+    <div class="row">
+        <h1>Polynomial Regression Playground</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="canvasContainer"></div>
+        </div>
+        <div class="col-md-6 ui">
+            <div id="polynomial"></div>
+            <div id="loss"></div>
+            <div id='lrP'></div>
+            <div id="lrSlider"></div>
+            Load Dataset:
+            <div id="polyDataset"></div>
+            Select Optimizer:
+            <div id="optimizer"></div>
+            <div class="buttons">
+                <div id="clearButton"></div>
+                <div id="randomizeCurve"></div>
+            </div>
+        </div>
+    </div>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/0.12.2/tf.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script defer type="text/javascript" src="script.js"></script>
 </body>
+
 </html>
