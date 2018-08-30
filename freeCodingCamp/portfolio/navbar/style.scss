@@ -8,11 +8,14 @@ $dark: #1a2930;
 $medium: #29414c;
 $light: #f7ce3e;
 $lightest: #c5c1c0;
-
-@mixin dynamicGradient($color, $amount, $direction: 0deg, $important: false, $image: false) {
+@mixin dynamicGradient($color,
+$amount,
+$direction: 0deg,
+$important: false,
+$image: false) {
     $newColor: $color;
 
-    @if $amount > 0 {
+    @if $amount>0 {
         $newColor: lighten(saturate($color, $amount), $amount);
     }
 
@@ -38,26 +41,26 @@ $lightest: #c5c1c0;
     }
 }
 
-$bgColor: lighten($medium, 2.5%);
+$bgColor: lighten($medium,
+2.5%);
 
-$bgColorActive: darken($medium, 8%);
+$bgColorActive: darken($medium,
+8%);
 
 $dynamicEffect: 10%;
 
-html,
-body {
-    margin: 0;
-    height: 100%;
-    background: $medium;
-}
-
+// html,
+// body {
+//     margin: 0;
+//     height: 100%;
+//     background: $medium;
+// }
 nav {
     position: fixed;
-    width: 100%;
-
-    // top: -30px;
+    width: 100%; // top: -30px;
     right: 0px;
     left: 0px;
+    z-index: 3;
     transition: top 0.25s ease-in-out;
 }
 
@@ -73,9 +76,7 @@ ul {
 }
 
 li {
-    display: inline;
-
-    // text-align: center;
+    display: inline; // text-align: center;
     width: 100%;
     margin: 0;
 }
@@ -83,14 +84,10 @@ li {
 li a {
     display: block;
     padding: 0;
-    margin: 0;
-
-    // font-size: 11px;
+    margin: 0; // font-size: 11px;
     font-weight: 550;
     font-family: 'Work Sans', sans-serif;
-    text-transform: uppercase;
-
-    // letter-spacing: 0.12em;
+    text-transform: uppercase; // letter-spacing: 0.12em;
     text-decoration: none;
     color: $lightest;
     transition: 0.1s ease-in-out;
@@ -105,17 +102,17 @@ li a {
 }
 
 #overlay {
-    position: fixed; 
-    display: none; 
-    width: 100%; 
-    height: 100%; 
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 2; 
-    cursor: pointer; 
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 499px) {
@@ -125,7 +122,6 @@ li a {
 
     nav {
         top: -248px;
-   
     }
 
     ul {
@@ -137,8 +133,11 @@ li a {
         text-align: left;
     }
 
-    li a {
-        @include dynamicGradient($bgColor, $dynamicEffect, -90deg, $image: false);
+    li>a {
+        @include dynamicGradient($bgColor,
+        $dynamicEffect,
+        -90deg,
+        $image: false);
 
         box-shadow: inset 0 0 100px hsla(0, 0%, 0%, 0.3);
         font-size: 13px;
@@ -147,17 +146,17 @@ li a {
         padding-left: $mobilePadding * 2;
         border-style: solid;
         border-width: 1px;
-        border-left-width: $mobileAccentBorderWidth;
-
-        // Border color.
+        border-left-width: $mobileAccentBorderWidth; // Border color.
         border-top-color: $bgColor;
         border-bottom-color: lighten($bgColor, 15%);
         border-right-color: $bgColor;
-        border-left-color: lighten(saturate($bgColor, $dynamicEffect), $dynamicEffect);
-
-        //lighten($bgColor, 15%);
+        border-left-color: lighten(saturate($bgColor, $dynamicEffect), $dynamicEffect); //lighten($bgColor, 15%);
         &:hover {
-            @include dynamicGradient(lighten($bgColor, 6%), $dynamicEffect, -90deg, $image: false);
+            @include dynamicGradient(lighten($bgColor,
+            6%),
+            $dynamicEffect,
+            -90deg,
+            $image: false);
 
             box-shadow: inset 0 0 100px hsla(0, 0%, 0%, 0.3);
             border-left-width: $mobileAccentBorderWidth;
@@ -166,7 +165,10 @@ li a {
     }
 
     #toggleNav {
-        @include dynamicGradient(lighten($bgColor, 8%), $dynamicEffect, 90deg);
+        @include dynamicGradient(lighten($bgColor,
+        8%),
+        $dynamicEffect,
+        90deg);
 
         box-shadow: inset 0 0 100px hsla(0, 0%, 0%, 0.3);
         display: flex;
@@ -182,14 +184,20 @@ li a {
         border-color: lighten($bgColor, 15%);
         border-radius: 0 0 8px 0;
         color: $lightest;
-        font-size: 20px;
+        font-size: 30px;
         &:hover {
-            @include dynamicGradient(lighten($bgColor, 18%), $dynamicEffect, 90deg);
+            @include dynamicGradient(lighten($bgColor,
+            18%),
+            $dynamicEffect,
+            90deg);
         }
     }
 
     .active {
-        @include dynamicGradient($bgColorActive, $dynamicEffect * 1.1, -90deg, $important: true);
+        @include dynamicGradient($bgColorActive,
+        $dynamicEffect * 1.1,
+        -90deg,
+        $important: true);
 
         box-shadow: inset 12px 0 10px -15px #000, inset -12px 0 10px -15px #000 !important;
         border-left-color: $light !important;
@@ -210,7 +218,9 @@ li a {
     }
 
     li a {
-        @include dynamicGradient($bgColor, $dynamicEffect, 180deg);
+        @include dynamicGradient($bgColor,
+        $dynamicEffect,
+        180deg);
 
         font-size: 11px;
         letter-spacing: 0.12em;
@@ -222,19 +232,26 @@ li a {
         border-bottom-width: 1px;
 
         &:hover {
-            @include dynamicGradient(lighten($bgColor, 6%), $dynamicEffect, 180deg);
+            @include dynamicGradient(lighten($bgColor,
+            6%),
+            $dynamicEffect,
+            180deg);
 
             border-top-style: solid;
             border-top-color: #dddddd;
         }
     }
 
+    #overlay,
     #toggleNav {
         display: none;
     }
 
     .active {
-        @include dynamicGradient($bgColorActive, $dynamicEffect, 180deg, $important: true);
+        @include dynamicGradient($bgColorActive,
+        $dynamicEffect,
+        180deg,
+        $important: true);
 
         box-shadow: inset 12px 0 10px -15px #000, inset -12px 0 10px -15px #000 !important;
         border-top-color: $light !important;

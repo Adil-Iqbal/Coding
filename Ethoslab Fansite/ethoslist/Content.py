@@ -1,10 +1,11 @@
-from class_util import *
-from abc import ABCMeta, abstractmethod
+from utility import *
+from pprint import pprint
+from datetime import datetime
+from abc import ABC, abstractmethod
+from operator import attrgetter
 
 
-class Content(object):
-    __metaclass__ = ABCMeta
-
+class Content(ABC):
     def __init__(self, source=None):
         if source is None:
             self.uid = generate_uid()
@@ -23,8 +24,8 @@ class Content(object):
         elif type(source) is str:
             self.load(source)
         else:
-            raise TypeError(
-                f'{self.uid}: Source must be a string, dictionary, object class, or None. (Was {type(source)})')
+            raise TypeError('{}: Source must be a string, dictionary, object class, or None. Was {}'
+                            .format(self.uid, type(source)))
 
     def __eq__(self, other):
         if type(other) in (float, list):
@@ -40,66 +41,89 @@ class Content(object):
         else:
             return False
 
+    def __repr__(self):
+        def force_string_length(string, length, filler=" "):
+            string = str(string)
+            length = int(length)
+            while len(string) < length:
+                string += filler
+            return string[:length]
+
+        a = self.type[0].upper() if self.type is not None else 'N'
+        b = self.uid
+        x = 31 if a is 'E' else 0
+        y = str(self.title)
+        c = force_string_length(y[x:], 20)
+        d = force_string_length(self.description, 30)
+
+        return f'{a}-{b} #{c} #{d}'
+
     def to_dict(self):
         """Convert instance into a dictionary and return it."""
         dictionary = {}
         for attribute, value in self.__dict__.items():
-            dictionary[attribute] = value
+            if isinstance(value, datetime):
+                dictionary[attribute] = value.isoformat()
+            else:
+                dictionary[attribute] = value
         return dictionary
-
-    def _validate_dictionary(self, dictionary):
-        """Ensure dictionary is compatible with this class."""
-        if type(dictionary) is not dict:
-            raise TypeError('{}: This function expects a dictionary.'.format(self.uid))
-        dictionary_keys = dictionary.keys()
-        attributes = []
-        for attribute, value in self.__dict__.items():
-            attributes.append(attribute)
-        for index, key in enumerate(dictionary_keys):
-            if key not in attributes:
-                raise KeyError('{}: Dictionary contains unexpected key: {}'.format(self.uid, key))
-        for index, attribute in enumerate(attributes):
-            if attribute not in dictionary_keys:
-                raise KeyError('{}: Dictionary is missing a required key: {}'.format(self.uid, attribute))
-        if dictionary['type'] is not self.type:
-                raise TypeError('{}: Object type of dictionary ({}) does not match object type of class ({}).'
-                                .format(self.uid, dictionary['type'], self.type))
 
     def from_dict(self, dictionary):
         """Assign dictionary values to class attributes."""
-        self.uid = dictionary['uid']
-        self.type = dictionary['type']
-        self.title = dictionary['title']
-        self.description = dictionary['description']
-        self.clips = dictionary['clips']
-        self.episodes = dictionary['episodes']
-        self.projects = dictionary['projects']
+        for key in dictionary.keys():
+            setattr(self, key, dictionary[key])
+        # self.uid = dictionary['uid']
+        # self.type = dictionary['type']
+        # self.title = dictionary['title']
+        # self.description = dictionary['description']
+        # self.clips = dictionary['clips']
+        # self.episodes = dictionary['episodes']
+        # self.projects = dictionary['projects']
+
+
+    @classmethod
+    def validate_dictionary(cls, dictionary):
+        """Ensure dictionary is compatible with this class."""
+        class_instance = cls()
+        if type(dictionary) is not dict:
+            raise TypeError('{}: This function expects a dictionary.'.format(class_instance.uid))
+        dictionary_keys = dictionary.keys()
+        attributes = []
+        for attribute, value in class_instance.__dict__.items():
+            attributes.append(attribute)
+        for index, key in enumerate(dictionary_keys):
+            if key not in attributes:
+                raise KeyError('{}: Dictionary contains unexpected key: {}'.format(class_instance.uid, key))
+        for index, attribute in enumerate(attributes):
+            if attribute not in dictionary_keys:
+                raise KeyError('{}: Dictionary is missing a required key: {}'.format(class_instance.uid, attribute))
+        validate_uid(dictionary['uid'])
+        validate_content_type(dictionary['type'])
+        if dictionary['type'] is not class_instance.type:
+            raise TypeError('{}: Object type of dictionary ({}) does not match object type of class ({}).'
+                            .format(class_instance.uid, dictionary['type'], class_instance.type))
+
+        def cep_validation(key_, data):
+            """Ensure linking lists are the correct type."""
+            if type(data) is not list and data is not None:
+                raise TypeError('{}: A linking list in this dictionary was neither a list nor None. Was type {}.'
+                                .format(class_instance.uid, dictionary[key_]))
+            elif data is not None:
+                validate_uid_list(data)
+
+        cep_validation('clips', dictionary['clips'])
+        cep_validation('episodes', dictionary['episodes'])
+        cep_validation('projects', dictionary['projects'])
+        if class_instance.type in ('clip', 'episode') and dictionary['episodes'] is not None:
+            raise ValueError('{}: A dictionary of content type {} should not have an episodes list.'
+                             .format(class_instance.uid, class_instance.type))
+        if class_instance.type is 'clip' and dictionary['clips'] is not None:
+            raise ValueError('{}: A dictionary of content type {} should not have a clips list.'
+                             .format(class_instance.uid, class_instance.type))
 
     @abstractmethod
     def validate(self):
         raise NotImplementedError('Method to be overridden by child classes.')
-
-    def _base_validation(self):
-        """Ensure base attributes meet criteria for propriety."""
-        validate_uid(self.uid)
-        validate_type(self.type)
-        if self.type is not "episode":
-            title_length = len(self.title)
-            description_length = len(self.description)
-            if type(self.title) is not str or not title_length > 0 or not title_length <= 50:
-                raise ValueError('{}: Title must be a string with length between 1 - 50. '
-                                 'Was type {}, length {}, value: {}'
-                                 .format(self.uid, type(self.title), title_length, self.title))
-            if type(self.description) is not str or not description_length > 0 or not description_length <= 140:
-                raise ValueError('{}: Description must be a string with length between 1 - 140. '
-                                 'Was type {}, length {}, value: {}'
-                                 .format(self.uid, type(self.description), description_length, self.description))
-        if self.clips is not None:
-            validate_uid_list(self.clips)
-        if self.episodes is not None:
-            validate_uid_list(self.episodes)
-        if self.projects is not None:
-            validate_uid_list(self.projects)
 
     def load(self, uid):
         """Overwrite this instance with a saved dictionary."""
@@ -109,6 +133,7 @@ class Content(object):
 
     def save(self):
         """Save instance into appropriate JSON file."""
+        self._curate()
         self.validate()
         data = access_dictionary(self.type)
         to_append = True
@@ -122,25 +147,80 @@ class Content(object):
 
     def get_clips(self):
         """Return list of classes representing associated clips."""
-        if self.clips is not None:
-            from editor_util import list_of_uids_to_classes
-            return list_of_uids_to_classes(self.clips)
+        if self.clips is None:
+            raise AttributeError('{} {}: This parent method has been disabled.'.format(self.type[:2].upper(), self.uid))
+        return Content._batch_load_classes_from_uids(self.clips, 'clip')
 
     def get_episodes(self):
         """Return list of classes representing associated episodes."""
-        if self.episodes is not None:
-            from editor_util import list_of_uids_to_classes
-            return list_of_uids_to_classes(self.episodes)
-        else:
-            AttributeError('{} {}: This parent method has been disabled.'.format(self.type[:2].upper(), self.uid))
+        if self.episodes is None:
+            raise AttributeError('{} {}: This parent method has been disabled.'.format(self.type[:2].upper(), self.uid))
+        return Content._batch_load_classes_from_uids(self.episodes, 'episode')
 
     def get_projects(self):
         """Return list of classes representing associated projects."""
+        if self.projects is None:
+            raise AttributeError('{} {}: This parent method has been disabled.'.format(self.type[:2].upper(), self.uid))
+        return Content._batch_load_classes_from_uids(self.projects, 'project')
+
+    def print(self):
+        pprint(self.to_dict())
+
+    def _base_class_validation(self):
+        """Ensure base attributes meet criteria for propriety. (PRIVATE)"""
+        validate_uid(self.uid)
+        validate_content_type(self.type)
+        if type(self.title) is not str:
+            raise TypeError('{}: Title attribute must be a string. Was type {}.'.format(self.uid, type(self.title)))
+        if type(self.description) is not str:
+            raise TypeError('{}: Description attribute must be a string. Was type {}.'
+                            .format(self.uid, type(self.description)))
+        if self.type is not "episode":
+            title_length = len(self.title)
+            description_length = len(self.description)
+            if not title_length > 0 or not title_length <= 50:
+                raise ValueError('{}: Title must have a length between 1 - 50. Was length {} with value: {}'
+                                 .format(self.uid, title_length, self.title))
+            if not description_length > 0 or not description_length <= 140:
+                raise ValueError('{}: Description must have length between 1 - 140. Was length {} with value: {}'
+                                 .format(self.uid, description_length, self.description))
+        if self.clips is not None:
+            validate_uid_list(self.clips)
+        if self.episodes is not None:
+            validate_uid_list(self.episodes)
         if self.projects is not None:
-            from editor_util import list_of_uids_to_classes
-            return list_of_uids_to_classes(self.projects)
+            validate_uid_list(self.projects)
 
+    def _curate(self, content_type=None):
+        """Curate associated clips, episodes, and projects by date/time where applicable. (PRIVATE)"""
+        if self.clips is not None and content_type in ('clip', None):
+            temp = self.get_clips()
+            temp.sort(key=attrgetter('published', 'start'))
+            self.clips = list_to_uids(temp)
+        if self.episodes is not None and content_type in ('episode', None):
+            temp = self.get_episodes()
+            temp.sort(key=attrgetter('published'))
+            self.episodes = list_to_uids(temp)
+        if self.projects is not None and content_type in ('project', None):
+            temp = self.get_projects()
+            temp.sort(key=attrgetter('begin_date'))
+            self.projects = list_to_uids(temp)
 
-a = Content()
-print(a.to_dict())
-print(type(a))
+    @staticmethod
+    def _batch_load_classes_from_uids(source_list, content_type=None):
+        """Turn entire list of UID into classes all at once. (PRIVATE)"""
+        validate_uid_list(source_list)
+        classes = []
+        if content_type is None:
+            data = access_all_dictionaries()
+        else:
+            validate_content_type(content_type)
+            data = access_dictionary(content_type)
+        for index, content in enumerate(data):
+            if content['uid'] in source_list:
+                classes.append(any_to_class(content))
+                if len(source_list) > 1:
+                    source_list.remove(content['uid'])
+                else:
+                    break
+        return classes

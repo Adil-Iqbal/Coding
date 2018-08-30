@@ -6,226 +6,48 @@
     <title>Adil Iqbal - Portfolio</title>
     <meta name="description" content="The portfolio website for Mr. Adil Iqbal.">
     <meta name="author" content="Adil Iqbal">
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/jquery.fullPage.min.css" />
+    <link rel="stylesheet" href="navbar/style.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+    <div id="overlay"></div> 
+    <nav>
+        <ul>
+            <li><a href="#resume" id="resume" class='navLink'>Resume</a></li>
+            <li><a href="#about" id="about" class='navLink'>About</a  ></li>
+            <li><a href="#soft" id="soft" class='navLink'>Soft Skills</a></li>
+            <li><a href="#portfolio" id="portfolio" class='navLink'>Portfolio</a></li>
+            <li><a href="#contact" id="contact" class='navLink'>Contact</a></li>
+        </ul>
+        <div id="toggleNav"><i class="fas fa-bars toggleNav"></i></div>
+    </nav>
+
     <div id="fullpage">
-        <!-- Intro -->
-        <div class="section" data-anchor="intro">
+        <!-- Resume -->
+        <div class="section" data-anchor="resume">
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <img srcset="media/logo-1.1.svg" alt="Signature" class="signature img-fluid">
-                    <!-- <div class="name">ADIL IQBAL</div>
-            <div class="title">Full Stack Developer</div> -->
-                    <div class="resume">
-                        <span class="resume__mask"></span>
-                        <span class="resume__text">download resume</span>
-                        <span class="resume__text resume__text--bis">download resume</span>
+                    <div class="fancy_resume">
+                        <span class="fancy_resume__mask"></span>
+                        <span class="fancy_resume__text">download resume</span>
+                        <span class="fancy_resume__text--bis">download resume</span>
                     </div>
                 </div>
                 <div class="col-md-3"></div>
             </div>
             <div class="row column">
-                <div><a href="#about_me"><i class="fas fa-chevron-down arrow__down"></i></a></div>
+                <div><a href="#about"><i class="fas fa-chevron-down arrow__down"></i></a></div>
             </div>
         </div>
-        <!-- About Me -->
-        <div class="section" data-anchor="about_me">
-            <div class="row column">
-                <a href="#intro"><i class="fas fa-chevron-up arrow__up"></i></a>
-            </div>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="box_titles">About Me</div>
-                    <div class="text_box">
-                        <img class="headshot" src="media/adil_headshot.jpg" alt="Adil Iqbal! Full Stack Developer.">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, quo, quibusdam! Maiores incidunt corrupti sapiente voluptatibus itaque aspernatur dolor sit amet consectetur, dolores. Animi magnam provident facilis distinctio saepe est?</p>
-                    </div>
-                </div>
-                <div class="col-md-3"></div>
-            </div>
-            <div class="row column">
-                <a href="#technical_skills"><i class="fas fa-chevron-down arrow__down"></i></a>
-            </div>
-        </div>
-        <!-- 
-                <div class="row">
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-6">
-                    </div>
-                    <div class="col-md-3">
-                    </div>
-                </div>
-                <div class="row">
-                </div>
-         -->
-        <!-- Technical Profile -->
-        <div class="section" data-anchor="technical_skills">
-            <div class="row column"><a href="#about_me"><i class="fas fa-chevron-up arrow__up"></i></a></div>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <i class="fas fa-cog fa-3x"></i>
-                    <div class="box_titles">Technical Profile</div>
-                    <div id="skill_bars">
-                        <div class="progressbar">
-                            <div class="bar" id="python">python</div>
-                        </div>
-                        <div class="progressbar">
-                            <div class="bar" id="javascript">javascript</div>
-                        </div>
-                        <div class="progressbar">
-                            <div class="bar" id="jquery">jquery</div>
-                        </div>
-                        <div class="progressbar">
-                            <div class="bar" id="sass">sass</div>
-                        </div>
-                        <div class="progressbar">
-                            <div class="bar" id="css">css</div>
-                        </div>
-                        <div class="progressbar">
-                            <div class="bar" id="html">html</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3"></div>
-            </div>
-            <div class="row column">
-                <a href="#soft_skills/main"><i class="fas fa-chevron-down arrow__down"></i></a>
-            </div>
-        </div>
-        <!-- Soft Skills -->
-        <div class="section" data-anchor="soft_skills">
-            <!-- Soft Skills / Main -->
-            <div class="slide" data-anchor="main">
-                <div class="row column">
-                    <a href="#technical_skills"><i class="fas fa-chevron-up arrow__up"></i></a>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="box_titles">Soft Skills</div>
-                        <div class="text_box">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa aliquam, nihil eum nemo reprehenderit repellat nam quis dolore voluptatem enim accusantium molestiae sit pariatur tenetur! Ullam eum magnam dolorem.</p>
-                        </div>
-                        <div id="contact_icons">
-                            <a href="#soft_skills/communication">
-                                <div class="contact">
-                                    <div class="icon"><i class="fas fa-comments fa-3x"></i></div>
-                                    <div class="label">Communication</div>
-                                </div>
-                            </a>
-                            <a href="#soft_skills/work_ethic">
-                                <div class="contact">
-                                    <div class="icon"><i class="fa fa-suitcase fa-3x"></i></div>
-                                    <div class="label">Work Ethic</div>
-                                </div>
-                            </a>
-                            <a href="#soft_skills/curiosity">
-                                <div class="contact">
-                                    <div class="icon"><i class="far fa-lightbulb fa-3x"></i></div>
-                                    <div class="label">Curiosity</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                    </div>
-                </div>
-                <div class="row column">
-                    <a href="#portfolio"><i class="fas fa-chevron-down arrow__down"></i></a>
-                </div>
-            </div>
-            <!-- Soft Skills / Communication -->
-            <div class="slide" data-anchor="communication">
-                <div class="row column">
-                    <a href="#technical_skills"><i class="fas fa-chevron-up arrow__up"></i></a>
-                </div>
-                <div class="middle_row">
-                    <a href="#soft_skills/main"><i class="fas fa-chevron-left arrow__left"></i></a>
-                    <div class="middle_col">
-                        <i class="fas fa-comments fa-3x"></i>
-                        <div class="box_titles">Communication</div>
-                        <div class="text_box">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa aliquam, nihil eum nemo reprehenderit repellat nam quis dolore voluptatem enim accusantium molestiae sit pariatur tenetur! Ullam eum magnam dolorem.</p>
-                        </div>
-                    </div>
-                    <a href="#soft_skills/work_ethic"><i class="fas fa-chevron-right arrow__right"></i></a>
-                </div>
-                <div class="row column">
-                    <a href="#portfolio"><i class="fas fa-chevron-down arrow__down"></i></a>
-                </div>
-            </div>
-            <!-- Soft Skills / Work Ethic -->
-            <div class="slide work_ethic" data-anchor="work_ethic">
-                <div class="row column">
-                    <a href="#technical_skills"><i class="fas fa-chevron-up arrow__up"></i></a>
-                </div>
-                <div class="middle_row">
-                    <a href="#soft_skills/communication"><i class="fas fa-chevron-left arrow__left"></i></a>
-                    <div class="middle_col">
-                        <i class="fa fa-suitcase fa-3x" aria-hidden="true"></i>
-                        <div class="box_titles">Work Ethic</div>
-                        <div class="text_box">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa aliquam, nihil eum nemo reprehenderit repellat nam quis dolore voluptatem enim accusantium molestiae sit pariatur tenetur! Ullam eum magnam dolorem.</p>
-                        </div>
-                    </div>
-                    <a href="#soft_skills/curiosity"><i class="fas fa-chevron-right arrow__right"></i></a>
-                </div>
-                <div class="row column">
-                    <a href="#portfolio"><i class="fas fa-chevron-down arrow__down"></i></a>
-                </div>
-            </div>
-            <!-- Soft Skills / Curiosity -->
-            <div class="slide" data-anchor="curiosity">
-                <a href="#technical_skills"><i class="fas fa-chevron-up arrow__up"></i></a>
-                <div class="middle_row">
-                    <a href="#soft_skills/work_ethic"><i class="fas fa-chevron-left arrow__left"></i></a>
-                    <div class="middle_col">
-                        <i class="far fa-lightbulb fa-3x"></i>
-                        <div class="box_titles">Curiosity</div>
-                        <div class="text_box">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa aliquam, nihil eum nemo reprehenderit repellat nam quis dolore voluptatem enim accusantium molestiae sit pariatur tenetur! Ullam eum magnam dolorem.</p>
-                        </div>
-                    </div>
-                    <a href="#soft_skills/main"><i class="fas fa-chevron-circle-left arrow__right"></i></a>
-                </div>
-                <a href="#portfolio"><i class="fas fa-chevron-down arrow__down"></i></a>
-            </div>
-        </div>
-        <!-- <div class="row">
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
-            </div>
-        </div>
-        <div class="row">
-        </div> -->
-        <!-- Portfolio -->
-        <div class="section" data-anchor="portfolio">
-            <!-- Portfolio / Main -->
-            <a href="#soft_skills/main"><i class="fas fa-chevron-up arrow__up"></i></a>
-            <div class="box_titles">Portfolio</div>
-            <div class="text_box">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa aliquam, nihil eum nemo reprehenderit repellat nam quis dolore voluptatem enim accusantium molestiae sit pariatur tenetur! Ullam eum magnam dolorem.</p>
-            </div>
-            <a href="#contact_me"><i class="fas fa-chevron-down arrow__down"></i></a>
-        </div>
+        
         <!-- Contact Me -->
-        <div class="section" data-anchor="contact_me">
+        <div class="section" data-anchor="contact">
             <a href="#portfolio"><i class="fas fa-chevron-up arrow__up"></i></a>
             <div class="box_titles">Contact Me</div>
             <div>
@@ -263,14 +85,14 @@
                     </div>
                 </a>
             </div>
-            <a href="#intro"><i class="fas fa-chevron-circle-up arrow__down"></i></a>
+            <a href="#resume"><i class="fas fa-chevron-circle-up arrow__down"></i></a>
         </div>
     </div>
     <script type="text/javascript " src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.6/jquery.fullpage.min.js"></script>
-    <script type="text/javascript" src="jquery.visible.min.js"></script>
+    <script type="text/javascript" src="navbar/script.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </body>
 

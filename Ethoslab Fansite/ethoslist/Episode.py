@@ -1,4 +1,4 @@
-from class_util import *
+from utility import *
 from Content import Content
 from datetime import datetime
 import dateutil.parser as to_datetime
@@ -21,25 +21,28 @@ class Episode(Content):
 
     def __eq__(self, other):
         default = Content.__eq__(self, other)
-        if not default and type(other) is int:
-            return self.episode_number == other
-        else:
-            return default
+        if default is False and type(other) is int:
+            if self.episode_number == other:
+                return True
+            else:
+                return self.uid == str(other)
+        return default
 
     def from_dict(self, dictionary):
         """Assign dictionary values to class attributes."""
-        self._validate_dictionary(dictionary)
-        Content.from_dict(self, dictionary)
-        self.ytid = dictionary['ytid']
-        self.episode_number = dictionary['episode_number']
-        self.published = to_datetime.parse(dictionary['published'])
-        self.duration = dictionary['duration']
-        self.thumbnails = dictionary['thumbnails']
-        self.curation = dictionary['curation']
+        Episode.validate_dictionary(dictionary)
+        validate_ytid(self.ytid)
+        super().from_dict(dictionary)
+        # self.ytid = dictionary['ytid']
+        # self.episode_number = dictionary['episode_number']
+        # self.published = to_datetime.parse(dictionary['published'])
+        # self.duration = dictionary['duration']
+        # self.thumbnails = dictionary['thumbnails']
+        # self.curation = dictionary['curation']
 
     def validate(self):
-        """Ensure class attributes have usable values."""
-        self._base_validation()
+        """Ensure class meets criteria for propriety."""
+        self._base_class_validation()
         if self.type is not "episode":
             raise TypeError("{}: Object type is must be \'episode\'. Was \'{}\')".format(self.uid, self.type))
         validate_ytid(self.ytid)
@@ -52,7 +55,7 @@ class Episode(Content):
         if type(self.duration) is not int or not self.duration > 0:
             raise ValueError('{}: Duration must be an integer greater than 0. Was type {} and value {}.'
                              .format(self.uid, type(self.duration), self.duration))
-        if type(curation) is not float or not curation > 0 or not curation <= 100:
+        if type(self.curation) is not float or not self.curation > 0 or not self.curation <= 100:
             raise ValueError('{}: Curation must be a float between 0 and 100. Was type {} and value {}.'
                              .format(self.uid, type(self.curation), self.curation))
         if type(self.thumbnails) is not dict:
@@ -61,9 +64,4 @@ class Episode(Content):
 
     def new(self, ytid):
         """Get new"""
-
-
-
-
-a = Episode()
-print(a.to_dict())
+        pass
