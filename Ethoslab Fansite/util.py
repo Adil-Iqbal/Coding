@@ -194,7 +194,8 @@ def convert_to_seconds(string):
         try:
             seconds = int(string)
         except ValueError:
-            return None # Allow while loop to handle input.
+            # Allow while loop to handle input.
+            return None
     return seconds
 
 

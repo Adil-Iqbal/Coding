@@ -16,8 +16,7 @@ class Episode(Content):
             self.duration = None
             self.thumbnails = None
             self.curation = None
-        else:
-            self.validate()
+        self.validate()
 
     def __eq__(self, other):
         default = Content.__eq__(self, other)
@@ -31,14 +30,8 @@ class Episode(Content):
     def from_dict(self, dictionary):
         """Assign dictionary values to class attributes."""
         Episode.validate_dictionary(dictionary)
-        validate_ytid(self.ytid)
+        validate_ytid(dictionary["ytid"])
         super().from_dict(dictionary)
-        # self.ytid = dictionary['ytid']
-        # self.episode_number = dictionary['episode_number']
-        # self.published = to_datetime.parse(dictionary['published'])
-        # self.duration = dictionary['duration']
-        # self.thumbnails = dictionary['thumbnails']
-        # self.curation = dictionary['curation']
 
     def validate(self):
         """Ensure class meets criteria for propriety."""
@@ -62,6 +55,11 @@ class Episode(Content):
             raise TypeError('{}: Thumbnails attribute must be a dictionary. Was {}.'
                             .format(self.uid, type(self.thumbnails)))
 
-    def new(self, ytid):
-        """Get new"""
-        pass
+    @classmethod
+    def new(cls, ytid):
+        """Get new episode from the YouTube Data API."""
+        validate_ytid(ytid)
+        url = "https://www.googleapis.com/youtube/v3/videos"
+        api_key = "AIzaSyBoVWZevLKCgLn_v-KNyT7gt3fsr_JdA4M"
+        class_instance = cls()
+        return class_instance

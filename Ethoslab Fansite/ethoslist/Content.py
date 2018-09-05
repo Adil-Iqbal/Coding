@@ -1,8 +1,9 @@
 from utility import *
 from pprint import pprint
 from datetime import datetime
-from abc import ABC, abstractmethod
 from operator import attrgetter
+from abc import ABC, abstractmethod
+import dateutil.parser as to_datetime
 
 
 class Content(ABC):
@@ -58,28 +59,9 @@ class Content(ABC):
 
         return f'{a}-{b} #{c} #{d}'
 
-    def to_dict(self):
-        """Convert instance into a dictionary and return it."""
-        dictionary = {}
-        for attribute, value in self.__dict__.items():
-            if isinstance(value, datetime):
-                dictionary[attribute] = value.isoformat()
-            else:
-                dictionary[attribute] = value
-        return dictionary
-
-    def from_dict(self, dictionary):
-        """Assign dictionary values to class attributes."""
-        for key in dictionary.keys():
-            setattr(self, key, dictionary[key])
-        # self.uid = dictionary['uid']
-        # self.type = dictionary['type']
-        # self.title = dictionary['title']
-        # self.description = dictionary['description']
-        # self.clips = dictionary['clips']
-        # self.episodes = dictionary['episodes']
-        # self.projects = dictionary['projects']
-
+    @abstractmethod
+    def validate(self):
+        raise NotImplementedError('Method to be overridden by child classes.')
 
     @classmethod
     def validate_dictionary(cls, dictionary):
@@ -121,19 +103,27 @@ class Content(ABC):
             raise ValueError('{}: A dictionary of content type {} should not have a clips list.'
                              .format(class_instance.uid, class_instance.type))
 
-    @abstractmethod
-    def validate(self):
-        raise NotImplementedError('Method to be overridden by child classes.')
+    def to_dict(self):
+        """Convert instance into a dictionary and return it."""
+        dictionary = {}
+        for attribute, value in self.__dict__.items():
+            if isinstance(value, datetime):
+                dictionary[attribute] = value.isoformat()
+            else:
+                dictionary[attribute] = value
+        return dictionary
 
-    def load(self, uid):
-        """Overwrite this instance with a saved dictionary."""
-        validate_uid(uid)
-        dictionary = retrieve_dictionary_by_uid(uid, self.type)
-        self.from_dict(dictionary)
+    def from_dict(self, dictionary):
+        """Assign dictionary values to class attributes."""
+        for key in dictionary.keys():
+            if key in ('published', 'begin_date', 'last_updated'):
+                setattr(self, key, to_datetime.parse(dictionary[key]))
+            else:
+                setattr(self, key, dictionary[key])
 
     def save(self):
         """Save instance into appropriate JSON file."""
-        self._curate()
+        self._sort_linking_list()
         self.validate()
         data = access_dictionary(self.type)
         to_append = True
@@ -144,6 +134,12 @@ class Content(ABC):
         if to_append:
             data.append(self.to_dict())
         update_file(self.type, data)
+
+    def load(self, uid):
+        """Overwrite this instance with a saved dictionary."""
+        validate_uid(uid)
+        dictionary = retrieve_dictionary_by_uid(uid, self.type)
+        self.from_dict(dictionary)
 
     def get_clips(self):
         """Return list of classes representing associated clips."""
@@ -164,6 +160,7 @@ class Content(ABC):
         return Content._batch_load_classes_from_uids(self.projects, 'project')
 
     def print(self):
+        """Print class data to terminal."""
         pprint(self.to_dict())
 
     def _base_class_validation(self):
@@ -191,21 +188,6 @@ class Content(ABC):
         if self.projects is not None:
             validate_uid_list(self.projects)
 
-    def _curate(self, content_type=None):
-        """Curate associated clips, episodes, and projects by date/time where applicable. (PRIVATE)"""
-        if self.clips is not None and content_type in ('clip', None):
-            temp = self.get_clips()
-            temp.sort(key=attrgetter('published', 'start'))
-            self.clips = list_to_uids(temp)
-        if self.episodes is not None and content_type in ('episode', None):
-            temp = self.get_episodes()
-            temp.sort(key=attrgetter('published'))
-            self.episodes = list_to_uids(temp)
-        if self.projects is not None and content_type in ('project', None):
-            temp = self.get_projects()
-            temp.sort(key=attrgetter('begin_date'))
-            self.projects = list_to_uids(temp)
-
     @staticmethod
     def _batch_load_classes_from_uids(source_list, content_type=None):
         """Turn entire list of UID into classes all at once. (PRIVATE)"""
@@ -219,8 +201,26 @@ class Content(ABC):
         for index, content in enumerate(data):
             if content['uid'] in source_list:
                 classes.append(any_to_class(content))
-                if len(source_list) > 1:
-                    source_list.remove(content['uid'])
-                else:
+                source_list.remove(content['uid'])
+                if len(source_list) is 0:
                     break
+        if len(source_list) > 0:
+            content_type = 'ALL' if content_type is None else content_type.upper()
+            raise FileNotFoundError(f'The following dictionaries were missing: {source_list} of type {content_type}')
         return classes
+
+    def _sort_linking_list(self, content_type=None):
+        """Sort associated clips, episodes, and projects by date/time where applicable. (PRIVATE)"""
+        if self.clips is not None and content_type in ('clip', None):
+            temp = self.get_clips()
+            temp.sort(key=attrgetter('published', 'start'))
+            self.clips = list_to_uids(temp)
+        if self.episodes is not None and content_type in ('episode', None):
+            temp = self.get_episodes()
+            temp.sort(key=attrgetter('published'))
+            self.episodes = list_to_uids(temp)
+        if self.projects is not None and content_type in ('project', None):
+            temp = self.get_projects()
+            temp.sort(key=attrgetter('begin_date'))
+            self.projects = list_to_uids(temp)
+
