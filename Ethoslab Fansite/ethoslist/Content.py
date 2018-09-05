@@ -198,10 +198,10 @@ class Content(ABC):
         else:
             validate_content_type(content_type)
             data = access_dictionary(content_type)
-        for index, content in enumerate(data):
-            if content['uid'] in source_list:
-                classes.append(any_to_class(content))
-                source_list.remove(content['uid'])
+        for index, dictionary in enumerate(data):
+            if dictionary['uid'] in source_list:
+                classes.append(any_to_class(dictionary))
+                source_list.remove(dictionary['uid'])
                 if len(source_list) is 0:
                     break
         if len(source_list) > 0:
