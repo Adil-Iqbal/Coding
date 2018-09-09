@@ -1,3 +1,4 @@
+import requests
 from utility import *
 from Content import Content
 from datetime import datetime
@@ -14,7 +15,7 @@ class Episode(Content):
             self.episode_number = None
             self.published = None
             self.duration = None
-            self.thumbnails = None
+            self.thumbnail = None
             self.curation = None
         self.validate()
 
@@ -35,7 +36,7 @@ class Episode(Content):
 
     def validate(self):
         """Ensure class meets criteria for propriety."""
-        self._base_class_validation()
+        super().validate()
         if self.type is not "episode":
             raise TypeError("{}: Object type is must be \'episode\'. Was \'{}\')".format(self.uid, self.type))
         validate_ytid(self.ytid)
@@ -51,15 +52,29 @@ class Episode(Content):
         if type(self.curation) is not float or not self.curation > 0 or not self.curation <= 100:
             raise ValueError('{}: Curation must be a float between 0 and 100. Was type {} and value {}.'
                              .format(self.uid, type(self.curation), self.curation))
-        if type(self.thumbnails) is not dict:
+        if type(self.thumbnail) is not dict:
             raise TypeError('{}: Thumbnails attribute must be a dictionary. Was {}.'
-                            .format(self.uid, type(self.thumbnails)))
+                            .format(self.uid, type(self.thumbnail)))
 
     @classmethod
-    def new(cls, ytid):
+    def request(cls, ytid):
         """Get new episode from the YouTube Data API."""
         validate_ytid(ytid)
         url = "https://www.googleapis.com/youtube/v3/videos"
-        api_key = "AIzaSyBoVWZevLKCgLn_v-KNyT7gt3fsr_JdA4M"
-        class_instance = cls()
-        return class_instance
+        parameters = {
+            "part": "snippet,contentDetails",
+            "id": ytid,
+            "key": "AIzaSyBoVWZevLKCgLn_v-KNyT7gt3fsr_JdA4M",
+        }
+        result = requests.request(method="get", url=url, params=parameters)
+        json_result = json.loads(result.text)
+        new_episode = cls()
+        new_episode.ytid = json_result['items'][0]['id']
+        new_episode.title = json_result['items'][0]['snippet']['title']
+        new_episode.episode_number = get_episode_num(json_result['items'][0]['snippet']['title'])
+        new_episode.description = json_result['items'][0]['snippet']['description']
+        new_episode.published = json_result['items'][0]['snippet']['publishedAt']
+        new_episode.duration = convert_to_seconds(json_result['items'][0]['contentDetails']['duration'])
+        new_episode.thumbnail = json_result['items'][0]['snippet']['thumbnails']['medium']['url']
+        # TODO: Validate episode data (not episode class).
+        return new_episode

@@ -1,5 +1,6 @@
 import os
 import json
+import traceback
 from random import randint
 
 """Utility function for Ethoslist Classes"""
@@ -270,3 +271,53 @@ def save_classes(source_list):
     for index, content in enumerate(source_list):
         content.save()
 
+
+def get_episode_num(string):
+    """Determine the episode number from the title and return it as an integer."""
+    for i, char in enumerate(string):
+        if char == ":":
+            return int(string[i - 3:i])
+
+
+def convert_to_seconds(string):
+    """Convert any input to an integer representation of seconds and return it."""
+    string = str(string)
+    if ":" in string:
+        # Assume "HH:MM:SS" format
+        try:
+            string = [int(x) for x in string.split(":")]
+        except ValueError:
+            # Allow while loop to handle invalid input.
+            return None
+        while len(string) < 3:
+            string.insert(0, 0)
+        seconds = (string[0] * 3600) + (string[1] * 60) + (string[2])
+    elif string.startswith("PT"):
+        # Assume "contentDetails.duration" from YouTube Data API.
+        original_string = string
+        string = string[2:]
+        seconds = 0
+        num = ""
+        for i, char in enumerate(string):
+            if char.isdigit():
+                num += char
+            else:
+                x = 1
+                if char == "H":
+                    x = 3600
+                elif char == "M":
+                    x = 60
+                try:
+                    seconds += int(num) * x
+                except (ValueError, TypeError):
+                    traceback.print_exc()
+                    return original_string
+                num = ""
+    else:
+        # Assume single integer.
+        try:
+            seconds = int(string)
+        except ValueError:
+            # Allow while loop to handle input.
+            return None
+    return seconds

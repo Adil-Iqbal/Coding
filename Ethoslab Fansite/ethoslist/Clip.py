@@ -15,7 +15,8 @@ class Clip(Content):
         self.validate()
 
     def validate(self):
-        self._base_class_validation()
+        super().validate()
+        self._validate_string_length()
         pass
 
 

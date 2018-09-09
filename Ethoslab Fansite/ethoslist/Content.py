@@ -1,8 +1,8 @@
+from abc import ABC
 from utility import *
 from pprint import pprint
 from datetime import datetime
 from operator import attrgetter
-from abc import ABC, abstractmethod
 import dateutil.parser as to_datetime
 
 
@@ -59,9 +59,20 @@ class Content(ABC):
 
         return f'{a}-{b} #{c} #{d}'
 
-    @abstractmethod
     def validate(self):
-        raise NotImplementedError('Method to be overridden by child classes.')
+        validate_uid(self.uid)
+        validate_content_type(self.type)
+        if type(self.title) is not str:
+            raise TypeError('{}: Title attribute must be a string. Was type {}.'.format(self.uid, type(self.title)))
+        if type(self.description) is not str:
+            raise TypeError('{}: Description attribute must be a string. Was type {}.'
+                            .format(self.uid, type(self.description)))
+        if self.clips is not None:
+            validate_uid_list(self.clips)
+        if self.episodes is not None:
+            validate_uid_list(self.episodes)
+        if self.projects is not None:
+            validate_uid_list(self.projects)
 
     @classmethod
     def validate_dictionary(cls, dictionary):
@@ -163,30 +174,16 @@ class Content(ABC):
         """Print class data to terminal."""
         pprint(self.to_dict())
 
-    def _base_class_validation(self):
-        """Ensure base attributes meet criteria for propriety. (PRIVATE)"""
-        validate_uid(self.uid)
-        validate_content_type(self.type)
-        if type(self.title) is not str:
-            raise TypeError('{}: Title attribute must be a string. Was type {}.'.format(self.uid, type(self.title)))
-        if type(self.description) is not str:
-            raise TypeError('{}: Description attribute must be a string. Was type {}.'
-                            .format(self.uid, type(self.description)))
-        if self.type is not "episode":
-            title_length = len(self.title)
-            description_length = len(self.description)
-            if not title_length > 0 or not title_length <= 50:
-                raise ValueError('{}: Title must have a length between 1 - 50. Was length {} with value: {}'
-                                 .format(self.uid, title_length, self.title))
-            if not description_length > 0 or not description_length <= 140:
-                raise ValueError('{}: Description must have length between 1 - 140. Was length {} with value: {}'
-                                 .format(self.uid, description_length, self.description))
-        if self.clips is not None:
-            validate_uid_list(self.clips)
-        if self.episodes is not None:
-            validate_uid_list(self.episodes)
-        if self.projects is not None:
-            validate_uid_list(self.projects)
+    def _validate_string_length(self):
+        """Ensure appropriate length of title and description attributes. (PRIVATE)"""
+        title_length = len(self.title)
+        description_length = len(self.description)
+        if not title_length > 0 or not title_length <= 50:
+            raise ValueError('{}: Title must have a length between 1 - 50. Was length {} with value: {}'
+                             .format(self.uid, title_length, self.title))
+        if not description_length > 0 or not description_length <= 140:
+            raise ValueError('{}: Description must have length between 1 - 140. Was length {} with value: {}'
+                             .format(self.uid, description_length, self.description))
 
     @staticmethod
     def _batch_load_classes_from_uids(source_list, content_type=None):
