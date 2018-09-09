@@ -73,7 +73,7 @@ class Episode(Content):
         new_episode.title = json_result['items'][0]['snippet']['title']
         new_episode.episode_number = get_episode_num(json_result['items'][0]['snippet']['title'])
         new_episode.description = json_result['items'][0]['snippet']['description']
-        new_episode.published = json_result['items'][0]['snippet']['publishedAt']
+        new_episode.published = to_datetime.parse(['items'][0]['snippet']['publishedAt'])
         new_episode.duration = convert_to_seconds(json_result['items'][0]['contentDetails']['duration'])
         new_episode.thumbnail = json_result['items'][0]['snippet']['thumbnails']['medium']['url']
         # TODO: Validate episode data (not episode class).

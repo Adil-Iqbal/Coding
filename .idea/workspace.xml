@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91d130fb-faf6-4e4d-8341-60411e64364e" name="Default" comment="minor change">
+    <list default="true" id="91d130fb-faf6-4e4d-8341-60411e64364e" name="Default" comment="Implement episode request method. Clean up validation setup.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Clip.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Clip.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Content.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Content.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Episode.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Episode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Project.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/utility.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,31 +46,30 @@
         <counts>
           <entry key="dummy" value="28" />
           <entry key="json" value="3" />
-          <entry key="py" value="25512" />
-          <entry key="txt" value="127" />
+          <entry key="py" value="25528" />
+          <entry key="txt" value="217" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="3" />
-          <entry key="PLAIN_TEXT" value="155" />
-          <entry key="Python" value="25512" />
+          <entry key="PLAIN_TEXT" value="245" />
+          <entry key="Python" value="25528" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Content.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-508">
-              <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
+            <state relative-caret-position="-1202">
+              <caret column="19" selection-start-column="19" selection-end-column="19" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <marker date="1536498409377" expanded="true" signature="205:210" ph="..." />
-                <marker date="1536498409377" expanded="true" signature="1494:5097" ph="..." />
-                <marker date="1536498409377" expanded="true" signature="7604:8293" ph="..." />
+                <marker date="1536498484353" expanded="true" signature="189:194" ph="..." />
+                <marker date="1536498484353" expanded="true" signature="1478:5081" ph="..." />
+                <marker date="1536498484353" expanded="true" signature="7588:8277" ph="..." />
               </folding>
             </state>
           </provider>
@@ -101,14 +96,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Episode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="912">
-              <caret line="64" column="45" lean-forward="true" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+            <state relative-caret-position="472">
+              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <marker date="1536498409297" expanded="true" signature="159:164" ph="..." />
+                <marker date="1536499264239" expanded="true" signature="159:164" ph="..." />
               </folding>
             </state>
           </provider>
@@ -230,9 +225,9 @@
         <option value="$PROJECT_DIR$/Ethoslab Fansite/Project.py" />
         <option value="$PROJECT_DIR$/Ethoslab Fansite/util.py" />
         <option value="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Project.py" />
-        <option value="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Content.py" />
         <option value="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Clip.py" />
         <option value="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/utility.py" />
+        <option value="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Content.py" />
         <option value="$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Episode.py" />
       </list>
     </option>
@@ -427,7 +422,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536169361097</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Implement episode request method. Clean up validation setup.">
+      <created>1536498534698</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1536498534698</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -491,7 +493,8 @@
     <MESSAGE value="Update formatting of episodes.json" />
     <MESSAGE value="Begin implementing Clip &amp; Project.&#10;Fixes to Content and Episode validation.&#10;Optimize linking list getters." />
     <MESSAGE value="minor change" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor change" />
+    <MESSAGE value="Implement episode request method. Clean up validation setup." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement episode request method. Clean up validation setup." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/project_euler/problem_012.py">
@@ -606,16 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Project.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Clip.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -648,26 +641,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Episode.py">
+    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Content.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="64" column="45" lean-forward="true" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+        <state relative-caret-position="-1202">
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1536498409297" expanded="true" signature="159:164" ph="..." />
+            <marker date="1536498484353" expanded="true" signature="189:194" ph="..." />
+            <marker date="1536498484353" expanded="true" signature="1478:5081" ph="..." />
+            <marker date="1536498484353" expanded="true" signature="7588:8277" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Content.py">
+    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Project.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-508">
-          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
+        <state relative-caret-position="440">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1536498409377" expanded="true" signature="205:210" ph="..." />
-            <marker date="1536498409377" expanded="true" signature="1494:5097" ph="..." />
-            <marker date="1536498409377" expanded="true" signature="7604:8293" ph="..." />
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ethoslab Fansite/ethoslist/Episode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1536499264239" expanded="true" signature="159:164" ph="..." />
           </folding>
         </state>
       </provider>
