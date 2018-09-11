@@ -132,6 +132,7 @@ class Content(ABC):
             else:
                 setattr(self, key, dictionary[key])
 
+    @backup_files
     def save(self):
         """Save instance into appropriate JSON file."""
         self._sort_linking_list()
@@ -220,4 +221,3 @@ class Content(ABC):
             temp = self.get_projects()
             temp.sort(key=attrgetter('begin_date'))
             self.projects = list_to_uids(temp)
-

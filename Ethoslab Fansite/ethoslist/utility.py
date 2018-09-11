@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import traceback
 from random import randint
@@ -146,18 +147,18 @@ def update_file(type_, data):
         json.dump(data, json_data)
 
 
-def retrieve_dictionary_by_uid(uid, type_=None):
+def retrieve_dictionary_by_uid(uid, content_type=None):
     """Return dictionary with matching uid."""
     validate_uid(uid)
-    if type_ is not None:
-        validate_content_type(type_)
-        data = access_dictionary(type_)
+    if content_type is not None:
+        validate_content_type(content_type)
+        data = access_dictionary(content_type)
     else:
         data = access_all_dictionaries()
     for index, dictionary in enumerate(data):
         if dictionary['uid'] == uid:
             return dictionary
-    raise FileNotFoundError('Dictionary of type \'{}\' with id \'{}\' was not found.'.format(type_, uid))
+    raise FileNotFoundError('Dictionary of type \'{}\' with id \'{}\' was not found.'.format(content_type, uid))
 
 
 def retrieve_list_of_dictionaries_by_uid(source_list, type_=None):
@@ -321,3 +322,21 @@ def convert_to_seconds(string):
             # Allow while loop to handle input.
             return None
     return seconds
+
+
+def backup_files(callback):
+    """Back up all JSON files before executing function."""
+    def wrapped():
+        backup_project_data = list(access_dictionary("project"))
+        backup_clip_data = list(access_dictionary("clip"))
+        backup_episode_data = list(access_dictionary("episode"))
+        try:
+            callback()
+        except (ValueError, KeyError, AttributeError, TypeError, FileNotFoundError):
+            update_file("project", backup_project_data)
+            update_file("clip", backup_clip_data)
+            update_file("episode", backup_episode_data)
+            print("All files were reverted to a back-up state.")
+            traceback.print_exc()
+            sys.exit()
+    return wrapped

@@ -16,7 +16,6 @@ class Project(Content):
             self.y = None
             self.z = None
             self.media = None
-        self.validate()
 
     def validate(self):
         super().validate()
